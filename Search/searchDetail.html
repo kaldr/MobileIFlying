@@ -1,0 +1,1177 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="keywords" content="宁波飞扬旅行社,宁波旅行社,宁波旅游网" />
+    <meta name="description" content="飞扬旅游网隶属于浙江飞扬国际旅游集团,宁波旅行社行业第一,全国第八,浙江省首批五星级旅行社,宁波市最佳旅行社.服务热线:4000-365-666" />
+    <meta name="apple-mobile-web-app-title" content="飞扬旅游网" />
+    <title>飞扬旅游网</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/my-app.css">
+</head>
+<body ontouchstart>
+    <!-- views start-->
+    <div class="views" >
+        <!-- view-main start-->
+        <div class="view view-main">
+            <!--  page start-->
+            <div class="page navbar-fixed">
+                <!-- navbar start-->
+                <div class="navbar tmBar">
+                    <div class="navbar-inner navbar-on-center">
+                        <div class="left">
+                            <a class="back link" href="javascript:window.location.href='search.html';">
+                                <i class="icon icon-back"></i>
+                            </a>
+                        </div>
+                        <div class="center sliding t1" id="title"></div>
+                        <div class="right">
+                            <a href="javascript:window.location.href='../index.html';">
+                                <i class="icon home-i"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- navbar END-->
+                <!-- page-content start-->
+                <div class="page-content">
+                    <p class="color9 ft16 p10" id="searchTitle">
+                        
+                    </p>
+                    <div class="swiper-container swiper-2 tab-swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <a href="#tab1" class="tab-link active" onClick="changeProduct(1);">跟团游<span id="groupNum">(0)</span></a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#tab2" class="tab-link" onClick="changeProduct(2);">自助游<span id="zyxNum">(0)</span></a>
+                            </div>
+                            <!--<div class="swiper-slide">
+                                <a href="#tab3" class="tab-link" onclick="changeProduct(3);">自驾游</a>
+                            </div>-->
+                            <div class="swiper-slide">
+                                <a href="#tab4" class="tab-link" onClick="changeProduct(4);">签证<span id="visaNum">(0)</span></a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#tab5" class="tab-link" onClick="changeProduct(5);">邮轮<span id="ylNum">(0)</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tabs" id="contentDiv" style="display:none;">
+                        <!-- 第一个tab-->
+                        <div class="tab active" id="tab1">
+                           
+                        </div>
+                        <!-- 第二个tab -->
+                        <div class="tab" id="tab2">
+                            
+                        </div>
+                        <!-- 第三个tab -->
+                        <div class="tab" id="tab3">
+
+                        </div>
+                        <div class="tab" id="tab4">
+                           
+                        </div>
+                        <div class="tab" id="tab5">
+
+                        </div>
+                    </div>
+                    <div class="loadingRow" style="background:#66cbff" id="loadDiv"><img style="margin-top:-20%;" src="../images/loading-ani.gif" alt=""></div>
+                </div>
+                <!-- page-content END-->
+            </div>
+        </div>
+        <!--  page END-->
+        <!--  searchBar start -->
+        <div class="toolbar tabbar searchBar" id="searchBar">
+            <!--  groupBar start -->
+            <div class="toolbar-inner groupBar" id="groupBar">
+                <a href="#" class="tab-link btn-1">
+                    <i class="icon-b c1"></i>
+                    <span>出发城市</span>
+                </a>
+                <a href="#" class="tab-link btn-2" id="startTimePark">
+                    <i class="icon-b c2"></i>
+                    <span>出游时间</span>
+                </a>
+                <a href="#" class="tab-link btn-3">
+                    <i class="icon-b c3"></i>
+                    <span>时间天数</span>
+                </a>
+                <a href="#" class="tab-link btn-4">
+                    <i class="icon-b c4"></i>
+                    <span>价格范围</span>
+                </a>
+            </div>
+            <!--  shipBar start -->
+            <div style="display:none" class="toolbar-inner shipBar" id="shipBar">
+                <a href="#" class="tab-link">
+                    <i class="icon-b c5 btn-5"></i>
+                    <span>邮轮航线</span>
+                </a>
+                <a href="#" class="tab-link">
+                    <i class="icon-b c3 btn-6"></i>
+                    <span>时间天数</span>
+                </a>
+                <a href="#" class="tab-link">
+                    <i class="icon-b c6 btn-7"></i>
+                    <span>邮轮公司</span>
+                </a>
+            </div>
+        </div>
+        <!--  searchBar END -->
+    </div>
+    <!-- views END-->
+    <!-- Picker 1 start-->
+    <div class="popup my-model picker-1">
+        
+        <div class="picker-modal-inner">
+            <div class="list-block list3">
+                <ul class="">
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectDepart(-1);">
+                            <div class="item-inner">
+                                <input type="radio" checked="checked" value="-1" name="Depart">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">不限</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectDepart(512);">
+                            <div class="item-inner">
+                                <input type="radio" value="512" name="Depart">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">宁波</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectDepart(9);">
+                            <div class="item-inner">
+                                <input type="radio" value="9" name="Depart">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">上海</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectDepart(511);">
+                            <div class="item-inner">
+                                <input type="radio" value="511" name="Depart">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">杭州</span>
+                            </div>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Picker 2 start-->
+    <div class="popup my-model picker-2" style="display:block;">
+        <div class="toolbar">
+            <div class="toolbar-inner">
+                <div class="left">
+                    <a class="close-popup" href="#">取消</a>
+                </div>
+                <div class="right">
+                    <a href="#" class="close-popup red_t ft16 mr10" onClick="selectDate();">确定</a>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="content-block">
+                <div style="padding:0; margin-right:-15px; width:auto" class="content-block-inner">
+                    <div style="margin:0" class="list-block">
+                        <ul style="border-top:none">
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="text" placeholder="Date Time" readonly id="picker-date">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="picker-date-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Picker 3 start-->
+    <div class="popup my-model picker-3">          
+        <div class="picker-modal-inner">
+            <div class="list-block list3">
+                <ul class="">
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectDays('');">
+                            <div class="item-inner">
+                                <input type="radio" checked="checked" value="" name="days">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">不限</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectDays('1-3');">
+                            <div class="item-inner">
+                                <input type="radio" value="" name="days">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">1～3天</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectDays('4-6');">
+                            <div class="item-inner">
+                                <input type="radio" value="" name="days">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">4～6天</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectDays('7');">
+                            <div class="item-inner">
+                                <input type="radio" value="" name="days">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">6天以上</span>
+                            </div>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Picker 4 start-->
+    <div class="popup my-model picker-4">
+        <div class="picker-modal-inner">
+            <div class="list-block list3">
+                <ul class="">
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectPrice('');">
+                            <div class="item-inner">
+                                <input type="radio" checked="checked" value="" name="price">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">不限</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectPrice('0-1000');">
+                            <div class="item-inner">
+                                <input type="radio" value="" name="price">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">1000元以下</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectPrice('1000-3000');">
+                            <div class="item-inner">
+                                <input type="radio" value="" name="price">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">1000~3000元</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectPrice('3000-5000');">
+                            <div class="item-inner">
+                                <input type="radio" value="" name="price">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">3000~5000元</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectPrice('5000');">
+                            <div class="item-inner">
+                                <input type="radio" value="" name="price">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">5000元以上</span>
+                            </div>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup my-model picker-5">
+
+        <div class="picker-modal-inner">
+            <div class="list-block list3">
+                <ul class="">
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectAirline(-1);">
+                            <div class="item-inner">
+                                <input type="radio" checked="checked" value="-1" name="AirLine">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">全部航线</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectAirline(2);">
+                            <div class="item-inner">
+                                <input type="radio" value="512" name="AirLine">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">日韩航线</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectAirline(4);">
+                            <div class="item-inner">
+                                <input type="radio" value="9" name="AirLine">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">地中海航线</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectAirline(7);">
+                            <div class="item-inner">
+                                <input type="radio" value="511" name="AirLine">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">加勒比海航线</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectAirline(8);">
+                            <div class="item-inner">
+                                <input type="radio" value="511" name="AirLine">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">环球航线</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectAirline(9);">
+                            <div class="item-inner">
+                                <input type="radio" value="511" name="AirLine">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">港澳台航线</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectAirline(11);">
+                            <div class="item-inner">
+                                <input type="radio" value="511" name="AirLine">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">极地航线</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectAirline(12);">
+                            <div class="item-inner">
+                                <input type="radio" value="511" name="AirLine">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">东南亚航线</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectAirline(13);">
+                            <div class="item-inner">
+                                <input type="radio" value="511" name="AirLine">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">中东非航线</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectAirline(14);">
+                            <div class="item-inner">
+                                <input type="radio" value="511" name="AirLine">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">东加勒比+美国全景航线</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectAirline(15);">
+                            <div class="item-inner">
+                                <input type="radio" value="511" name="AirLine">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">澳新航线</span>
+                            </div>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup my-model picker-6">
+        <div class="picker-modal-inner">
+            <div class="list-block list3">
+                <ul class="">
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectShipday(-1);">
+                            <div class="item-inner">
+                                <input type="radio" checked="checked" value="" name="shipday">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">全部天数</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectShipday(4);">
+                            <div class="item-inner">
+                                <input type="radio" value="" name="shipday">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">4天</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectShipday(5);">
+                            <div class="item-inner">
+                                <input type="radio" value="" name="shipday">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">5天</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectShipday(6);">
+                            <div class="item-inner">
+                                <input type="radio" value="" name="shipday">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">6天</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectShipday(99);">
+                            <div class="item-inner">
+                                <input type="radio" value="" name="shipday">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">6天以上</span>
+                            </div>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup my-model picker-7">
+        <div class="picker-modal-inner">
+            <div class="list-block list3">
+                <ul class="">
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectShipcompany(-1);">
+                            <div class="item-inner">
+                                <input type="radio" checked="checked" value="" name="company">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">全部公司</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectShipcompany(7);">
+                            <div class="item-inner">
+                                <input type="radio" value="" name="company">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">歌诗达邮轮</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectShipcompany(8);">
+                            <div class="item-inner">
+                                <input type="radio" value="" name="company">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">丽星邮轮</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectShipcompany(9);">
+                            <div class="item-inner">
+                                <input type="radio" value="" name="company">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">皇家加勒比邮轮</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectShipcompany(10);">
+                            <div class="item-inner">
+                                <input type="radio" value="" name="company">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">公主邮轮</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectShipcompany(11);">
+                            <div class="item-inner">
+                                <input type="radio" value="" name="company">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">MSC地中海邮轮</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="close-popup">
+                        <label class="label-radio item-content" onclick="selectShipcompany(40);">
+                            <div class="item-inner">
+                                <input type="radio" value="" name="company">
+                                <div class="item-media">
+                                    <i class="icon icon-form-radio"></i>
+                                </div>
+                                <span class="cityR">天海邮轮公司</span>
+                            </div>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- modal-overlay -->
+    <script type="text/javascript" src="../js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="../js/framework7.js"></script>
+    <script type="text/javascript" src="../js/kitchen-sink.js"></script>
+    <script type="text/javascript" src="../js/command.js"></script>
+	<script src="http://s4.cnzz.com/stat.php?id=4072742&web_id=4072742" language="JavaScript"></script>
+    <script>
+var myApp = new Framework7();
+
+var mySwiper2 = myApp.swiper('.swiper-2', {
+  pagination:'.swiper-2 .swiper-pagination',
+  spaceBetween: 0,
+  slidesPerView: 4
+});
+//日历
+var today = new Date();
+
+var pickerInline = myApp.picker({
+    input: '#picker-date',
+    container: '#picker-date-container',
+    toolbar: false,
+    rotateEffect: true,
+
+    value: [today.getFullYear(),today.getMonth(), today.getDate(),  today.getHours(), (today.getMinutes() < 10 ? '0' + today.getMinutes() : today.getMinutes())],
+
+    onChange: function (picker, values, displayValues) {
+        var daysInMonth = new Date(picker.value[2], picker.value[0]*1 + 1, 0).getDate();
+        if (values[1] > daysInMonth) {
+            picker.cols[1].setValue(daysInMonth);
+        }
+    },
+
+    formatValue: function (p, values, displayValues) {
+        return displayValues[0] + '-' + (parseInt(values[1],10)+1) + '-' + values[2];
+    },
+
+    cols: [
+            // Years
+        {
+            values: (function () {
+                var arr = [];
+                var start = today.getFullYear();
+                var end = start + 1;
+                for (var i = start; i <= end; i++) { arr.push(i); }
+                return arr;
+            })(),
+        },
+        // Months
+        {
+            values: ('0 1 2 3 4 5 6 7 8 9 10 11').split(' '),
+            displayValues: ('1 2 3 4 5 6 7 8 9 10 11 12').split(' '),
+            textAlign: 'left'
+        },
+        // Days
+        {
+            values: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
+        },
+
+        // Space divider
+        {
+            divider: true,
+            content: '  '
+        }
+    ]
+});
+// bottom bar
+var $$ = Dom7;
+$$('.btn-1').on('click', function () {
+  myApp.popup('.picker-1')
+});
+
+$$('.btn-2').on('click', function () {
+  myApp.popup('.picker-2')
+});
+
+$$('.btn-3').on('click', function () {
+  myApp.popup('.picker-3')
+});
+$$('.btn-4').on('click', function () {
+  myApp.popup('.picker-4')
+});
+$$('.btn-5').on('click', function () {
+    myApp.popup('.picker-5')
+});
+$$('.btn-6').on('click', function () {
+    myApp.popup('.picker-6')
+});
+$$('.btn-7').on('click', function () {
+    myApp.popup('.picker-7')
+});
+
+
+    </script>
+    <script type="text/javascript">
+        var myRequest = GetRequest();
+        var searchStr = "";
+        var tempStr = decodeURIComponent(myRequest["search"]);
+        if (tempStr == undefined || tempStr == "" || tempStr == "undefined") {
+            searchStr = sessionStorage.getItem("searchStr");
+        }
+        else {
+            searchStr = tempStr;
+        }
+        if (searchStr == undefined || searchStr == null || searchStr == "") {
+            window.location.href = "search.html";
+        }
+        else {
+            $("#title").html(searchStr + "产品推荐");
+            $("#searchTitle").html("共搜索到 <b class='pinkTxt' id='searchNum'>0</b>个“" + searchStr + "”相关产品");
+
+            LoadGroupLine();
+            LoadFreeLine();
+            LoadDriveLine();
+            LoadVisa();
+            LoadShipLine();
+        }
+        function changeProNum(addNum) {
+            var nowNum = $("#searchNum").html();
+            if (nowNum == "") {
+                nowNum = "0";
+            }
+            var tempNum = parseInt(nowNum, 10) + addNum;
+            $("#searchNum").html(tempNum);
+            
+        }
+        var nowProduct = 1;
+        function changeProduct(type) {
+            switch (type) {
+                case 1:
+                    nowProduct = 1;
+                    $("#searchBar").show();
+                    $("#startTimePark").show();
+                    $("#groupBar").show();
+                    $("#shipBar").hide();
+                    break;
+                case 2:
+                    nowProduct = 2;
+                    $("#searchBar").show();
+                    $("#startTimePark").hide();
+                    $("#groupBar").show();
+                    $("#shipBar").hide();
+                    break;
+                case 3:
+                    nowProduct = 3;
+                    $("#searchBar").hide();
+                    break;
+                case 4:
+                    nowProduct = 4;
+                    $("#searchBar").hide();
+                    break;
+                case 5:
+                    nowProduct = 5;
+                    $("#searchBar").show();
+                    $("#groupBar").hide();
+                    $("#shipBar").show();
+                    break;
+            }
+            reSearchJson();
+        }
+        function reSearchJson() {
+            lineSearchJson.DepartID = -1;
+            lineSearchJson.Day = "";
+            lineSearchJson.StartDate = "";
+            lineSearchJson.Price = "";
+
+            shipSearchJson.AirLineID = -1;
+            shipSearchJson.CruiseCompanyID = -1;
+            shipSearchJson.Day = "";
+            shipSearchJson.Price = "";
+        }
+        var lineSearchJson = {
+            "DepartID": -1,
+            "Day": "",
+            "StartDate": "",
+            "Price": ""
+        }
+        var shipSearchJson = {
+            "AirLineID": -1,
+            "CruiseCompanyID": -1,
+            "Day": -1,
+            "Price": ""
+        }
+        function selectDepart(depId) {
+            lineSearchJson.DepartID = depId;
+            searchLineProduct();
+        }
+        function selectDate() {
+            lineSearchJson.StartDate = $("#picker-date").val();
+            searchLineProduct();
+        }
+        function selectDays(day) {
+            lineSearchJson.Day = day;
+            searchLineProduct();
+        }
+        function selectPrice(priceStr) {
+            lineSearchJson.Price = priceStr;
+            searchLineProduct();
+        }
+        function selectAirline(line) {
+            shipSearchJson.AirLineID = line;
+            searchLineProduct();
+        }
+        function selectShipday(day) {
+            shipSearchJson.Day = day;
+            searchLineProduct();
+        }
+        function selectShipcompany(company) {
+            shipSearchJson.CruiseCompanyID = company;
+            searchLineProduct();
+        }
+        var groupLineJson=[];
+        var driveLineJson=[];
+        var freeLineJson=[];
+        var visaJson=[];
+        var shipJson=[];
+        //获取跟团游数据
+        function LoadGroupLine() {
+            var postUrl = "";
+            postUrl = groupListUrl + "&Page=1&size=99&StringLike=" + searchStr + "&ProductType=1,2,3&ra=" + Math.random();
+            $.getJSON(postUrl, function (data) {
+                if (data != null && data.data != null) {                     
+                    if (data.data.LineList.length > 0) {
+                        changeProNum(data.data.LineList.length);
+                        $("#groupNum").html("(" + data.data.LineList.length + ")");
+                        groupLineJson = data.data.LineList;
+                        var lineStr = "<section class='section-pro p10'>";
+                        $.each(data.data.LineList, function (i, item) {
+                            lineStr += "<div class='pro-row'><a href='javascript:goProduct(" + item.ID + ");'><div class='proImg'><img src='" + item.DefaultPic + "' alt='' title=''></div><div class='pro-rInfo'>"
+                            + "<div class='pro-title'>" + item.Title + "</div><p class='pro-date'>发团日期：" + item.StartTime + "</p><div class='pro-price row'>"
+                            + "<span class='red_t'>¥ <b class='ft20'>" + item.DefaultPrice + "</b> <font>起</font></span><div class='coupon floatR'><font>送</font><span>100</span></div></div></div></a></div>";;
+                        });
+                        lineStr += "</section><div class='space'></div>";
+                        $("#tab1").html(lineStr);
+                    }
+                    else {
+                        $("#tab1").html("<div class='noinfo-tip'>暂时没有相关产品</div>");
+                    }
+                }
+
+                $("#loadDiv").hide();
+                $("#contentDiv").show();
+            });
+        }
+        //获取自驾数据
+        function LoadDriveLine() {
+            $.getJSON(dirveListUrl + "&Page=1&Size=99&StringLike="+searchStr+"&ra=" + Math.random(), function (data) {
+                if (data != null && data.data != null) {
+                    if (data.data.LineList.length > 0) {
+                        changeProNum(data.data.LineList.length);
+                        
+                        driveLineJson = data.data.LineList;
+                        var lineStr = "<section class='section-pro p10'>";
+                        $.each(data.data.LineList, function (i, item) {
+                            lineStr += "<div class='pro-row'><a href='javascript:goProduct(" + item.ID + ");'><div class='proImg'><img src='" + item.DefaultPic + "' alt='' title=''></div><div class='pro-rInfo'>"
+                            + "<div class='pro-title'>" + item.Title + "</div><p class='pro-date'>满意度：" + item.Scores + "%</p><div class='pro-price row'>"
+                            + "<span class='red_t'>¥ <b class='ft20'>" + item.DefaultPrice + "</b> <font>起</font></span></div></div></a></div>";;
+                        });
+                        lineStr += "</section><div class='space'></div>";
+                        $("#tab3").html(lineStr);
+                    }
+                    else {
+                        $("#tab3").html("<div class='noinfo-tip'>暂时没有相关产品</div>");
+                    }
+                }
+            });
+        }
+        //获取自由行数据
+        function LoadFreeLine() {
+            $.getJSON(freeListUrl + "&Page=1&Size=99&StringLike="+searchStr+"&ra=" + Math.random(), function (data) {
+                if (data != null && data.data != null) {
+                    if (data.data.LineList.length > 0) {
+                        changeProNum(data.data.LineList.length);
+                        $("#zyxNum").html("(" + data.data.LineList.length + ")");
+                        freeLineJson = data.data.LineList;
+                        var lineStr = "<section class='section-pro p10'>";
+                        $.each(data.data.LineList, function (i, item) {
+                            lineStr += "<div class='pro-row'><a href='javascript:goProduct(" + item.ID + ");'><div class='proImg'><img src='" + item.DefaultPic + "' alt='' title=''></div><div class='pro-rInfo'>"
+                            + "<div class='pro-title'>" + item.Title + "</div><p class='pro-date'>发团日期：" + item.StartTime + "</p><div class='pro-price row'>"
+                            + "<span class='red_t'>¥ <b class='ft20'>" + item.DefaultPrice + "</b> <font>起</font></span><div class='coupon floatR'><font>送</font><span>100</span></div></div></div></a></div>";;
+                        });
+                        lineStr += "</section><div class='space'></div>";
+                        $("#tab2").html(lineStr);
+                    }
+                    else {
+                        $("#tab2").html("<div class='noinfo-tip'>暂时没有相关产品</div>");
+                    }
+                }
+            });
+        }
+        //获取签证数据
+        function LoadVisa() {
+            var postUrl = ""; 
+            postUrl = visaListUrl + "&Page=1&size=99&StringLike="+searchStr+"&ra=" + Math.random();
+            $.getJSON(postUrl, function (data) {
+                if (data != null && data.data != null) {
+                    if (data.data.VisaList.length > 0) {
+                        changeProNum(data.data.VisaList.length);
+                        $("#visaNum").html("(" + data.data.VisaList.length + ")");
+                        visaJson = data.data.VisaList;
+                        var visaStr = "<ul class='visa-list'>";
+                        $.each(data.data.VisaList, function (i, item) {
+                            visaStr += "<li><a href='javascript:goProduct(" + item.ID + ");'><img class='pic' src='" + item.DefaultPic + "' alt=''><h2 class='ft16 normal elli'>" + item.WebTitle + "</h2>"
+                            + "<div class='f1 elli color6'><span class='mr15'>有效日期：" + item.VisaDate + "天</span>签证类型：" + item.VisaType + "</div><p class='ft16 red_t'><b>¥" + item.DefaultPrice + "</b></p></a></li>";
+
+                        });
+                        visaStr += "</ul><div class='space'></div>";
+                        $("#tab4").html(visaStr);
+                    }
+                    else {
+                        $("#tab4").html("<div class='noinfo-tip'>暂时没有相关产品</div>");
+                    }
+                }
+            });
+        }
+        //获取邮轮数据
+        function LoadShipLine() {
+            $.getJSON(shipListUrl + "&Page=1&Size=99&StringLike="+searchStr+"&ra=" + Math.random(), function (data) {
+                if (data != null && data.data != null) {
+                    if (data.data.CruiseList.length > 0) {
+                        changeProNum(data.data.CruiseList.length);
+                        $("#ylNum").html("(" + data.data.CruiseList.length + ")");
+                        shipJson = data.data.CruiseList;
+                        var lineStr = "<section class='section-pro p10'>";
+                        $.each(data.data.CruiseList, function (i, item) {
+                            lineStr += "<div class='pro-row'><a href='javascript:goProduct(" + item.ID + ");'><div class='proImg'><img src='" + item.DefaultPic + "' alt='' title=''></div><div class='pro-rInfo'>"
+                            + "<div class='pro-title'>" + item.Title + "</div><div class='linkRow row color9'><span> <i class='iconB start'></i>出发地："+item.Depart+"</span><span>"
+                            +"<i class='iconB delay'></i>"+item.Night+"晚"+item.DayNum+"天</span><span><i class='iconB shipLine'></i>"+item.AirLine+"</span></div><div class='pro-price'>"
+                            + "<span class='red_t floatR'>¥ <b class='ft20'>" + item.DefaultPrice + "</b> <font>起</font></span></div></div></a></div>";
+                        });
+                        lineStr += "</section><div class='space'></div>";
+                        $("#tab5").html(lineStr);
+                    }
+                    else {
+                        $("#tab5").html("<div class='noinfo-tip'>暂时没有相关产品</div>");
+                    }
+                }
+            });
+        }
+
+        function searchLineProduct() {
+            if (nowProduct == 1) {
+                searchGroup();
+            }
+            else if (nowProduct == 2) {
+                searchFree();
+            }
+            else if (nowProduct == 5) {
+                searchShip();
+            }
+        }
+
+        function searchGroup() {
+            if (groupLineJson != null && groupLineJson.length > 0) {
+                var lineStr = "";
+                var numCount = 0;
+                $.each(groupLineJson, function (i, item) {
+                    //出发地筛选
+                    if (lineSearchJson.DepartID > 0) {
+                        if (item.DepartID != lineSearchJson.DepartID) {
+                            return true;
+                        }
+                    }
+                    //出游天数筛选
+                    if (lineSearchJson.Day != "") {
+                        if (lineSearchJson.Day.indexOf("-") > 0) {
+                            var dayStr = lineSearchJson.Day.split("-");
+                            if (parseInt(item.Daynum, 10) < parseInt(dayStr[0], 10) || parseInt(item.Daynum, 10) > parseInt(dayStr[1], 10)) {
+                                return true;
+                            }
+                        }
+                        else {
+                            if (parseInt(item.Daynum, 10) < parseInt(lineSearchJson.Day, 10)) {
+                                return true;
+                            }
+                        }
+                    }
+                    //出发时间筛选
+                    if (lineSearchJson.StartDate != "") {
+                        var nowDate = new Date();
+                        var nowYear = nowDate.getFullYear();
+                        var lastYear = nowYear + 1;
+                        var tempStr=lineSearchJson.StartDate.replace(nowYear+"-","").replace(lastYear+"-","");
+                        if (item.StartTime.indexOf(tempStr) < 0) {
+                            return true;
+                        }
+                    }
+
+                    //价格筛选
+                    if (lineSearchJson.Price != "") {
+                        if (lineSearchJson.Price.indexOf("-") > 0) {
+                            var PriceStr = lineSearchJson.Price.split("-");
+                            if (parseInt(item.DefaultPrice, 10) < parseInt(PriceStr[0], 10) || parseInt(item.DefaultPrice, 10) > parseInt(PriceStr[1], 10)) {
+                                return true;
+                            }
+                        }
+                        else {
+                            if (parseInt(item.DefaultPrice, 10) < parseInt(lineSearchJson.Price, 10)) {
+                                return true;
+                            }
+                        }
+                    }
+                    numCount++;
+                    lineStr += "<div class='pro-row'><a href='javascript:goProduct(" + item.ID + ");'><div class='proImg'><img src='" + item.DefaultPic + "' alt='' title=''></div><div class='pro-rInfo'>"
+                    + "<div class='pro-title'>" + item.Title + "</div><p class='pro-date'>发团日期：" + item.StartTime + "</p><div class='pro-price row'>"
+                    + "<span class='red_t'>¥ <b class='ft20'>" + item.DefaultPrice + "</b> <font>起</font></span><div class='coupon floatR'><font>送</font><span>100</span></div></div></div></a></div>";;
+                });
+                if (lineStr != "") {
+                    lineStr = "<section class='section-pro p10'>" + lineStr + "</section><div class='space'></div>";
+                }
+                else {
+                    lineStr = "<div class='noinfo-tip'>暂时没有相关产品</div>";
+                }
+                $("#groupNum").html("("+numCount+")");
+                $("#tab1").html(lineStr);
+            }
+            else {
+                $("#groupNum").html("(0)");
+                $("#tab1").html("<div class='noinfo-tip'>暂时没有相关产品</div>");
+            }
+        }
+        function searchFree() {
+            if (freeLineJson != null && freeLineJson.length > 0) {
+                var lineStr = "";
+                var numCount = 0;
+                $.each(freeLineJson, function (i, item) {
+                    //出发地筛选
+                    if (lineSearchJson.DepartID > 0) {
+                        if (item.DepartID != lineSearchJson.DepartID) {
+                            return true;
+                        }
+                    }
+                    //出游天数筛选
+                    if (lineSearchJson.Day != "") {
+                        if (lineSearchJson.Day.indexOf("-") > 0) {
+                            var dayStr = lineSearchJson.Day.split("-");
+                            if (parseInt(item.Daynum, 10) < parseInt(dayStr[0], 10) || parseInt(item.Daynum, 10) > parseInt(dayStr[1], 10)) {
+                                return true;
+                            }
+                        }
+                        else {
+                            if (parseInt(item.Daynum, 10) < parseInt(lineSearchJson.Day, 10)) {
+                                return true;
+                            }
+                        }
+                    }
+                    //出发时间筛选
+                    if (lineSearchJson.StartDate != "") {
+                        var nowDate = new Date();
+                        var nowYear = nowDate.getFullYear();
+                        var lastYear = nowYear + 1;
+                        var tempStr = lineSearchJson.StartDate.replace(nowYear + "-", "").replace(lastYear + "-", "");
+                        if (item.StartTime.indexOf(tempStr) < 0) {
+                            return true;
+                        }
+                    }
+
+                    //价格筛选
+                    if (lineSearchJson.Price != "") {
+                        if (lineSearchJson.Price.indexOf("-") > 0) {
+                            var PriceStr = lineSearchJson.Price.split("-");
+                            if (parseInt(item.DefaultPrice, 10) < parseInt(PriceStr[0], 10) || parseInt(item.DefaultPrice, 10) > parseInt(PriceStr[1], 10)) {
+                                return true;
+                            }
+                        }
+                        else {
+                            if (parseInt(item.DefaultPrice, 10) < parseInt(lineSearchJson.Price, 10)) {
+                                return true;
+                            }
+                        }
+                    }
+                    numCount++;
+                    lineStr += "<div class='pro-row'><a href='javascript:goProduct(" + item.ID + ");'><div class='proImg'><img src='" + item.DefaultPic + "' alt='' title=''></div><div class='pro-rInfo'>"
+                    + "<div class='pro-title'>" + item.Title + "</div><p class='pro-date'>发团日期：" + item.StartTime + "</p><div class='pro-price row'>"
+                    + "<span class='red_t'>¥ <b class='ft20'>" + item.DefaultPrice + "</b> <font>起</font></span><div class='coupon floatR'><font>送</font><span>100</span></div></div></div></a></div>";;
+                });
+                if (lineStr != "") {
+                    lineStr = "<section class='section-pro p10'>" + lineStr + "</section><div class='space'></div>";
+                }
+                else {
+                    lineStr = "<div class='noinfo-tip'>暂时没有相关产品</div>";
+                }
+                $("#zyxNum").html("(" + numCount + ")");
+                $("#tab2").html(lineStr);
+            }
+            else {
+                $("#zyxNum").html("(0)");
+                $("#tab2").html("<div class='noinfo-tip'>暂时没有相关产品</div>");
+            }
+        } 
+        function searchShip() {
+            if (shipJson != null && shipJson.length > 0) {
+                var lineStr = "";
+                var numCount = 0;
+                $.each(shipJson, function (i, item) {
+                    //航线筛选
+                    if (shipSearchJson.AirLineID > 0) {
+                        if (parseInt(item.cl_id,10) != shipSearchJson.AirLineID) {
+                            return true;
+                        }
+                    }
+                    //天数筛选
+                    if (shipSearchJson.Day > 0) {
+                        if (shipSearchJson.Day == 99) {
+                            if (item.DayNum < 7) {
+                                return true;
+                            }
+                        }
+                        else {
+                            if (item.DayNum != shipSearchJson.Day) {
+                                return true;
+                            }
+                            
+                        }
+                    }
+                    //邮轮公司筛选
+                    if (shipSearchJson.CruiseCompanyID > 0) {
+                        if (parseInt(item.ci_company_id,10) != shipSearchJson.CruiseCompanyID) {
+                            return true;
+                        }
+                    }
+                    numCount++;
+                    lineStr += "<div class='pro-row'><a href='javascript:goProduct(" + item.ID + ");'><div class='proImg'><img src='" + item.DefaultPic + "' alt='' title=''></div><div class='pro-rInfo'>"
+                    + "<div class='pro-title'>" + item.Title + "</div><div class='linkRow row color9'><span> <i class='iconB start'></i>出发地：" + item.Depart + "</span><span>"
+                    + "<i class='iconB delay'></i>" + item.Night + "晚" + item.DayNum + "天</span><span><i class='iconB shipLine'></i>" + item.AirLine + "</span></div><div class='pro-price row'>"
+                    + "<span class='red_t'>¥ <b class='ft20'>" + item.DefaultPrice + "</b> <font>起</font></span><div class='coupon floatR'><font>送</font><span>100</span></div></div></div></a></div>";;
+
+                });
+                if (lineStr != "") {
+                    lineStr = "<section class='section-pro p10'>" + lineStr + "</section><div class='space'></div>";
+                }
+                else {
+                    lineStr = "<div class='noinfo-tip'>暂时没有相关产品</div>";
+                }
+                $("#ylNum").html("(" + numCount + ")");
+                $("#tab5").html(lineStr);
+            }
+            else {
+                $("#ylNum").html("(0)");
+                $("#tab5").html("<div class='noinfo-tip'>暂时没有相关产品</div>");
+            }
+        }
+
+        function goProduct(id) {
+            switch (nowProduct) {
+                case 1:
+                    goProductPage(id, 1);
+                    break;
+                case 2:
+                    goProductPage(id, 2);
+                    break;
+                case 3:
+                    goProductPage(id, 4);
+                    break;
+                case 4:
+                    goProductPage(id, 5);
+                    break;
+                case 5:
+                    goProductPage(id, 3);
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="keywords" content="宁波飞扬旅行社,宁波旅行社,宁波旅游网" />
+    <meta name="description" content="飞扬旅游网隶属于浙江飞扬国际旅游集团,宁波旅行社行业第一,全国第八,浙江省首批五星级旅行社,宁波市最佳旅行社.服务热线:4000-365-666" />
+    <meta name="apple-mobile-web-app-title" content="飞扬旅游网" />
+    <title>飞扬旅游网</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/my-app.css">
+    <link rel="stylesheet" href="../css/jin.css">
+</head>
+<body ontouchstart>
+    <div class="views" id="loadDiv" style="display:none;">
+        <!--view-main start-->
+        <div class="view view-main">
+            <!--page start-->
+            <div class="page">
+                <!--page-content start-->
+                <div class="page-content white">
+                    <div class="loadingRow" style="background:#66cbff"><img style="margin-top:-20%;" src="../images/loading-ani.gif" alt=""></div>
+                </div>
+                <!--page-content END-->
+            </div>
+            <!-- page END-->
+
+        </div>
+        <!--view-main END-->
+    </div>
+    <!--views start-->
+    <div class="views" id="contentDiv">
+        <div class="successBar" id="status" style="display:none;">修改成功</div>
+        <!--view-main start-->
+        <div class="view view-main">
+            <!--page start-->
+            <div class="page navbar-fixed">
+                <!-- navbar start-->
+                <div class="navbar tmBar">
+                    <div class="navbar-inner navbar-on-center">
+                        <div class="left"><a class="back link" href="javascript:history.back();"> <i class="icon icon-back"></i></a></div>
+                        <div class="center sliding t1">意向咨询</div>
+                        <div class="right"></div>
+                    </div>
+                </div>
+                <!-- navbar END-->
+                <!--page-content start-->
+                <div class="page-content">
+                    <div class="feedBack-box">
+                        <div class="color9 ft16 mb10">联系人</div>
+                        <div class="row-input">
+                            <input class="input-filed" name="" placeholder="输入联系人" type="text" id="_name">
+                        </div>
+                        <div class="color9 ft16 mb10">手机号</div>
+                        <div class="row-input">
+                            <input class="input-filed" name="" placeholder="输入手机号" type="text" id="account">
+                        </div>
+                        <!--<div class="row-input row">
+                            <input class="input-filed w1" placeholder="输入验证码" type="text" id="codeStr">
+                            <input class="codeBtn w2" type="button" value="获取验证码" id="codeBtn" onclick="sendCode();">
+                        </div>-->
+
+                        <div class="mb10"><a href="javascript:doSubmit();" class="button button-big button-fill button-raised color-red">提交</a></div>
+                        <div class="ft14">
+                            意向咨询不会收取您任何的费用，提交后我们的私人旅游顾问会尽快联系您。
+                        </div>
+                    </div>
+                </div>
+                <!--page-content END-->
+            </div>
+            <!-- page END-->
+        </div>
+        <!--view-main END-->
+    </div>
+    <!-- views end-->
+
+    <script type="text/javascript" src="../js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="../js/command.js"></script>
+    <script type="text/javascript" src="../js/mywechat.js"></script>
+    <script type="text/javascript">
+        var proTitle = sessionStorage.getItem("int_title");
+        var desStr = sessionStorage.getItem("int_des");
+        var proId = sessionStorage.getItem("int_proId");
+        var proType = sessionStorage.getItem("int_proType");
+        var proGADDRID = sessionStorage.getItem("int_proGADDRID");
+        var myPhone;
+        function sendCode() {
+            var phone = $("#account").val();
+            if (!myphonereg.test(phone)) {
+                alert("请输入有效的手机号码");
+                return;
+            }
+            $.ajax({
+                type: "POST",
+                url: orderCodeUrl + "?ra=" + Math.random() + "",
+                data: "StrMd5=" + md5Str + "&MT=" + phone + "&State=1",
+                dataType: "text",
+                async: true,
+                success: function (myMsg) {
+                    if (myMsg != "") {
+                        codeTimeAction();
+                        myPhone = phone;
+                    }
+                    else {
+                        alert("短信飞到火星去了,暂时收不到 = =!");
+                    }
+                },
+                error: function () {
+                    return;
+                }
+            });
+        }
+        var codeTime = 80;
+        function codeTimeAction() {
+            codeTime--;
+            if (codeTime > 0) {
+                $("#codeBtn").val(codeTime + "后重新发送");
+                $("#codeBtn").attr("onclick", "");
+
+                setTimeout('codeTimeAction()', 1000);
+            }
+            else {
+                //重置按钮
+                codeTime = 80;
+                $("#codeBtn").val("发送验证短信");
+                $("#codeBtn").attr("onclick", "sendCode();");
+            }
+        }
+        var isSubmit = false;
+        function doSubmit() {
+            if (isSubmit) {
+                return;
+            }
+            isSubmit = true;
+            var myname = $("#_name").val();
+            if (myname=="") {
+                showStatus("请输入联系人");
+                isSubmit = false;
+                return;
+            }
+            var user = $("#account").val();
+            if (!myphonereg.test(user)) {
+                showStatus("请输入有效的手机号");
+                isSubmit = false;
+                return;
+            }
+            //var code = $("#codeStr").val();
+            //if (code == "") {
+            //    showStatus("请输入验证码");
+            //    isSubmit = false;
+            //    return;
+            //}
+            $("#loadDiv").show();
+            $("#contentDiv").hide();
+
+            
+            /*新的意向订单   开始*/
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                async: true,
+                url: "http://nb.iflying.com/ajax/line.php",
+                data: {
+                    type: "fastorder", pid: proId, name: myname, mobile: user, rn: Math.random()
+                            , adrid: proGADDRID, adrstr: desStr
+                            , ptitle: proTitle, ltype: proType
+                },
+                success: function (msg) {
+                    if (msg.state == 1) {
+                        alert("意向预约成功,我们的私人旅游顾问会尽快联系您！！");
+                        window.history.back();
+                    } else
+                    {
+                        alert("提交失败" + msg.msg);
+                        window.history.back();
+                    }
+                    //window.history.back();
+                }
+            });
+            /*新的意向订单   结束*/
+
+            /*老的意向订单   开始*/
+            //$.ajax({
+            //    type: "POST",
+            //    url: customtourOrderUrl + "?ra=" + Math.random() + "",
+            //    data: "StrMd5=" + md5Str + "&GADDRName=" + desStr + "&UserName=" + myname + "&MT=" + user
+            //    + "&Code=" + code + "&AdultCount=1&ChildCount=0&ContactTime=0&Demand=产品名:" + proTitle,
+            //    dataType: "text",
+            //    async: true,
+            //    success: function (myMsg) {
+            //        var dataObj = eval("(" + myMsg + ")");
+            //        if (dataObj != null && dataObj.result == 1) {
+            //            alert("意向预约成功,我们的私人旅游顾问会尽快联系您！");
+            //            window.history.back();
+            //        }
+            //        else {
+            //            $("#loadDiv").hide();
+            //            $("#contentDiv").show();
+            //            alert("服务器在火星还没回来,请稍后重试 = =!");
+            //            isSubmit = false;
+            //            return;
+            //        }
+            //    },
+            //    error: function () {
+            //        return;
+            //    }
+            //});
+
+            /*老的意向订单   结束*/
+        }
+        function showStatus(str) {
+            $("#status").html(str);
+            $("#status").fadeIn(500);
+            setTimeout(hideStatus, 800);
+        }
+        function hideStatus() {
+            $("#status").fadeOut(500);
+        }
+    </script>
+</body>
+</html>

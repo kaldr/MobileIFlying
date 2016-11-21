@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title id="myTitle">飞扬旅游网</title>
+    <meta name="keywords" content="宁波飞扬旅行社,宁波旅行社,宁波旅游网" id="myKeywords" />
+    <meta name="description" id="myDescription" content="飞扬旅游网隶属于浙江飞扬国际旅游集团,宁波旅行社行业第一,全国第八,浙江省首批五星级旅行社,宁波市最佳旅行社.服务热线:4000-365-666" />
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/my-app.css">
+    <link rel="stylesheet" href="/css/des.css">
+    <link rel="stylesheet" href="/css/mcss.css">
+</head>
+<body ontouchstart>
+    <!--views start-->
+    <div class="views">
+        <!--view-main start-->
+        <div class="view view-main">
+            <!--page start-->
+            <div class="page navbar-fixed">
+                <!--page-content start-->
+                <div class="navbar tmBar">
+                    <div class="navbar-inner navbar-on-center">
+                        <div class="left">
+                            <a href="javascript:history.back();" class="back link">
+                                <i class="icon icon-back"></i>
+                            </a>
+                        </div>
+                        <div class="center sliding t1" id="title"></div>
+                        <div class="right"></div>
+                    </div>
+                </div>
+                <div class="page-content grayBg">
+                    <div class="line_dis">
+                        <ul id="trafficList">
+                           
+                        </ul>
+                    </div>
+
+                </div>
+                <!--page-content END-->
+            </div>
+            <!-- page END-->
+        </div>
+        <!--view-main END-->
+    </div>
+    <!-- views end-->
+
+    <script type="text/javascript" src="/js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="/js/command.js"></script>
+    <script type="text/javascript">
+        var myRequest = GetRequest();
+        var cityCode = decodeURI(myRequest["city"]);
+        var gaddrId = decodeURI(myRequest["gaddr"]);
+        var getInfoUrl = "";
+        if (gaddrId != undefined && gaddrId != null && gaddrId != "" && gaddrId != "undefined") {
+            getInfoUrl = gaddrInfo2Url + "&GaddrID=" + gaddrId;
+        }
+        else {
+            getInfoUrl = gaddrInfoUrl + "&CityCode=" + cityCode;
+        }
+        $.ajax({
+            type: "GET",
+            url: getInfoUrl + "&Type=4",
+            dataType: "text",
+            async: false,
+            success: function (myMsg) {
+                var dataObj = eval("(" + myMsg + ")");
+                if (dataObj != null && dataObj.result == 1) {
+                    var item = dataObj.data;
+                    $("#myTitle").html("【"+item.Title+"交通指南】怎么去"+item.Title+"_"+item.Title+"旅游交通方案 - 飞扬旅游网");
+                    $("#myKeywords").attr("content", item.Title+"交通指南,怎么去"+item.Title+","+item.Title+"旅游交通方案");
+                    $("#myDescription").attr("content", item.Title + "交通指南，怎么去" + item.Title + "，飞扬旅游网为您提供详尽的全国各地去" + item.Title + "交通方式，以及" + item.Title + "交通攻略，" + item.Title + "当地交通方式，交通实用信息。");
+
+                    $("#title").html(item.Title + "交通指南");
+                    var trafficStr = "";
+                    $.each(item.Traffic, function (i, trafficItem) {
+                        trafficStr += "<div class='grey_line'><span class='top'>" + trafficItem.Title + "</span></div><li>" + escape2Html(trafficItem.Note) + "</li>";
+                    });
+                    $("#trafficList").html(trafficStr);
+                }
+            },
+            error: function () {
+                return;
+            }
+        });
+    </script>
+	<script src="https://s4.cnzz.com/z_stat.php?id=4072742&web_id=4072742" language="JavaScript"></script>
+</body>
+</html>

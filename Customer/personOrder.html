@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="keywords" content="宁波飞扬旅行社,宁波旅行社,宁波旅游网" />
+    <meta name="description" content="飞扬旅游网隶属于浙江飞扬国际旅游集团,宁波旅行社行业第一,全国第八,浙江省首批五星级旅行社,宁波市最佳旅行社.服务热线:4000-365-666" />
+    <meta name="apple-mobile-web-app-title" content="飞扬旅游网" />
+    <title>飞扬旅游网</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/my-app.css">
+    <link rel="stylesheet" href="../css/jin.css">
+</head>
+<body ontouchstart>
+    <!--views start-->
+    <div class="views">
+        <!--view-main start-->
+        <div class="view view-main">
+            <!--page start-->
+            <div class="page navbar-fixed">
+                <!-- navbar start-->
+                <div class="navbar tmBar">
+                    <div class="navbar-inner navbar-on-center">
+                        <div class="left"><a class="back link" href="javascript:history.back();"> <i class="icon icon-back"></i></a></div>
+                        <div class="center sliding t1" id="title">全部订单</div>
+                        <div class="right"></div>
+                    </div>
+                </div>
+                <!-- navbar END-->
+                <!--page-content start-->
+                <div class="page-content grayBg" id="orderStr">
+                    
+                </div>
+                <!--page-content END-->
+            </div>
+            <!-- page END-->
+        </div>
+        <!--view-main END-->
+    </div>
+
+    <!-- views end-->
+
+    <script type="text/javascript" src="../js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="../js/command.js"></script>
+    <script type="text/javascript" src="../js/mywechat.js"></script>
+    <script type="text/javascript">
+        var userId = sessionStorage.getItem("FYUSERID");
+        if (userId == undefined || userId == null || userId == "") {
+            alert("请登录后进行本操作!");
+            window.location.href = "login.html";
+        }
+        var myRequest = GetRequest();
+        var actType = decodeURI(myRequest["type"]);
+        var proType = 0;
+        switch (actType) {
+            case "all":
+                $("#title").html("全部订单");
+                proType = 100;
+                break;
+            case "a":
+                $("#title").html("待处理订单");
+                proType = 4;
+                break;
+            case "b":
+                $("#title").html("待出游订单");
+                proType = 5;
+                break;
+            case "c":
+                $("#title").html("待支付订单");
+                proType = 7;
+                break;
+        }
+        var orderStr = "";
+        $.getJSON(orderListUrl + "&UID=" + userId + "&ProductType="+proType+"&Page=1&Size=20", function (data) {
+            if (data != null && data.data != null) {
+                $.each(data.data, function (i, item) {
+                    var statusStr = "";
+                    switch (item.Status) {
+                        case 0:
+                            statusStr = "待处理";
+                            break;
+                        case 1:
+                            statusStr = "已签约";
+                            break;
+                        case -1:
+                            statusStr = "已取消";
+                            break;
+                    }
+                    orderStr += "<div class='w-panel border-topNone'><div class='clerFix ft16 plr10 mb10'><span class='floatL ft16'>订单号：" + item.OrderNo + "</span>"
+                    + "<span class='red_t2 floatR '>" + statusStr + "</span></div><div class='box-p mb10'><ul style='padding:0;' class='list-b'><li><div class='boxA'>"
+                    + "<a href='../OrderPublic/orderDetail.html?order="+item.ID+"'><img alt='' src='" + item.DefaultPic + "' class='img'><div class='Mpad'>" + item.PBASTitle + "</div></a></div></li></div>"
+                    + "<div class='algin_right red_t2 ft14 plr10'>总金额：<b class='ft18'>¥" + item.TotalMoney + "</b>";
+                    if (item.Prepay > 0) {
+                        orderStr += "&nbsp;&nbsp;已支付：<font style='color:green;'>¥" + item.Prepay + "</font>";
+                    }
+                    orderStr += "</div></div>";
+                });
+                $("#orderStr").html(orderStr);
+            }
+        });
+    </script>
+</body>
+</html>

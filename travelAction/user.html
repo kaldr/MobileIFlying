@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title> 意向报名 </title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="telephone=no" name="format-detection" />
+    <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+    <script type="text/javascript">
+        function GetRequest() {
+            var url = location.search; //获取url中"?"符后的字串 
+            var theRequest = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                strs = str.split("&");
+                for (var i = 0; i < strs.length; i++) {
+                    theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+                }
+            }
+            return theRequest;
+        }
+        function doSubmit()
+        {
+            var name = $("#userName").val();
+            if (name == "")
+            {
+                alert("请输入联系人");
+                return;
+            }
+            var phone = $("#userMt").val();
+            var myreg = /^(13|14|15|16|18|19)\d{9}$/;
+            if (!myreg.test(phone)) {
+                alert("请输入有效的手机号码")
+                return;
+            }
+            var myRequest = GetRequest();
+            var title = decodeURI(myRequest["title"]);
+            $.ajax({
+                type: "GET",
+                url: "travelAction.ashx?name=" + name + "&phone=" + phone + "&title=" + title + "&ra=" + Math.random() + "",
+                dataType: "text",
+                async: true,
+                success: function (myMsg) {
+                    if (myMsg == "2") {
+                        alert("您已报名成功");
+                    } else if (myMsg == "1") {
+                        window.location = "userok.html";
+                    }
+                    else {
+                        alert("请稍后再试");
+                    }
+                },
+                error: function () {
+                    return;
+                }
+            });
+        }
+    </script>
+</head>
+
+<body style="margin:0 auto; padding:0 ;font-family:Microsoft Yahei">
+    <div style=" width:100%; font-size:20px; background:#00CCCC; line-height:45px; font-weight:bold; text-align:center; color:#fff;">
+
+        意向报名
+
+    </div>
+
+    <div style="padding:20px 0; margin:0 auto; width:90%; line-height:35px;">
+        联系人：
+        <div style="padding-bottom:15px;">
+            <input name="userName" id="userName" type="text" value="" style="width:100%; margin:0 auto; line-height:30px; height:30px; border:1px solid #ccc; padding:0" />
+        </div>
+
+
+        手机号：
+        <div>
+            <input name="userMt" id="userMt" type="text" value="" style="width:100%; margin:0 auto; line-height:30px; height:30px; border:1px solid #ccc; padding:0;" />
+        </div>
+        <a href="#" style="display:block; width:100%; height:40px;  line-height:40px; border-radius:10px; text-decoration:none; font-size:20px; background:#f60; text-align:center; color:#fff; margin:0 auto; border:1px solid #f60; margin-top:25px;" onclick="doSubmit()">提前报名，我们会联系您</a>
+    </div>
+</body>
+</html>

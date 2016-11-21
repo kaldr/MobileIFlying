@@ -1,0 +1,315 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="keywords" content="宁波飞扬旅行社,宁波旅行社,宁波旅游网" />
+    <meta name="description" content="飞扬旅游网隶属于浙江飞扬国际旅游集团,宁波旅行社行业第一,全国第八,浙江省首批五星级旅行社,宁波市最佳旅行社.服务热线:4000-365-666" />
+    <meta name="apple-mobile-web-app-title" content="飞扬旅游网" />
+    <title>飞扬旅游网</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/my-app.css">
+    <link rel="stylesheet" href="../css/jin.css">
+</head>
+<body class="grayBg" ontouchstart>
+    <div class="views" id="loadDiv" style="display:none;">
+        <!--view-main start-->
+        <div class="view view-main">
+            <!--page start-->
+            <div class="page">
+                <!--page-content start-->
+                <div class="page-content white">
+                    <div class="loadingRow" style="background:#66cbff"><img style="margin-top:-20%;" src="../images/loading-ani.gif" alt=""></div>
+                </div>
+                <!--page-content END-->
+            </div>
+            <!-- page END-->
+
+        </div>
+        <!--view-main END-->
+    </div>
+    <!--views start-->
+    <div class="views" id="contentDiv">
+        <!--view-main start-->
+        <div class="view view-main">
+            <!--page start-->
+            <div class="page navbar-fixed">
+                <!-- navbar start-->
+                <div class="navbar tmBar">
+                    <div class="navbar-inner navbar-on-center">
+                        <div class="left"> <a class="back link" href="#"> <i class="icon icon-back mr5"></i> </a> </div>
+                        <div class="center sliding t1">联系信息</div>
+                        <div class="right"></div>
+                    </div>
+                </div>
+                <!-- navbar END-->
+                <!--page-content start-->
+                <div class="page-content grayBg">
+                    <!-- 人员信息 start-->
+                    <div class="w-panel p0 mt10">
+                        <div class="card-header" style="display:block"><span>人员信息</span><a class="floatR ft14 blue_txt mt5" href="javascript:history.back();">更改出发日期或人数</a></div>
+                        <div class="list-block inputs-list inCus">
+                            <ul>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media w100"><font class="need">*</font>产品名称</div>
+                                        <div class="item-inner">
+                                            <div class="item-input" id="proTitle">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media w100"><font class="need">*</font>出发日期</div>
+                                        <div class="item-inner">
+                                            <div class="item-input" id="startTime">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media w100"><font class="need">*</font>成人</div>
+                                        <div class="item-inner">
+                                            <div class="item-input" id="adultNum">
+                                                
+                                            </div>
+                                            <span>位</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media w100"><font class="need">*</font>儿童</div>
+                                        <div class="item-inner">
+                                            <div class="item-input" id="childNum">
+                                                
+                                            </div>
+                                            <span>位</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--人员信息 w-panel END-->
+                    <!-- 订单联系人 start-->
+                    <div class="w-panel p0 mt10">
+                        <div class="card-header">订单联系人</div>
+                        <div class="list-block inputs-list inCus">
+                            <ul>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media">联系人</div>
+                                        <div class="item-inner">
+                                            <div class="item-input">
+                                                <input type="text" placeholder="联系人" id="nameStr" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media">手机号</div>
+                                        <div class="item-inner">
+                                            <div class="item-input">
+                                                <input type="text" placeholder="手机号" id="phoneStr" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media">验证码</div>
+                                        <div class="item-inner none">
+                                            <div class="item-input item-input-field">
+                                                <input type="text" placeholder="手机验证码" id="codeStr"><a href="javascript:sendCode();" class="button color-red inline radis0 yzm" id="codeBtn">发送验证短信</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <!--订单联系人 w-panel END-->
+                    <!-- 联系时间 start-->
+                    <div class="w-panel p0 mt10">
+                        <div class="card-header">联系时间</div>
+                        <div class="list-block inputs-list inCus">
+                            <div class="list-block">
+                                <ul>
+                                    <li>
+                                        <label class="label-checkbox item-content">
+                                            <input type="radio" name="linkTime" value="0" checked="checked" />
+                                            <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                                            <div class="item-inner">
+                                                <div class="item-title">立即联系我</div>
+                                            </div>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="label-checkbox item-content">
+                                            <input type="radio" name="linkTime" value="3,4" />
+                                            <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                                            <div class="item-inner">
+                                                <div class="item-title">工作日休息时间联系我</div>
+                                            </div>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="label-checkbox item-content">
+                                            <input type="radio" name="linkTime" value="6" />
+                                            <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                                            <div class="item-inner">
+                                                <div class="item-title">周末联系我</div>
+                                            </div>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!--联系时间 w-panel END-->
+                    <!-- 特殊需求 start-->
+                    <div class="w-panel p0 mt10">
+                        <div class="card-header">特殊需求</div>
+                        <div class="list-block inputs-list inCus">
+                            <ul>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-input">
+                                                <textarea style="height:100px;" placeholder="有什么特殊需求写这里..." rows="3" class="resizable" id="remark"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--特殊需求 w-panel END-->
+
+                    <div class="space">&nbsp;</div>
+                </div>
+                <!--page-content END-->
+            </div>
+            <!-- page END-->
+            <div class="toolbar h1"><a style="width:100%; font-size:20px;" href="javascript:subOrder();" class="yellowbtn b3">确认提交</a> </div>
+        </div>
+        <!--view-main END-->
+    </div>
+    <!-- views end-->
+    <script type="text/javascript" src="../js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="../js/command.js"></script>
+    <script type="text/javascript" src="../js/mywechat.js"></script>
+    <script type="text/javascript">
+        var myRequest = GetRequest();
+        var token = decodeURI(myRequest["token"]);
+        var orderJson = JSON.parse(sessionStorage.getItem(token));
+        if (orderJson != null) {
+            $("#proTitle").html(orderJson.ProductTitle);
+            $("#startTime").html(orderJson.StartTime);
+            $("#adultNum").html(orderJson.AdultNum);
+            $("#childNum").html(orderJson.ChildNum);
+            
+        }
+        
+        function sendCode() {
+            var phone = $("#phoneStr").val();
+            if (!myphonereg.test(phone)) {
+                alert("请输入有效的手机号码");
+                return;
+            }
+            $.ajax({
+                type: "POST",
+                url: orderCodeUrl + "?ra=" + Math.random() + "",
+                data: "StrMd5=" + md5Str + "&MT=" + phone + "&State=1",
+                dataType: "text",
+                async: true,
+                success: function (myMsg) {
+                    if (myMsg != "") {
+                        codeTimeAction();
+                        orderJson.Phone = phone;
+                    }
+                    else {
+                        alert("短信飞到火星去了,暂时收不到 = =!");
+                    }
+                },
+                error: function () {
+                    return;
+                }
+            });
+        }
+        var codeTime = 80;
+        function codeTimeAction() {
+            codeTime--;
+            if (codeTime > 0) {
+                $("#codeBtn").html(codeTime + "后重新发送");
+                $("#codeBtn").attr("href", "javascript:void(0);");
+
+                setTimeout('codeTimeAction()', 1000);
+            }
+            else {
+                //重置按钮
+                codeTime = 80;
+                $("#codeBtn").html("发送验证短信");
+                $("#codeBtn").attr("href", "javascript:sendCode();");
+            }
+        }
+        function subOrder() {
+            var name = $("#nameStr").val();
+            if (name == "") {
+                alert("请输入联系人");
+                return;
+            }
+
+            var phone = $("#phoneStr").val();
+            if (!myphonereg.test(phone)) {
+                alert("请输入有效的手机号码");
+                return;
+            }
+
+            var code = $("#codeStr").val();
+            if (code == "") {
+                alert("请输入验证码");
+                return;
+            }
+            orderJson.Customer = name;
+            var linkTimeStr = $("#linkTime").val();
+            var remarkStr = $("#remark").val();
+            $("#loadDiv").show();
+            $("#contentDiv").hide();
+            $.ajax({
+                type: "POST",
+                url: cruiseOrderUrl + "?ra=" + Math.random() + "",
+                data: "StrMd5=" + md5Str + "&ProductID=" + orderJson.ProductID + "&PPRODID=" + orderJson.PlanID + "&UserName=" + orderJson.Customer + "&MT=" + orderJson.Phone
+                + "&Sex=1&AdultCount=" + orderJson.AdultNum + "&ChildCount=" + orderJson.ChildNum + "&ContactTime=" + linkTimeStr + "&Demand=" + remarkStr + "&Code="+code,
+                dataType: "text",
+                async: true,
+                success: function (myMsg) {
+                    var dataObj = eval("(" + myMsg + ")");
+                    if (dataObj != null && dataObj.result == 1) {
+                        window.location.href = "ship_step3.html";
+                    }
+                    else {
+                        $("#loadDiv").hide();
+                        $("#contentDiv").show();
+                        alert("下单失败："+dataObj.cause);
+                        return;
+                    }
+                },
+                error: function () {
+                    return;
+                }
+            });
+
+        }
+    </script>
+</body>
+</html>

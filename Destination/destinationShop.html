@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title id="myTitle">飞扬旅游网</title>
+    <meta name="keywords" content="宁波飞扬旅行社,宁波旅行社,宁波旅游网" id="myKeywords" />
+    <meta name="description" id="myDescription" content="飞扬旅游网隶属于浙江飞扬国际旅游集团,宁波旅行社行业第一,全国第八,浙江省首批五星级旅行社,宁波市最佳旅行社.服务热线:4000-365-666" />
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/my-app.css">
+    <link rel="stylesheet" href="/css/des.css">
+    <link rel="stylesheet" href="/css/mcss.css">
+</head>
+<body ontouchstart>
+    <!--views start-->
+    <div class="views">
+        <!--view-main start-->
+        <div class="view view-main">
+            <!--page start-->
+            <div class="page navbar-fixed">
+                <!--page-content start-->
+                <div class="navbar tmBar">
+                    <div class="navbar-inner navbar-on-center">
+                        <div class="left">
+                            <a href="javascript:history.back();" class="back link">
+                                <i class="icon icon-back"></i>
+                            </a>
+                        </div>
+                        <div class="center sliding t1" id="title"></div>
+                        <div class="right"></div>
+                    </div>
+                </div>
+                <div class="page-content grayBg">
+                    <div class="w_media">
+                        <div class="cred lineB"> <strong>购物点</strong></div>
+                        <ul class="shopping-list" id="itemList">
+
+                        </ul>
+                    </div>
+                    <div class="w_media">
+                        <div class="cred lineB"> <strong>特产</strong></div>
+                        <ul class="shopping-list" id="shopList">
+
+                           
+                        </ul>
+                    </div>
+                </div>
+                <!--page-content END-->
+            </div>
+            <!-- page END-->
+        </div>
+        <!--view-main END-->
+    </div>
+    <!-- views end-->
+
+    <script type="text/javascript" src="/js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="/js/command.js"></script>
+    <script type="text/javascript">
+        var myRequest = GetRequest();
+        var cityCode = decodeURI(myRequest["city"]);
+        var gaddrId = decodeURI(myRequest["gaddr"]);
+        var getInfoUrl = "";
+        if (gaddrId != undefined && gaddrId != null && gaddrId != "" && gaddrId != "undefined") {
+            getInfoUrl = gaddrInfo2Url + "&GaddrID=" + gaddrId;
+        }
+        else {
+            getInfoUrl = gaddrInfoUrl + "&CityCode=" + cityCode;
+        }
+        $.ajax({
+            type: "GET",
+            url: getInfoUrl + "&Type=5",
+            dataType: "text",
+            async: false,
+            success: function (myMsg) {
+                var dataObj = eval("(" + myMsg + ")");
+                if (dataObj != null && dataObj.result == 1) {
+                    var item = dataObj.data;
+                    $("#title").html(item.Title + "购物攻略");
+                    $("#myTitle").html("【"+item.Title+"旅游购物攻略】"+item.Title+"购物指南_去"+item.Title+"旅游买什么好_旅游特产,纪念品 - 飞扬旅游网");
+                    $("#myKeywords").attr("content", item.Title+"旅游购物攻略,"+item.Title+"旅游购物指南,去"+item.Title+"旅游买什么好,"+item.Title+"旅游特产");
+                    $("#myDescription").attr("content", item.Title + "旅游购物攻略," + item.Title + "购物指南,飞扬旅游网提供最全面的" + item.Title + "购物攻略,去" + item.Title + "旅游买什么好?包括" + item.Title + "当地土特产,旅游纪念品,工艺品等.");
+
+                    var shopStr = "";
+                    if (item.Shopping.length > 0) {
+                        $.each(item.Shopping, function (i, shopItem) {
+                            shopStr += "<li><img src='" + shopItem.Photo + "'><div class='sp-r'><h2>" + shopItem.Title + "</h2><p class='f1'>" + shopItem.Intro + "</p></div></li>";
+                        });
+                    }
+                    if (shopStr == "") {
+                        shopStr = "<li>暂无信息</li>";
+                    }
+                    $("#shopList").html(shopStr);
+                    var itemStr = "";
+                    if (item.Specialty.length > 0) {
+                        $.each(item.Specialty, function (i, speItem) {
+                            itemStr += "<li><img src='" + speItem.Photo + "'><div class='sp-r'><h2>" + speItem.Title + "</h2><p class='f1'>" + speItem.Intro + "</p></div></li>";
+                        });
+                    }
+                    if (itemStr == "") {
+                        itemStr = "<li>暂无信息</li>";
+                    }
+                    $("#itemList").html(itemStr);
+                }
+            },
+            error: function () {
+                return;
+            }
+        });
+    </script>
+	<script src="https://s4.cnzz.com/z_stat.php?id=4072742&web_id=4072742" language="JavaScript"></script>
+</body>
+</html>

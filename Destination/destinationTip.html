@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title id="myTitle">飞扬旅游网</title>
+    <meta name="keywords" content="宁波飞扬旅行社,宁波旅行社,宁波旅游网" id="myKeywords" />
+    <meta name="description" id="myDescription" content="飞扬旅游网隶属于浙江飞扬国际旅游集团,宁波旅行社行业第一,全国第八,浙江省首批五星级旅行社,宁波市最佳旅行社.服务热线:4000-365-666" />
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/my-app.css">
+</head>
+<body ontouchstart>
+    <!--views start-->
+    <div class="views">
+        <!--view-main start-->
+        <div class="view view-main">
+            <!--page start-->
+            <div class="page navbar-fixed">
+                <!-- navbar start-->
+                <div class="navbar tmBar">
+                    <div class="navbar-inner navbar-on-center">
+                        <div class="left"><a id="backUrl" class="back link" href="javascript:history.back();"> <i class="icon icon-back"></i></a></div>
+                        <div class="center sliding t1">注意事项</div>
+                        <div class="right"></div>
+                    </div>
+                </div>
+                <!-- navbar END-->
+                <!--page-content start-->
+                <div class="page-content">
+                    <div class="borderB feeInfo">
+                        <div class="infoTxt" id="tipList">
+
+                        </div>
+                    </div>
+
+                </div>
+                <!--page-content END-->
+            </div>
+            <!-- page END-->
+
+        </div>
+        <!--view-main END-->
+    </div>
+
+    <!-- views end-->
+
+    <script type="text/javascript" src="/js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="/js/command.js"></script>
+    <script type="text/javascript">
+        var myRequest = GetRequest();
+        var cityCode = decodeURI(myRequest["city"]);
+        var gaddrId = decodeURI(myRequest["gaddr"]);
+        var getInfoUrl = "";
+        if (gaddrId != undefined && gaddrId != null && gaddrId != "" && gaddrId != "undefined") {
+            getInfoUrl = gaddrInfo2Url + "&GaddrID=" + gaddrId;
+        }
+        else {
+            getInfoUrl = gaddrInfoUrl + "&CityCode=" + cityCode;
+        }
+        $.ajax({
+            type: "GET",
+            url: getInfoUrl + "&Type=8",
+            dataType: "text",
+            async: false,
+            success: function (myMsg) {
+                var dataObj = eval("(" + myMsg + ")");
+                if (dataObj != null && dataObj.result == 1) {
+                    var item = dataObj.data;
+                    $("#myTitle").html("【"+item.Title+"旅游注意事项】去"+item.Title+"旅游要注意什么 - 飞扬旅游网");
+                    $("#myKeywords").attr("content", item.Title+"旅游注意事项,去"+item.Title+"旅游注意什么");
+                    $("#myDescription").attr("content", "飞扬旅游网为您介绍一些" + item.Title + "旅游注意事项_去" + item.Title + "旅游要注意什么,让您了解" + item.Title + "当地的气候,风俗习惯等.去" + item.Title + "旅游注意事项详情请点击进入网站查看.");
+
+                    var CateStr = "";
+                    $.each(item.Notice, function (i, CateItem) {
+                        CateStr += "<div class='borderB feeInfo'><div class='redTit mb15'>" + CateItem.Title + "</div><div class='infoTxt'>"+CateItem.Note+"</div></div>";
+                    });
+                    $("#tipList").html(CateStr);
+                }
+            },
+            error: function () {
+                return;
+            }
+        });
+    </script>
+	<script src="https://s4.cnzz.com/z_stat.php?id=4072742&web_id=4072742" language="JavaScript"></script>
+</body>
+</html>

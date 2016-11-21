@@ -1,0 +1,278 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="destination.aspx.cs" Inherits="WeChat.NewIflying.NewDestination.destination" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>【旅游攻略】自助游攻略,旅游攻略大全,原创精彩旅游攻略分享 - 飞扬旅游网 </title>
+    <meta name="keywords" content="旅游攻略，国内旅游目的地，热门旅游目的地，国内旅游景点，旅游景点大全" />
+    <meta name="description" content="为您提供丰富、权威、实用的国内目的地旅游指南信息。最新原创旅游攻略,全方位旅游资讯、景区介绍、交通线路、当地美食、用户点评及旅行信息的深度搜索,让你出行更方便。" />
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/my-app.css">
+</head>
+<body ontouchstart>
+    <!--views start-->
+    <div class="views">
+        <!--view-main start-->
+        <div class="view view-main">
+            <!--page start-->
+            <div class="page navbar-fixed">
+                <!--page-content start-->
+                <div class="navbar tmBar">
+                    <div class="navbar-inner navbar-on-center">
+                        <div class="left"><a href="javascript: window.location.href = 'index.html';" class="back link"> <i class="icon icon-back"></i></a></div>
+                        <div class="center sliding t1">目的地列表</div>
+                        <div class="right"></div>
+                    </div>
+                </div>
+                <div class="page-content"  style="overflow:hidden;">
+                    <div class="visa-more">
+                        <div class="visa-search">
+                            <div class="search">
+                                <input type="text" class="seaIpt" placeholder="输入目的地" id="searchStr">
+                                <a class="serBtn" href="javascript:search();"><i class="iconI i-search">&nbsp;</i></a>
+                            </div>
+                        </div>
+                        <div class="tab_con">
+                            <div class="tab-list s-menu">
+                                <div class="buttons-row">
+                                <a class="tab-link button active" href="javascript:changeType(1);" id="btn1">境内</a>
+                                <a class="tab-link button" href="javascript:changeType(2);" id="btn2">境外</a>
+                                </div>
+                            </div>
+                            <div class="wrap_sort">
+                                <!-- Tabs, 标签内容区容器 -->
+                                <div class="tabs">
+                                    <div id="tab1" class="tab active">
+                                        <div class="sort-city" id="addrList">
+                                        </div>
+                                        
+                                        <div class="right_alp" id="searchIndex">
+
+                                        </div>
+                                    </div>  
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--page-content END-->
+            </div>
+            <!-- page END-->
+
+        </div>
+        <!--view-main END-->
+    </div>
+    <!-- views end-->
+
+    <script type="text/javascript" src="../js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="../js/command.js"></script>
+    <script type="text/javascript" src="../js/destination.js"></script>
+    <script type="text/javascript">
+        var myRequest = GetRequest();
+        var type = decodeURI(myRequest["type"]);
+        var eCode = ["A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "W", "X", "Y", "Z"];
+        $.each(eCode, function (i, item) {
+            $("#searchIndex").append("<a>" + item + "</a>");
+        });
+
+        var ele = $(".right_alp");
+        var winH = $(".views").height() - 150;
+        var alpNum = ele.find("a").length;
+        var eveH = winH / alpNum;
+        ele.css({ height: winH });
+        ele.find("a").css({ height: eveH, lineHeight: eveH + 'px' });
+
+        $(".right_alp a").each(function (index, element) {
+            $(element).click(function () {
+                var tit = $(".sort-tit")[index].offsetTop;
+                $('#tab1 .sort-city').animate({
+                    scrollTop: tit + 'px'
+                });
+            });
+        });
+
+        var loadType = 1;
+        var gnJson = Territory;
+        var cjJson = Outbound;
+        function loadAddr() {
+            if (gnJson!=null && gnJson.length > 0) {
+                innerGaddr();
+            }
+            else {
+                $.getJSON(gaddrListUrl + "&AddrType=0", function (data) {
+                    if (data != null && data.data != null) {
+                        gnJson = data.data;
+                        innerGaddr();                        
+                    }
+                });
+            }
+            
+            if (cjJson!=null && cjJson.length <= 0) {
+                $.getJSON(gaddrListUrl + "&AddrType=1", function (data2) {
+                    if (data2 != null && data2.data != null) {
+                        cjJson = data2.data;
+                    }
+                });
+            }
+            switch (type) {
+                case "1":
+                    changeType(1);
+                    break;
+                case "2":
+                    changeType(2);
+                    break;
+            }
+        }
+        function loadGn() {
+            loadType = 1;
+            if (gnJson.length > 0) {
+                innerGaddr();
+            }
+            else {
+                $.getJSON(gaddrListUrl + "&AddrType=0", function (data) {
+                    if (data != null && data.data != null) {
+                        gnJson = data.data;
+                        innerGaddr();
+                    }
+                });
+            }
+        }
+        function loadCj() {
+            loadType = 2;
+            if (cjJson.length > 0) {
+                innerGaddr();
+            }
+            else {
+                $.getJSON(gaddrListUrl + "&AddrType=1", function (data) {
+                    if (data != null && data.data != null) {
+                        cjJson = data.data;
+                        innerGaddr();
+                    }
+                });
+            }
+        }
+        function changeType(type) {
+            $("#btn1").attr("class", "tab-link button");
+            $("#btn2").attr("class", "tab-link button");
+            $("#btn1").attr("href", "javascript:changeType(1);");
+            $("#btn2").attr("href", "javascript:changeType(2);");
+            switch (type) {
+                case 1:
+                    $("#btn1").attr("class", "tab-link button active");
+                    loadGn();
+                    break;
+                case 2:
+                    $("#btn2").attr("class", "tab-link button active");
+                    loadCj();
+                    break;
+            }
+        }
+        function innerGaddr(type) {
+            var gaddrStr = "";
+            $.each(eCode, function (i, item) {
+                gaddrStr += "<a name='" + item + "'></a><div class='sort-tit'>" + item + "</div>";
+                gaddrStr += "<div class='sort-list'>";
+                var tempJson = [];
+                if (loadType == 1) {
+                    tempJson = gnJson;
+                }
+                else {
+                    tempJson = cjJson;
+                }
+                if (tempJson != null && tempJson.length > 0) {
+                    $.each(tempJson, function (i, gaddrItem) {
+                        if (gaddrItem.Children.length > 0) {
+                            $.each(gaddrItem.Children, function (i, ChildItem) {
+                                if (getFirstChar(ChildItem.Shorter) == item) {
+                                    gaddrStr += "<a href='http://m.iflying.com/" + ChildItem.CityCode + "/city/?city=" + ChildItem.CityCode + "'>" + ChildItem.Title + "</a>";
+                                }
+                            });
+                        }
+                        else {
+                            if (getFirstChar(gaddrItem.Shorter) == item) {
+                                gaddrStr += "<a href='http://m.iflying.com/" + gaddrItem.CityCode + "/city/?city=" + gaddrItem.CityCode + "'>" + gaddrItem.Title + "</a>";
+                            }
+                        }
+
+                    });
+                }
+                gaddrStr += "</div>";
+            });
+            gaddrStr += "<div class='space'></div>";
+            $("#addrList").html(gaddrStr);
+        }
+        function getFirstChar(str) {
+            if (str!=undefined && str != "") {
+                //str = str.toUpperCase();
+                var temp = str.substring(0, 1);
+                return temp;
+            }
+            return "";
+        }
+        loadAddr();
+        function search() {
+            var searStr = $("#searchStr").val();
+            var gaddrStr = "";
+            if (searchStr != "") {
+                gaddrStr += "<div class='sort-tit'>搜索目的地</div>";
+                gaddrStr += "<div class='sort-list'>";
+                $.each(gnJson, function (i, gaddrItem) {
+                    if (gaddrItem.Title == searStr) {
+                        if (gaddrItem.Children.length > 0) {
+                            $.each(gaddrItem.Children, function (i, ChildItem) {
+                                gaddrStr += "<a href='http://m.iflying.com/" + ChildItem.CityCode + "/city/?city=" + ChildItem.CityCode + "'>" + ChildItem.Title + "</a>";
+                            });
+                        }
+                    }
+                    if (gaddrItem.Children.length > 0) {
+                        $.each(gaddrItem.Children, function (i, ChildItem) {
+                            if (ChildItem.Title.indexOf(searStr) >= 0) {
+                                gaddrStr += "<a href='http://m.iflying.com/" + ChildItem.CityCode + "/city/?city=" + ChildItem.CityCode + "'>" + ChildItem.Title + "</a>";
+                            }
+                        });
+                    }
+                    else {
+                        if (gaddrItem.Title.indexOf(searStr) >= 0) {
+                            gaddrStr += "<a href='http://m.iflying.com/" + gaddrItem.CityCode + "/city/?city=" + gaddrItem.CityCode + "'>" + gaddrItem.Title + "</a>";
+                        }
+                    }
+
+                });
+                $.each(cjJson, function (i, gaddrItem) {
+                    if (gaddrItem.Title == searStr) {
+                        if (gaddrItem.Children.length > 0) {
+                            $.each(gaddrItem.Children, function (i, ChildItem) {
+                                gaddrStr += "<a href='http://m.iflying.com/" + ChildItem.CityCode + "/city/?city=" + ChildItem.CityCode + "'>" + ChildItem.Title + "</a>";
+                            });
+                        }
+                    }
+                    if (gaddrItem.Children.length > 0) {
+                        $.each(gaddrItem.Children, function (i, ChildItem) {
+                            if (ChildItem.Title.indexOf(searStr) >= 0) {
+                                gaddrStr += "<a href='http://m.iflying.com/" + ChildItem.CityCode + "/city/?city=" + ChildItem.CityCode + "'>" + ChildItem.Title + "</a>";
+                            }
+                        });
+                    }
+                    else {
+                        if (gaddrItem.Title.indexOf(searStr) >= 0) {
+                            gaddrStr += "<a href='http://m.iflying.com/" + gaddrItem.CityCode + "/city/?city=" + gaddrItem.CityCode + "'>" + gaddrItem.Title + "</a>";
+                        }
+                    }
+
+                });
+                gaddrStr += "</div>";
+                gaddrStr += "<div class='space'></div>";
+                $("#addrList").html(gaddrStr);
+            }
+        }
+    </script>
+	<script src="https://s4.cnzz.com/z_stat.php?id=4072742&web_id=4072742" language="JavaScript"></script>
+</body>
+</html>

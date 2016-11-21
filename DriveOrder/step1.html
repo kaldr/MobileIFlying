@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="keywords" content="宁波飞扬旅行社,宁波旅行社,宁波旅游网" />
+    <meta name="description" content="飞扬旅游网隶属于浙江飞扬国际旅游集团,宁波旅行社行业第一,全国第八,浙江省首批五星级旅行社,宁波市最佳旅行社.服务热线:4000-365-666" />
+    <meta name="apple-mobile-web-app-title" content="飞扬旅游网" />
+    <title>飞扬旅游网</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/my-app.css">
+</head>
+<body class="grayBg" ontouchstart>
+    <!--views start-->
+    <div class="views">
+        <!--view-main start-->
+        <div class="view view-main">
+            <!--page start-->
+            <div class="page navbar-fixed">
+                <!-- navbar start-->
+                <div class="navbar tmBar">
+                    <div class="navbar-inner navbar-on-center">
+                        <div class="left"><a class="back link" href="#"> <i class="icon icon-back"></i></a></div>
+                        <div class="center sliding t1">产品确认</div>
+                        <div class="right"></div>
+                    </div>
+                </div>
+                <!-- navbar END-->
+                <!--page-content start-->
+                <div class="page-content">
+                    <div class="w-panel card-spe">
+                        <div class="ft16 mb10 pt10 plr10" id="proTitle"></div>
+                        <div class="ft14 color6 plr10 line25">
+                            <p id="bookNotes"></p>
+                        </div>
+                    </div>
+                    <!-- 1 w-panel start-->
+                    <div class="w-panel p0">
+                        <div class="card-header">预定信息</div>
+                        <div class="list-block">
+                            <ul class="ins-list">
+                                <li>
+                                    <label class="label-radio item-content">
+                                        <div class="ins-name">份数</div>
+                                        <input type="radio" checked="" value="" name="radio-01">
+
+                                        <div class="r-p">
+                                            <span class="ft16 mr10"><font class="pinkTxt" id="myprice"></font>/份</span><span class="numPanel">
+                                                <a class="numVH" href="javascript:plusPerson(1);" id="adultPlus">-</a>
+                                                <input type="text" class="form-control vhInput" style="width:35px; background:#eee; line-height:32px; height:32px; font-size:15px;" value="0" name="" id="adultNum">
+                                                <a class="numVH" href="javascript:addPerson(1);" id="adultAdd">+</a>
+                                            </span>
+                                        </div>
+                                    </label>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <!--1 w-panel END-->
+                    <div class="space">&nbsp;</div>
+                </div>
+                <!--page-content END-->
+            </div>
+            <!-- page END-->
+
+            <div class="toolbar h64">
+                <div class="toolbar-inner"><span>总金额：<strong class="red_t" id="totalPrice"></strong></span>
+                <span><a href="javascript:showPriceDiv();" class="red_t2 inline mr10 ft14" id="totalPriceStr">费用明细</a>
+                    <a class="button button-big button-fill inline redBtn radis0 inline mBtn" href="javascript:goNext();">下一步</a></span></div>
+            </div>
+        </div>
+        <!--view-main END-->
+    </div>
+    <!-- views end-->
+    <div class="modal-overlay modal-overlay-visible" style="display:none;" id="_priceDiv"></div>
+    <div class="actions-modal modal-in" style="display:none;" id="priceDiv">
+        <ul class="list-b">
+            <li id="teamPriceStr">
+               
+            </li>
+            <!--<li>
+                <div class="ft14 mb5 clerFix"><b class="floatL">保险费用</b><font class="floatR pinkTxt">¥120</font></div>
+                <p class="ft14 color6">泰康境外旅意险(户外运动版)</p>
+                <div class="ft14 color6"><span class="floatL">2成人</span><span class="floatR">¥60/6天/人×2</span></div>
+            </li>-->
+            <li id="prePriceStr" style="display:none;">
+                <div class="ft14 mb5 clerFix"><b class="floatL">优惠</b><font class="floatR greenTxt" id="prePrice"></font></div>
+                <p class="ft14 color6">下单立减</p>
+                <!--<div class="ft14 color6"><span class="floatL">2成人</span><span class="floatR">¥30×2</span></div>-->
+            </li>
+        </ul>
+        <div class="row_price ft14"><span class="floatL mt5">总金额：<b class="red_t ft18" id="countPrice"></b></span>
+        <span class="floatR"><a href="javascript:showPriceDiv();" class="red_t2 inline mr10 ft14" id="priceStr">费用明细</a>
+            <a class="button button-big button-fill inline redBtn radis0 inline mBtn" href="javascript:goNext();">下一步</a></span></div>
+    </div>
+    <script type="text/javascript" src="../js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="../js/command.js"></script>
+    <script type="text/javascript" src="../js/mywechat.js"></script>
+    <script type="text/javascript">
+        var myRequest = GetRequest();
+        var proId = decodeURI(myRequest["id"]);
+        var priceId = decodeURI(myRequest["price"]);
+        var proInfo = sessionStorage.getItem("driveInfo");
+        var dirveJson = "";
+        var orderJson = {
+            "ProductID": 0,
+            "ProductTitle": "",
+            "ProductPic": "",
+            "PlanID": "",
+            "PriceID": "",
+            "ProductType": 13,
+            "AdultPrice": 0,
+            "ChildPrice": 0,
+            "StartTime": "",
+            "Seat": 0,
+            "AdultNum": 0,
+            "ChildNum": 0,
+            "Preferential": 0,
+            "TotalPrice": 0,
+            "Customer": "",
+            "Phone": "",
+            "OrderID": 0,
+            "PayPrice": 0,
+            "OrderNo": ""
+        }
+        if (proInfo == undefined || proInfo == null || proInfo == "") {
+            $.getJSON(driveInfoUrl + "&DriveID=" + proId, function (data) {
+                if (data != null && data.data != null) {
+                    if (data.data.length > 0) {
+                        dirveJson = data.data[0];
+                        innerInfo();
+                    }
+                }
+            });
+        }
+        else {
+            dirveJson = JSON.parse(proInfo);
+            innerInfo();
+        }
+
+        function innerInfo() {
+           
+            if (dirveJson != "" && dirveJson != null) {                   
+                $("#bookNotes").html(dirveJson.BookingNotes);
+                $.each(dirveJson.DriveType, function (i, item) {
+                    if (item.PPRODID == priceId) {
+                        $("#myprice").html("¥" + item.DefaultPrice);
+                        orderJson.PlanID = priceId;
+                        orderJson.ProductTitle = item.Title;
+                        orderJson.AdultPrice = item.DefaultPrice;
+                        return false;
+                    }
+                });
+                $("#proTitle").html(dirveJson.Title);
+                orderJson.ProductID = dirveJson.ID;              
+                orderJson.Seat = 99;
+
+                checkSeat();
+            }
+        }
+
+        function addPerson(type) {
+            if ((orderJson.AdultNum + orderJson.ChildNum) == orderJson.Seat) {
+                return;
+            }
+            else {
+                switch (type) {
+                    case 1:
+                        orderJson.AdultNum++;
+                        break;
+                    case 2:
+                        orderJson.ChildNum++;
+                        break;
+                }
+                checkSeat();
+                countPrice();
+            }
+        }
+        function checkSeat() {
+            if (orderJson.Seat <= (orderJson.AdultNum + orderJson.ChildNum)) {
+                $("#adultAdd").attr("href", "javascript:void(0);");
+                $("#adultAdd").attr("class", "numVH disabled");
+            }
+            else {
+                $("#adultAdd").attr("href", "javascript:addPerson(1);");
+                $("#adultAdd").attr("class", "numVH");
+            }
+
+            if (orderJson.AdultNum == 0) {
+                $("#adultPlus").attr("href", "javascript:void(0);");
+                $("#adultPlus").attr("class", "numVH disabled");
+            }
+            else if (orderJson.AdultNum > 0) {
+                $("#adultPlus").attr("href", "javascript:plusPerson(1);");
+                $("#adultPlus").attr("class", "numVH");
+            }
+        }
+        function plusPerson(type) {
+            switch (type) {
+                case 1:
+                    if (orderJson.AdultNum == 0) {
+                        return;
+                    }
+                    else {
+                        orderJson.AdultNum--;
+                        checkSeat();
+                        countPrice();
+                    }
+                    break;
+                case 2:
+                    if (orderJson.ChildNum == 0) {
+                        return;
+                    }
+                    else {
+                        orderJson.ChildNum--;
+                        checkSeat();
+                        countPrice();
+                    }
+                    break;
+            }
+        }
+        function countPrice() {
+            $("#adultNum").val(orderJson.AdultNum);
+            var count = orderJson.AdultNum * orderJson.AdultPrice - orderJson.Preferential;
+            orderJson.TotalPrice = count;
+            $("#countPrice").html("¥" + count);
+            $("#totalPrice").html("¥" + count);
+
+            var teamStr = "";
+            teamStr += "<div class='ft14 mb5 clerFix'><b class='floatL'>基本费用</b><font class='floatR pinkTxt'>¥" + (orderJson.AdultNum * orderJson.AdultPrice + orderJson.ChildNum * orderJson.ChildPrice) + "</font></div>";
+            if (orderJson.AdultNum > 0) {
+                teamStr += "<div class='ft14 color6'><span class='floatL'>" + orderJson.AdultNum + "份</span><span class='floatR'>¥" + orderJson.AdultPrice + "/份×" + orderJson.AdultNum + "</span></div>";
+            }
+
+            $("#teamPriceStr").html(teamStr);
+            $("#prePrice").html("－¥" + orderJson.Preferential);
+            if (orderJson.Preferential > 0) {
+                $("#prePriceStr").show();
+            }
+        }
+        function showPriceDiv() {
+            $("#_priceDiv").show();
+            $("#priceDiv").show();
+            $("#priceStr").html("收起明细");
+            $("#priceStr").attr("href", "javascript:hidePriceDiv();");
+            $("#totalPriceStr").html("收起明细");
+            $("#totalPriceStr").attr("href", "javascript:hidePriceDiv();");
+        }
+        function hidePriceDiv() {
+            $("#_priceDiv").hide();
+            $("#priceDiv").hide();
+            $("#priceStr").html("费用明细");
+            $("#priceStr").attr("href", "javascript:showPriceDiv();");
+            $("#totalPriceStr").html("费用明细");
+            $("#totalPriceStr").attr("href", "javascript:showPriceDiv();");
+        }
+        function goNext() {
+            //if (orderJson.Seat <= 0) {
+            //    alert("余位不足,请选择其他团期或拨打4000-365-666咨询。");
+            //    return;
+            //}
+          
+            if (orderJson.TotalPrice > 0) {
+                var dataName = orderJson.ProductID + "_" + Math.random();
+                sessionStorage.setItem(dataName, JSON.stringify(orderJson));
+                window.location.href = "step2.html?token=" + dataName;
+            }
+            else {
+                alert("请选择团期及人数");
+            }
+        }
+    </script>
+</body>
+</html>

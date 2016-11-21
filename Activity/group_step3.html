@@ -1,0 +1,328 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="keywords" content="宁波飞扬旅行社,宁波旅行社,宁波旅游网" />
+    <meta name="description" content="飞扬旅游网隶属于浙江飞扬国际旅游集团,宁波旅行社行业第一,全国第八,浙江省首批五星级旅行社,宁波市最佳旅行社.服务热线:4000-365-666" />
+    <meta name="apple-mobile-web-app-title" content="飞扬旅游网" />
+    <title>飞扬旅游网</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/my-app.css">
+</head>
+<body class="grayBg" ontouchstart>
+    <div class="views" id="loadDiv" style="display:none;">
+        <!--view-main start-->
+        <div class="view view-main">
+            <!--page start-->
+            <div class="page">
+                <!--page-content start-->
+                <div class="page-content white">
+                    <div class="loadingRow" style="background:#66cbff"><img style="margin-top:-20%;" src="../images/loading-ani.gif" alt=""></div>
+                </div>
+                <!--page-content END-->
+            </div>
+            <!-- page END-->
+
+        </div>
+        <!--view-main END-->
+    </div>
+    <!--views start-->
+    <div class="views" id="contentDiv">
+        <!--view-main start-->
+        <div class="view view-main">
+            <!--page start-->
+            <div class="page navbar-fixed">
+                <!-- navbar start-->
+                <div class="navbar tmBar">
+                    <div class="navbar-inner navbar-on-center">
+                        <div class="left"><a class="back link" href="javascript:history.back();"> <i class="icon icon-back"></i></a></div>
+                        <div class="center sliding t1">填写订单</div>
+                        <div class="right"></div>
+                    </div>
+                </div>
+                <!-- navbar END-->
+                <!--page-content start-->
+                <div class="page-content grayBg" id="mainContent">
+
+                    <!-- 1 w-panel start-->
+                    <div class="w-panel p0 mt10">
+                        <div class="card-header mb10">联系人信息</div>
+                        <div class="list-block inputs-list iflying-inputs">
+                            <ul>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media">姓名：</div>
+                                        <div class="item-inner">
+                                            <div class="item-input item-input-field">
+                                                <input type="text" placeholder="您的姓名" id="nameStr">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media">手机：</div>
+                                        <div class="item-inner">
+                                            <div class="item-input item-input-field">
+                                                <input type="text" placeholder="您的手机" id="phoneStr">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media">验证码：</div>
+                                        <div class="item-inner none">
+                                            <div class="item-input item-input-field">
+                                                <input type="text" placeholder="手机验证码" id="codeStr"><a href="javascript:sendCode();" class="button color-red inline radis0 yzm" id="codeBtn">发送验证短信</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--1 w-panel END-->
+                    <div class="space">&nbsp;</div>
+                </div>
+                <!--page-content END-->
+            </div>
+            <!-- page END-->
+
+            <div class="toolbar h64" id="subDiv">
+                <div class="toolbar-inner"><span>总金额：<strong class="red_t" id="totalPrice"></strong></span><span>
+                    <a class="red_t2 inline mr10 ft14" href="javascript:showPriceDiv();" style="display:none;">费用明细</a>
+                    <a href="javascript:goNext();" class="button button-big button-fill inline redBtn radis0 inline mBtn">下一步</a></span></div>
+            </div>
+        </div>
+        <!--view-main END-->
+    </div>
+    <!-- views end-->
+    <div class="modal-overlay modal-overlay-visible" style="display:none;" id="_priceDiv"></div>
+    <div class="actions-modal modal-in" style="display:none;" id="priceDiv">
+        <ul class="list-b">
+            <li id="teamPriceStr">
+            </li>
+            <li id="prePriceStr">
+                <div class="ft14 mb5 clerFix"><b class="floatL">优惠</b><font class="floatR greenTxt" id="prePrice"></font></div>
+                <p class="ft14 color6">下单立减</p>
+                <div class="ft14 color6" id="preStr"></div>
+            </li>
+        </ul>
+        <div class="row_price ft14">
+            <span class="pt5 floatL">总金额：<b class="red_t" id="allPrice"></b></span><span class="floatR">
+                <a href="javascript:showPriceDiv();" class="red_t2 inline mr10 ft14" id="priceStr" style="display:none;">费用明细</a>
+                <a class="button button-big button-fill inline redBtn radis0 inline mBtn" href="javascript:goNext();">下一步</a>
+            </span>
+        </div>
+    </div>
+    <script type="text/javascript" src="../js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="../js/command.js"></script>
+    <script type="text/javascript">
+        var myRequest = GetRequest();
+        var token = decodeURI(myRequest["token"]);
+        var orderStr = sessionStorage.getItem(token);
+        if (orderStr == undefined || orderStr == "" || orderStr == "undefined") {
+            alert("订单已过期");
+            window.location.href = "http://m.iflying.com/";
+        }
+        else {
+            var orderJson = JSON.parse(orderStr);
+            if (orderJson != null) {
+                $("#totalPrice").html("¥" + orderJson.TotalPrice);
+                $("#allPrice").html("¥" + orderJson.TotalPrice);
+
+                var teamStr = "";
+                teamStr += "<div class='ft14 mb5 clerFix'><b class='floatL'>基本团费</b><font class='floatR pinkTxt'>¥" + (orderJson.AdultNum * orderJson.AdultPrice + orderJson.ChildNum * orderJson.ChildPrice) + "</font></div>";
+                if (orderJson.AdultNum > 0) {
+                    teamStr += "<div class='ft14 color6'><span class='floatL'>" + orderJson.AdultNum + "成人</span><span class='floatR'>¥" + orderJson.AdultPrice + "/人×" + orderJson.AdultNum + "</span></div>";
+                }
+                if (orderJson.ChildNum > 0) {
+                    teamStr += "<div class='ft14 color6'><span class='floatL'>" + orderJson.ChildNum + "儿童</span><span class='floatR'>¥" + orderJson.ChildPrice + "/人×" + orderJson.ChildNum + "</span></div>";
+                }
+                $("#teamPriceStr").html(teamStr);
+
+                var otherStr2 = "";
+                if (orderJson.AdultAirportPrice > 0 || orderJson.ChildAirportPrice > 0) {
+                    otherStr2 += "<li><div class='ft14 mb5 clerFix'><b class='floatL'>机场燃油费</b><font class='floatR pinkTxt'>¥" + (orderJson.AdultNum * orderJson.AdultAirportPrice + orderJson.ChildNum * orderJson.ChildAirportPrice) + "</font></div>";
+                    if (orderJson.AdultNum > 0 && orderJson.AdultAirportPrice > 0) {
+                        otherStr2 += "<div class='ft14 color6'><span class='floatL'>" + orderJson.AdultNum + "成人</span><span class='floatR'>¥" + orderJson.AdultAirportPrice + "/人×" + orderJson.AdultNum + "</span></div>";
+                    }
+                    if (orderJson.ChildNum > 0 && orderJson.ChildAirportPrice > 0) {
+                        otherStr2 += "<div class='ft14 color6'><span class='floatL'>" + orderJson.ChildNum + "儿童</span><span class='floatR'>¥" + orderJson.ChildAirportPrice + "/人×" + orderJson.ChildNum + "</span></div>";
+                    }
+
+                }
+                if (orderJson.AgentDefaultPrice > 0 || orderJson.AgentChildPrice > 0) {
+                    otherStr2 += "<li><div class='ft14 mb5 clerFix'><b class='floatL'>港务费</b><font class='floatR pinkTxt'>¥" + (orderJson.AdultNum * orderJson.AgentDefaultPrice + orderJson.ChildNum * orderJson.AgentChildPrice) + "</font></div>";
+                    if (orderJson.AdultNum > 0 && orderJson.AgentDefaultPrice > 0) {
+                        otherStr2 += "<div class='ft14 color6'><span class='floatL'>" + orderJson.AdultNum + "成人</span><span class='floatR'>¥" + orderJson.AgentDefaultPrice + "/人×" + orderJson.AdultNum + "</span></div>";
+                    }
+                    if (orderJson.ChildNum > 0 && orderJson.AgentChildPrice > 0) {
+                        otherStr2 += "<div class='ft14 color6'><span class='floatL'>" + orderJson.ChildNum + "儿童</span><span class='floatR'>¥" + orderJson.AgentChildPrice + "/人×" + orderJson.ChildNum + "</span></div>";
+                    }
+                }
+                if (orderJson.VisaPrice > 0) {
+                    otherStr2 += "<li><div class='ft14 mb5 clerFix'><b class='floatL'>签证费</b><font class='floatR pinkTxt'>¥" + (orderJson.AdultNum * orderJson.VisaPrice + orderJson.ChildNum * orderJson.VisaPrice) + "</font></div>";
+                    if (orderJson.AdultNum > 0 && orderJson.VisaPrice > 0) {
+                        otherStr2 += "<div class='ft14 color6'><span class='floatL'>" + orderJson.AdultNum + "成人</span><span class='floatR'>¥" + orderJson.VisaPrice + "/人×" + orderJson.AdultNum + "</span></div>";
+                    }
+                    if (orderJson.ChildNum > 0 && orderJson.VisaPrice > 0) {
+                        otherStr2 += "<div class='ft14 color6'><span class='floatL'>" + orderJson.ChildNum + "儿童</span><span class='floatR'>¥" + orderJson.VisaPrice + "/人×" + orderJson.ChildNum + "</span></div>";
+                    }
+                }
+                if (otherStr2 != "") {
+                    $("#priceInfo").append(otherStr2);
+                }
+
+                if (orderJson.Preferential <= 0) {
+                    $("#prePriceStr").hide();
+                }
+                else {
+                    $("#prePrice").html("－¥" + (orderJson.Preferential * orderJson.AdultNum));
+                    $("#preStr").html("<span class='floatL'>" + orderJson.AdultNum + "成人</span><span class='floatR'>¥" + orderJson.Preferential + "×" + orderJson.AdultNum + "</span>");
+                }
+            }
+        }
+        function showPriceDiv() {
+            $("#_priceDiv").show();
+            $("#priceDiv").show();
+            $("#priceStr").html("收起明细");
+            $("#priceStr").attr("href", "javascript:hidePriceDiv();");
+            $("#totalPriceStr").html("收起明细");
+            $("#totalPriceStr").attr("href", "javascript:hidePriceDiv();");
+        }
+        function hidePriceDiv() {
+            $("#_priceDiv").hide();
+            $("#priceDiv").hide();
+            $("#priceStr").html("费用明细");
+            $("#priceStr").attr("href", "javascript:showPriceDiv();");
+            $("#totalPriceStr").html("费用明细");
+            $("#totalPriceStr").attr("href", "javascript:showPriceDiv();");
+        }
+        function goNext() {
+            subOrder();
+        }
+        function sendCode() {
+            var phone = $("#phoneStr").val();
+            if (!myphonereg.test(phone)) {
+                alert("请输入有效的手机号码");
+                $("#phoneStr").focus();
+                return;
+            }
+            $.ajax({
+                type: "POST",
+                url: orderCodeUrl + "?ra=" + Math.random() + "",
+                data: "StrMd5=" + md5Str + "&MT=" + phone + "&State=1",
+                dataType: "text",
+                async: true,
+                success: function (myMsg) {
+                    if (myMsg != "") {
+                        codeTimeAction();
+                        orderJson.Phone = phone;
+                    }
+                    else {
+                        alert("短信飞到火星去了,暂时收不到 = =!");
+                    }
+                },
+                error: function () {
+                    return;
+                }
+            });              
+        }
+        var codeTime = 80;
+        function codeTimeAction() {
+            codeTime--;
+            if (codeTime > 0) {
+                $("#codeBtn").html(codeTime + "后重新发送");
+                $("#codeBtn").attr("href", "javascript:void(0);");
+
+                setTimeout('codeTimeAction()', 1000);
+            }
+            else{
+                //重置按钮
+                codeTime = 80;
+                $("#codeBtn").html("发送验证短信");
+                $("#codeBtn").attr("href", "javascript:sendCode();");
+            }
+        }
+        function subOrder() {
+            var name = $("#nameStr").val();
+            if (name == "") {
+                alert("请输入联系人");
+                return;
+            }
+
+            var phone = $("#phoneStr").val();
+            if (!myphonereg.test(phone)) {
+                alert("请输入有效的手机号码");
+                return;
+            }
+
+            var code = $("#codeStr").val();
+            if (code == "") {
+                alert("请输入验证码");
+                return;
+            }
+            //组装数据
+            //价格数据
+            var priceStr = "";
+            if (orderJson.PriceID > 0) {
+                priceStr += "[";
+                for (var i = 0; i < orderJson.AdultNum; i++) {
+                    priceStr += "{'PPROD10ID':'" + orderJson.PriceID + "','CustomerType':'0'},";
+                }
+                for (var i = 0; i < orderJson.ChildNum; i++) {
+                    priceStr += "{'PPROD10ID':'" + orderJson.PriceID + "','CustomerType':'1'},";
+                }
+                priceStr = priceStr.substring(0, priceStr.length - 1);
+                priceStr += "]";
+            }
+            orderJson.Customer = name;
+            $("#loadDiv").show();
+            $("#contentDiv").hide();
+            $.ajax({
+                type: "POST",
+                url: postOrderUrl + "?ra=" + Math.random() + "",
+                data: "StrMd5=" + md5Str + "&ProductID=" + orderJson.ProductID + "&PPRODID=" + orderJson.PlanID + "&ConcStatus=" + orderJson.Concid + "&IsPort=1&IsVisa=1&OrderSource=3&UserName=" + orderJson.Customer + "&Father=" + priceStr + "&MT=" + orderJson.Phone
+                + "&ProductType=1&Code=" + code + "&PrivilegePrice="+(orderJson.AdultNum*orderJson.Preferential)+"&UID=0&TotalMoney=" + orderJson.TotalPrice,
+                dataType: "text",
+                async: true,
+                success: function (myMsg) {
+                    var dataObj = eval("(" + myMsg + ")");
+                    if (dataObj != null && dataObj.result == 1) {
+                        var OrderNo = dataObj.data.OrderNo;
+                        var orderId = dataObj.data.OrderID;
+                        orderJson.OrderNo = OrderNo;
+                        orderJson.OrderID = orderId;
+                        orderJson.ProductPic = dataObj.data.DefaultPic;
+                        orderJson.BackPrice = dataObj.data.TotalPrice;
+                        orderJson.PayConfirm = dataObj.data.PayConfirm;
+                        sessionStorage.setItem(token, "");
+                        var  newtoken = "order_" + Math.random();
+                        sessionStorage.setItem(newtoken, JSON.stringify(orderJson));
+                        window.location.href = "../OrderPublic/step4.html?token=" + newtoken;
+                    }
+                    else {
+                        $("#loadDiv").hide();
+                        $("#contentDiv").show();
+                        alert("服务器在火星还没回来,请稍后重试 = =!");
+                        return;
+                    }
+                },
+                error: function () {
+                    return;
+                }
+            });
+           
+        }
+    </script>
+</body>
+</html>

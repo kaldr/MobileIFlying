@@ -1,0 +1,221 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="飞扬旅游网" />
+    <title>周边游推荐 - 飞扬旅游网</title>
+    <meta name="keywords" content="出境旅游,出境旅游推荐,国内旅游,国内旅游推荐,周边境旅游,周边旅游推荐" />
+    <meta name="description" content="飞扬旅游网提供出境旅游线路、出境旅游推荐、出境旅游线路报价、国内旅游线路、国内旅游推荐、国内旅游线路报价、周边旅游线路、周边旅游推荐、周边旅游线路报价。飞扬旅游网!m.Iflying.com" />
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/my-app.css">
+</head>
+<body ontouchstart>
+    <input type="hidden" id="DestinationID" value="" />
+    <!-- views start-->
+    <div class="views">
+        <!-- view-main start-->
+        <div class="view view-main">
+            <!--  page start-->
+            <div class="page navbar-fixed">
+                <!-- navbar start-->
+                <div class="navbar tmBar">
+                    <div class="navbar-inner navbar-on-center">
+                        <div class="left">
+                            <a class="back link" href="javascript:window.location.href='http://m.iflying.com/'">
+                                <i class="icon icon-back"></i>
+                            </a>
+                        </div>
+                        <div class="center sliding t1">周边游</div>
+                        <div class="right">
+                            <a href="javascript: window.location.href = '/Search/search.html?type=1';">
+                                <i class="icon icon-s2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- navbar END-->
+                <!-- page-content start-->
+                <div class="page-content grayBg">
+                    <div class="swiper-custom mb15">
+                        <div class="swiper-container">
+                            <div class="swiper-pagination"></div>
+                            <div id="adList" class="swiper-wrapper">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 出境游 w-panel start-->
+                    <div class="w-panel">
+                        <h2 class="hometitH2">当季热卖</h2>
+                        <ul class="markPanel" id="gaddrList">
+                            <li class="active" name="lineLi" onclick='selGaddr(0,this);'><a href="javascript:void(0);">推荐</a></li>
+                            
+                        </ul>
+                        <ul class="offer-list sizing lazy" id="lineList">
+
+                        </ul>
+                        <div class="loading-ani" id="myLoad"><img alt="" src="/images/loading2.gif">正在加载中</div>
+                    </div>
+                    <div class="w-panel">
+                        <h2 class="hometitH2">热门产品</h2>
+                        <div class="tab lazy" id="moreList">
+
+                        </div>
+                        <div class="mlr5"><a class="button  moreVisa" href="javascript:window.location.href='/Search/search.html?type=1">更多产品</a></div>
+                    </div>
+                    <!-- 出境游w-panel  END-->
+                    <!-- footer start-->
+                    <script src="/js/bottom.js"></script>
+                    <!-- footer END-->
+                </div>
+                <!-- page-content END-->
+            </div>
+            <!--  page END-->
+        </div>
+    </div>
+    <!-- views END-->
+    <script type="text/javascript" src="/js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="/js/framework7.js"></script>
+    <script type="text/javascript" src="/js/kitchen-sink.js"></script>
+    <script type="text/javascript" src="/js/command.js"></script>
+    <script type="text/javascript" src="/js/gaddrJs.js"></script>
+    <script type="text/javascript" src="/js/recommended.js"></script>
+    <script type="text/javascript" src="/js/propublic.js"></script>
+    <script type="text/javascript" src="/js/jquery.lazyload.js"></script>
+    <script type="text/javascript">
+        var myRequest = GetRequest();
+        var openId = decodeURI(myRequest["openid"]);
+        if (openId != undefined && openId != "") {
+            sessionStorage.setItem("WeChatToken", openId);
+        }
+        loadAdInfo(recdAdJson.around);
+        if (aroundGaddr != null && aroundGaddr.length > 0) {
+            var gaddrStr = "";
+            $.each(aroundGaddr, function (i, item) {
+                gaddrStr += "<li name='lineLi' onclick='selGaddr(" + item.ID + ",this);'><a href=''>" + item.Title + "</a></li>";
+            });
+            $("#gaddrList").append(gaddrStr);
+        }
+
+        function selGaddr(id, obj) {
+            if (id == -1) {
+                window.location.href = "/Search/search.html?type=1";
+            }
+            $("[name='lineLi']").each(function () {
+                $(this).attr("class", "");
+            });
+            obj.className = "active";
+            $("#lineList").html("");
+            $("#myLoad").show();
+            if (id > 0) {
+                $("#DestinationID").val(id);
+                loadLineInfo();
+
+            }
+            else {
+                loadhotLine();
+            }
+        }
+        function loadhotLine() {
+            var proStr = "";
+            $.getJSON(getProductByIDUrl + "?id=" + recdProJson.around, function (data) {
+                var index = 1;
+                if (data != null && data.data != null) {
+                    
+                    $.each(data.data, function (i, item) {
+                        if (index == 5) {
+                            return false;
+                        }
+                        var scoreStr = "";
+                        if (item.satisfy == 100) {
+                            scoreStr = "新产品";
+                        }
+                        else if (item.satisfy < 90) {
+                            scoreStr = "90%满意度";
+                        }
+                        else {
+                            scoreStr = item.satisfy + "%满意度";
+                        }
+                        proStr += "<li><a href='javascript:goProduct(" + item.ID + ");'><div class='imgBox'><img src='" + item.pic + imgWidthStr+"' alt=''></div><div class='infoBox'>"
+                   + "<div class='o_link'>" + item.title + "</div><p class='price-row'><span class='red_t'>¥<b>" + item.price + "</b><font>起</font></span>"
+                   + "<span class='floatR color9 rT'>" + scoreStr + "</span></p></div></a></li>";
+                        index++;
+                    });
+                    if (proStr == "") {
+                        $.getJSON(groupListUrl + "&Page=1&size=4&ProductType=1", function (data) {
+                            if (data != null && data.data != null) {
+                                $.each(data.data.LineList, function (i, item) {
+                                    var scoreStr = "";
+                                    if (item.Scores == 100) {
+                                        scoreStr = "新产品";
+                                    }
+                                    else if (item.Scores < 90) {
+                                        scoreStr = "90%满意度";
+                                    }
+                                    else {
+                                        scoreStr = item.Scores + "%满意度";
+                                    }
+                                    proStr += "<li><a href='javascript:goProduct(" + item.ID + ");'><div class='imgBox'><img src='" + item.DefaultPic + imgWidthStr+"' alt=''></div>";
+                                    proStr += "<div class='infoBox'><div class='o_link'>" + item.Title + "</div><p class='price-row clerFix'><span class='red_t'>¥<b>" + item.DefaultPrice + "</b><font>起</font>";
+                                    proStr += "</span><span class='floatR color9 rT'>" + scoreStr + "</span></p></div></a></li>";
+                                });
+                                $("#lineList").html(proStr);
+                                $("#myLoad").hide();
+                            }
+                        });
+                    }
+                    else {
+                        $("#lineList").html(proStr);
+                        $("#myLoad").hide();
+                    }
+                }
+            });
+        }
+        var page = 1;
+        var size = 4;
+        function loadLineInfo() {
+            var desId = $("#DestinationID").val();
+            var postUrl = "";
+            if (desId != "") {
+                postUrl = groupListUrl + "&Page=" + page + "&size=" + size + "&Sort=7&ProductType=1&DestinationID=" + desId + "&ra=" + Math.random();
+            }
+            else {
+                postUrl = groupListUrl + "&Page=" + page + "&size=" + size + "&Sort=7&ProductType=1&ra=" + Math.random();
+            }
+            $.getJSON(postUrl, function (data) {
+                if (data != null && data.data != null) {
+                    if (data.data.LineList.length > 0) {
+                        var lineStr = "";
+                        $.each(data.data.LineList, function (i, item) {
+                            var scoreStr = "";
+                            if (item.Scores == 100) {
+                                scoreStr = "新产品";
+                            }
+                            else if (item.Scores < 90) {
+                                scoreStr = "90%满意度";
+                            }
+                            else {
+                                scoreStr = item.Scores + "%满意度";
+                            }
+                            lineStr += "<li><a href='javascript:goProduct(" + item.ID + ");'><div class='imgBox'><img src='" + item.DefaultPic +imgWidthStr+ "' alt=''></div>";
+                            lineStr += "<div class='infoBox'><div class='o_link'>" + item.Title + "</div><p class='price-row clerFix'><span class='red_t'>¥<b>" + item.DefaultPrice + "</b><font>起</font>";
+                            lineStr += "</span><span class='floatR color9 rT'>" + scoreStr + "</span></p></div></a></li>";
+                        });
+                        $("#lineList").html(lineStr);
+                        $("#myLoad").hide();
+                    }
+                }
+            });
+        }
+        function goProduct(id) {
+            goProductPage(id, 1);
+        }
+        loadhotLine();
+        LoadGroupLine(1);
+    </script>
+</body>
+</html>

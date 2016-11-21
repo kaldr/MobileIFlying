@@ -1,0 +1,789 @@
+﻿<!DOCTYPE html>
+<html class="pixel-ratio-1 watch-active-state">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>飞扬旅游网-宁波飞扬旅行社-浙江飞扬国际旅游集团</title>
+    <meta name="keywords" content="宁波飞扬旅行社,宁波旅行社,宁波旅游网">
+    <meta name="description" content="飞扬旅游网隶属于浙江飞扬国际旅游集团,宁波旅行社行业第一,全国第八,浙江省首批五星级旅行社,宁波市最佳旅行社.服务热线:4000-365-666">
+    <meta name="apple-mobile-web-app-title" content="飞扬旅游网">
+    <link rel="stylesheet" href="http://m.iflying.com/css/common.css">
+    <link rel="stylesheet" href="http://m.iflying.com/css/my-app.css">
+    <style>
+        .tz {
+            background: rgba(0, 0, 0, 0.6);
+            height: 100%;
+            left: 0;
+            position: fixed;
+            top: 0;
+            transition-duration: 400ms;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .btn {
+            position: absolute;
+            left: 0px;
+            top: 30px;
+            background: rgba(255, 255, 255, 0);
+            width: 100%;
+            height: 50px;
+        }
+
+        .i {
+            margin: 0 auto;
+            width: 100%;
+            height: 100%;
+            margin-top: 0px;
+            background: url(images/x.gif) no-repeat center center;
+            background-size: 90% auto;
+        }
+
+            .i img {
+                width: 100%;
+            }
+    </style>
+</head>
+<body ontouchstart="" class="">
+    <!-- views start-->
+    <div class="views">
+        <!-- view-main start-->
+        <div class="view view-main">
+            <!-- page-content start-->
+            <div class="page-content grayBg">
+                <!--header start-->
+                <div id="header">
+                    <div class="navbar tmBar">
+                        <div class="navbar-inner navbar-on-center">
+                            <div class="left"> <a class="back link" href="javascript:window.location.href='http://m.iflying.com/'"> <i class="icon icon-back"></i> </a> </div>
+                            <div class="center sliding t1">亲子游</div>
+                            <div class="right"> <a href="javascript: window.location.href = '/Search/search.html?type=2';"> <i class="icon icon-s2"></i> </a> </div>
+                        </div>
+                    </div>
+                </div>
+                <!--header END-->
+                <!--<div class="banner">
+                    <div class="swiper-custom mb15">
+                        <div class="swiper-container swiper-container-horizontal">
+                            <div class="swiper-pagination swiper-pagination-clickable"><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span></div>
+                            <div id="adList" class="swiper-wrapper">                            </div>
+                        </div>
+                    </div>
+                </div>-->
+
+                 <div class="banner">
+                    <div class="swiper-custom mb15">
+                        <div class="swiper-container">
+                            <div class="swiper-pagination"></div>
+                            <div id="adList" class="swiper-wrapper">                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <style>
+                    .yys_list {
+                        background: #fff;
+                        border: 0;
+                    }
+
+                        .yys_list ul {
+                            padding: 0 0 10px 0;
+                            overflow: hidden;
+                        }
+
+                        .yys_list li {
+                            float: left;
+                            width: 30%;
+                            margin: 0 1%;
+                            color: #999;
+                            text-align: center;
+                        }
+
+                            .yys_list li a {
+                                color: #999;
+                            }
+
+                            .yys_list li img {
+                                width: 100%;
+                            }
+
+                    .center_name {
+                        background: url(img/bgline.gif) no-repeat #f2f2f2 center center;
+                        height: 60px;
+                        line-height: 60px;
+                        border: solid #e1e1e1;
+                        border-width: 1px 0 1px 0;
+                        text-align: center;
+                        font-size: 14px;
+                        color: #a3a3a3;
+                    }
+
+                        .center_name span {
+                            display: block;
+                            background: #f2f2f2;
+                            width: 100px;
+                            overflow: hidden;
+                            margin: 0 auto;
+                            line-height: 56px;
+                        }
+
+                    .b_t {
+                        display: block;
+                        border-bottom: 1px solid #cbcbcb;
+                        color: #0c8e46;
+                        font-size: 16px;
+                        padding: 0 0 5px 0;
+                        margin-bottom: 5px;
+                    }
+
+                    .other_l {
+                        margin: 15px 0;
+                    }
+                </style>
+
+                <div class="w-panel">
+                    <div class="yys_list">
+                        <ul>
+                            <li onclick="changelist(1)"><a href="#"><img src="img/bby.gif"></a></li>
+                            <li onclick="changelist(2)" style="margin:0 2%;"><a href="#"><img src="img/bby2.gif"></a></li>
+                            <li onclick="changelist(3)"><a href="#"><img src="img/bby3.gif"></a></li>
+                        </ul>
+                    </div>
+                    <div class="center_name"><span>亲子精选</span></div>
+                    <div class="yys_list">
+                        <ul class="other_l">
+                            <li><a href="#"><span class="b_t">周末游</span>短途缤纷游</a></li>
+                            <li style="margin:0 2%;"><a href="#"><span class="b_t">自驾游</span>自驾嗨翻天</a></li>
+                            <li><a href="#"><span class="b_t">游世界</span>带着宝贝游世界</a></li>
+                        </ul>
+                    </div>
+
+
+                    <ul class="markPanel" id="abroadGaddr_zmy">
+                    </ul>
+
+                    <ul class="offer-list sizing lazy" id="abroadLine_zmy"></ul>
+
+
+                    <ul class="markPanel" id="abroadGaddr1_zmy" style="display:none;"></ul>
+
+                    <ul class="offer-list sizing lazy" id="abroadLine1_zmy" style="display:none;"></ul>
+
+
+                    <ul class="markPanel" id="abroadGaddr2_zmy" style="display:none;"></ul>
+
+                    <ul class="offer-list sizing lazy" id="abroadLine2_zmy" style="display:none;"></ul>
+
+
+                    <div class="loading-ani" id="abroadLoad" style="display: none;"><img alt="" src="images/loading2.gif">正在加载中</div>
+                </div>
+
+                <div class="w-panel">
+                    <h2 class="hometitH2">热门产品</h2>
+                    <div class="tab lazy" id="moreList1">
+                        <section class="section-pro p10" id="section1"></section>
+                        <section class="section-pro p10" id="section2" style="display:none;"></section>
+                        <section class="section-pro p10" id="section3" style="display:none;"></section>
+                    </div>
+  
+                        <div class="mlr5"><a class="button  moreVisa" href="javascript:window.location.href='/Search/search.html?type=2'">更多产品</a></div>
+                    </div>
+                <!-- 出境游w-panel  END-->
+                <!-- footer start-->
+                <script src="/js/bottom.js"></script>
+                <!-- footer END-->
+            </div>
+            <!-- page-content END-->
+            <div class="tz" style="display: none;">
+                <div class="i" id="ccc"></div>
+            </div>
+        </div>
+    </div>
+    <!-- views END-->
+    <script type="text/javascript" src="http://m.iflying.com/js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="http://m.iflying.com/js/command.js"></script>
+    <script src="http://s25.cnzz.com/stat.php?id=4072742&amp;web_id=4072742&amp;show=pic" language="JavaScript"></script>
+    <script src="http://c.cnzz.com/core.php?web_id=4072742&amp;show=pic&amp;t=z" charset="utf-8" type="text/javascript"></script>
+    <a href="http://www.cnzz.com/stat/website.php?web_id=4072742" target="_blank" title="站长统计" style="display:none;"><img src="http://icon.cnzz.com/img/pic.gif" hspace="0" vspace="0" border="0"></a>
+    <script type="text/javascript" src="http://m.iflying.com/js/framework7.js"></script>
+    <script type="text/javascript" src="http://m.iflying.com/js/kitchen-sink.js"></script>
+    <script type="text/javascript" src="http://m.iflying.com/js/gaddrJs.js"></script>
+    <script type="text/javascript" src="http://m.iflying.com/js/recommended.js"></script>
+    <script type="text/javascript" src="http://m.iflying.com/js/jquery.lazyload.js"></script>
+    <script type="text/javascript">
+        /*................亲子游      开始...................*/
+        function changelist(val) {
+            if (val == 1) {
+                document.getElementById("abroadGaddr_zmy").style.display = "";
+                document.getElementById("abroadLine_zmy").style.display = "";
+                document.getElementById("abroadGaddr1_zmy").style.display = "none";
+                document.getElementById("abroadLine1_zmy").style.display = "none";
+                document.getElementById("abroadGaddr2_zmy").style.display = "none";
+                document.getElementById("abroadLine2_zmy").style.display = "none";
+                document.getElementById("section1").style.display = "";
+                document.getElementById("section2").style.display = "none";
+                document.getElementById("section3").style.display = "none";
+            }
+            if (val == 2) {
+                document.getElementById("abroadGaddr_zmy").style.display = "none";
+                document.getElementById("abroadLine_zmy").style.display = "none";
+                document.getElementById("abroadGaddr1_zmy").style.display = "";
+                document.getElementById("abroadLine1_zmy").style.display = "";
+                document.getElementById("abroadGaddr2_zmy").style.display = "none";
+                document.getElementById("abroadLine2_zmy").style.display = "none";
+                document.getElementById("section1").style.display = "none";
+                document.getElementById("section2").style.display = "";
+                document.getElementById("section3").style.display = "none";
+            }
+            if (val == 3) {
+                document.getElementById("abroadGaddr_zmy").style.display = "none";
+                document.getElementById("abroadLine_zmy").style.display = "none";
+                document.getElementById("abroadGaddr1_zmy").style.display = "none";
+                document.getElementById("abroadLine1_zmy").style.display = "none";
+                document.getElementById("abroadGaddr2_zmy").style.display = "";
+                document.getElementById("abroadLine2_zmy").style.display = "";
+                document.getElementById("section1").style.display = "none";
+                document.getElementById("section2").style.display = "none";
+                document.getElementById("section3").style.display = "";
+            }
+        }
+        GetZBYList();
+        GetlyyList();
+        GetysjList();
+
+        //周末游
+        function GetZBYList()
+        {
+            var proStr = "";
+            var sectiondata = "";
+            var vurl = "http://appservice.iflying.com/Get/ParentChildTravel.ashx?zhm=33&yn=n&ProductType=&ChildType=";
+            $.getJSON(vurl, function (data) {
+                if (data != null && data.data != null && data.data.LineList != null) {
+                    var index = 1;
+                    $.each(data.data.LineList, function (i, item) {
+                        if (index == 5) {
+                            return false;
+                        }
+                        var scoreStr = "";
+                        //if (item.satisfy == 100) {
+                        //    scoreStr = "新产品";
+                        //}
+                        //else if (item.satisfy < 90) {
+                        //    scoreStr = "90%满意度";
+                        //}
+                        //else {
+                        //    scoreStr = item.satisfy + "%满意度";
+                        //}
+                        proStr += "<li><a href='javascript:goProduct(" + item.ID + ");'><div class='imgBox'><div class='poss'>周末游</div><img src='" + item.DefaultPic + "' alt=''></div><div class='infoBox'>"
+                   + "<div class='o_link'>" + item.Title + "</div><p class='price-row'><span class='red_t'>¥<b>" + item.DefaultPrice + "</b><font>起</font></span>"
+                   + "<span class='floatR color9 rT'>" + scoreStr + "</span></p></div></a></li>";
+                        index++;
+
+                        var vstime = "";
+                        if (item.StartTime != "") {
+                            vstime = "发团日期：" + item.StartTime;
+                        }
+
+                        sectiondata += " <div class='pro-row'><a href='javascript:goProduct(" + item.ID + ");'><div class='proImg'><img src='" + item.DefaultPic + "' alt='' title=''></div><div class='pro-rInfo'><div class='pro-title'>" + item.Title + "</div><p class='pro-date'>" + vstime + "</p><div class='pro-price row'><span class='red_t'>¥ <b class='ft20'>" + item.DefaultPrice + "</b> <font>起</font></span></div></div></a></div>";
+
+
+                    });
+                    //加载默认推荐产品
+
+                    $("#abroadLine_zmy").append(proStr);
+                    $("#section1").append(sectiondata);
+                }
+            });
+        }
+
+        //乐园游
+        function GetlyyList() {
+            var proStr = "";
+            var gaddrStr = "";
+            var sectiondata = "";
+            var vurl = "http://appservice.iflying.com/Get/ParentChildTravel_lb.ashx?zhm=&lb=&ProductType=13&ChildType=";
+            $.getJSON(vurl, function (data) {
+                if (data != null && data.data != null && data.data.LineList != null) {
+                    var index = 1;
+                    $.each(data.data.LineList, function (i, item) {
+                        if (index == 5) {
+                            return false;
+                        }
+                        var scoreStr = "";
+
+                        proStr += "<li><a href='javascript:goProduct3(" + item.ID + ",4);'><div class='imgBox'><div class='poss'>自驾游</div><img src='" + item.DefaultPic + "' alt=''></div><div class='infoBox'>"
+                   + "<div class='o_link'>" + item.Title + "</div><p class='price-row'><span class='red_t'>¥<b>" + item.DefaultPrice + "</b><font>起</font></span>"
+                   + "<span class='floatR color9 rT'>" + scoreStr + "</span></p></div></a></li>";
+                        index++;
+
+                        sectiondata += " <div class='pro-row'><a href='javascript:goProduct3(" + item.ID + ",4);'><div class='proImg'><img src='" + item.DefaultPic + "' alt='' title=''></div><div class='pro-rInfo'><div class='pro-title'>" + item.Title + "</div><p class='pro-date'></p><div class='pro-price row'><span class='red_t'>¥ <b class='ft20'>" + item.DefaultPrice + "</b> <font>起</font></span></div></div></a></div>";
+
+                    });
+                    //加载默认推荐产品
+
+                    $("#abroadLine1_zmy").append(proStr);
+                    $("#section2").append(sectiondata);
+                }
+                if (data != null && data.data != null && data.data.DestinationList != null) {
+                    $.each(data.data.DestinationList, function (i, item) {
+                        gaddrStr += "<li name='domesticLi' onclick='ChangeLYY(" + item.ID + ",this);'><a href='javascript:void(0);'>" + item.Title + "</a></li>";
+                    });
+                    //加载默认推荐产品
+
+                    $("#abroadGaddr1_zmy").append(gaddrStr);
+                }
+            });
+        }
+        //乐园游
+        function GetlyyLists()
+        {
+            var proStr = "";
+            var vurl = "http://appservice.iflying.com/Get/ParentChildTravel.ashx?zhm=&yn=n&ProductType=13&ChildType=";
+            $.getJSON(vurl, function (data) {
+                if (data != null && data.data != null && data.data.LineList != null) {
+                    var index = 1;
+                    $.each(data.data.LineList, function (i, item) {
+                        if (index == 5) {
+                            return false;
+                        }
+                        var scoreStr = "";
+
+                        proStr += "<li><a href='javascript:goProduct3(" + item.ID + ",4);'><div class='imgBox'><div class='poss'>自驾游</div><img src='" + item.DefaultPic + "' alt=''></div><div class='infoBox'>"
+                   + "<div class='o_link'>" + item.Title + "</div><p class='price-row'><span class='red_t'>¥<b>" + item.DefaultPrice + "</b><font>起</font></span>"
+                   + "<span class='floatR color9 rT'>" + scoreStr + "</span></p></div></a></li>";
+                        index++;
+                    });
+                    //加载默认推荐产品
+
+                    $("#abroadLine1_zmy").append(proStr);
+                }
+            });
+        }
+        //乐园游
+        function ChangeLYY(id, obj) {
+            $("[name='domesticLi']").each(function () {
+                $(this).attr("class", "");
+            });
+            obj.className = "active";
+
+            var proStr = "";
+            var vurl = "http://appservice.iflying.com/Get/ParentChildTravel_lb.ashx?zhm=&lb="+id+"&ProductType=13&ChildType=";
+            $.getJSON(vurl, function (data) {
+                if (data != null && data.data != null && data.data.LineList != null) {
+                    var index = 1;
+                    $.each(data.data.LineList, function (i, item) {
+                        if (index == 5) {
+                            return false;
+                        }
+                        var scoreStr = "";
+
+                        proStr += "<li><a href='javascript:goProduct3(" + item.ID + ",4);'><div class='imgBox'><div class='poss'>自驾游</div><img src='" + item.DefaultPic + "' alt=''></div><div class='infoBox'>"
+                   + "<div class='o_link'>" + item.Title + "</div><p class='price-row'><span class='red_t'>¥<b>" + item.DefaultPrice + "</b><font>起</font></span>"
+                   + "<span class='floatR color9 rT'>" + scoreStr + "</span></p></div></a></li>";
+                        index++;
+
+                    });
+                    //加载默认推荐产品
+                    document.getElementById("abroadLine1_zmy").innerHTML = "";
+                    $("#abroadLine1_zmy").append(proStr);
+                }
+              
+            });
+        }
+
+        //游世界
+        function GetysjList() {
+            var proStr = "";
+            var gaddrStr = "";
+            var sectiondata = "";
+            var vurl = "http://appservice.iflying.com/Get/ParentChildTravel_lb.ashx?zhm=&lb=&ProductType=&ChildType=3";
+            $.getJSON(vurl, function (data) {
+                if (data != null && data.data != null && data.data.LineList != null) {
+                    var index = 1;
+                    $.each(data.data.LineList, function (i, item) {
+                        if (index == 5) {
+                            return false;
+                        }
+                        var scoreStr = "";
+
+                        proStr += "<li><a href='javascript:goProduct(" + item.ID + ");'><div class='imgBox'><div class='poss'>游世界</div><img src='" + item.DefaultPic + "' alt=''></div><div class='infoBox'>"
+                   + "<div class='o_link'>" + item.Title + "</div><p class='price-row'><span class='red_t'>¥<b>" + item.DefaultPrice + "</b><font>起</font></span>"
+                   + "<span class='floatR color9 rT'>" + scoreStr + "</span></p></div></a></li>";
+                        index++;
+
+                        var vstime = "";
+                        if (item.StartTime != "")
+                        {
+                            vstime = "发团日期：" + item.StartTime;
+                        }
+
+                        sectiondata += " <div class='pro-row'><a href='javascript:goProduct(" + item.ID + ");'><div class='proImg'><img src='" + item.DefaultPic + "' alt='' title=''></div><div class='pro-rInfo'><div class='pro-title'>" + item.Title + "</div><p class='pro-date'>" + vstime + "</p><div class='pro-price row'><span class='red_t'>¥ <b class='ft20'>" + item.DefaultPrice + "</b> <font>起</font></span></div></div></a></div>";
+
+                    });
+                    //加载默认推荐产品
+
+                    $("#abroadLine2_zmy").append(proStr);
+                    $("#section3").append(sectiondata);
+                }
+                if (data != null && data.data != null && data.data.DestinationList != null) {
+                    $.each(data.data.DestinationList, function (i, item) {
+                        gaddrStr += "<li name='domesticLi' onclick='ChangeYSJ(" + item.ID + ",this);'><a href='javascript:void(0);'>" + item.Title + "</a></li>";
+                    });
+                    //加载默认推荐产品
+
+                    $("#abroadGaddr2_zmy").append(gaddrStr);
+                }
+            });
+        }
+        //游世界
+        function GetysjLists()
+        {
+            var proStr = "";
+            var vurl = "http://appservice.iflying.com/Get/ParentChildTravel.ashx?zhm=&yn=n&ProductType=&ChildType=3";
+            $.getJSON(vurl, function (data) {
+                if (data != null && data.data != null && data.data.LineList != null) {
+                    var index = 1;
+                    $.each(data.data.LineList, function (i, item) {
+                        if (index == 5) {
+                            return false;
+                        }
+                        var scoreStr = "";
+
+                        proStr += "<li><a href='javascript:goProduct(" + item.ID + ");'><div class='imgBox'><div class='poss'>游世界</div><img src='" + item.DefaultPic + "' alt=''></div><div class='infoBox'>"
+                   + "<div class='o_link'>" + item.Title + "</div><p class='price-row'><span class='red_t'>¥<b>" + item.DefaultPrice + "</b><font>起</font></span>"
+                   + "<span class='floatR color9 rT'>" + scoreStr + "</span></p></div></a></li>";
+                        index++;
+                    });
+                    //加载默认推荐产品
+
+                    $("#abroadLine2_zmy").append(proStr);
+                }
+            });
+        }
+
+        //游世界
+        function ChangeYSJ(id, obj) {
+            $("[name='domesticLi']").each(function () {
+                $(this).attr("class", "");
+            });
+            obj.className = "active";
+
+            var proStr = "";
+            var vurl = "http://appservice.iflying.com/Get/ParentChildTravel_lb.ashx?zhm=&lb="+id+"&ProductType=&ChildType=3";
+            $.getJSON(vurl, function (data) {
+                if (data != null && data.data != null && data.data.LineList != null) {
+                    var index = 1;
+                    $.each(data.data.LineList, function (i, item) {
+                        if (index == 5) {
+                            return false;
+                        }
+                        var scoreStr = "";
+
+                        proStr += "<li><a href='javascript:goProduct(" + item.ID + ");'><div class='imgBox'><div class='poss'>游世界</div><img src='" + item.DefaultPic + "' alt=''></div><div class='infoBox'>"
+                   + "<div class='o_link'>" + item.Title + "</div><p class='price-row'><span class='red_t'>¥<b>" + item.DefaultPrice + "</b><font>起</font></span>"
+                   + "<span class='floatR color9 rT'>" + scoreStr + "</span></p></div></a></li>";
+                        index++;
+
+                    });
+                    //加载默认推荐产品
+                    document.getElementById("abroadLine2_zmy").innerHTML = "";
+                    $("#abroadLine2_zmy").append(proStr);
+                }
+
+            });
+        }
+
+        /*................亲子游      结束...................*/
+
+        //首页广告
+        var myRequest = GetRequest();
+        var userId = sessionStorage.getItem("FYUSERID");
+        if (userId == undefined || userId == null || userId == "") {
+           // $("#loginBt").show();
+            //$("#userBt").hide();
+        }
+        else {
+            //$("#loginBt").hide();
+            //$("#userBt").show();
+        }
+        var openId = decodeURI(myRequest["openid"]);
+        if (openId != undefined && openId != "") {
+            sessionStorage.setItem("WeChatToken", openId);
+            $.ajax({
+                type: "GET",
+                url: isbindWechatUrl + "?weixinid=" + openId + "&ra=" + Math.random() + "",
+                dataType: "text",
+                async: true,
+                success: function (myMsg) {
+                    var dataObj = eval("(" + myMsg + ")");
+                    if (dataObj != null && dataObj.result == 1) {
+                        //跳转
+                        sessionStorage.setItem("FYUSERID", dataObj.data);
+                       // $("#loginBt").hide();
+                       // $("#userBt").show();
+                    }
+                },
+                error: function () {
+                    return;
+                }
+            });
+        }
+        loadAdInfo(249);//广告显示  
+        //出境热门目的地
+        if (indexAbroad != null && indexAbroad.length > 0) {
+            var gaddrStr = "";
+            console.log(indexAbroad);
+            $.each(indexAbroad, function (i, item) {
+                gaddrStr += "<li name='abroadLi' onclick='selAddr(1,"+item.ID+",this);'><a href='javascript:void(0);'>" + item.Title + "</a></li>";
+            });
+            $("#abroadGaddr").append(gaddrStr);
+        }
+        //国内热门目的地
+        if (indexDomestic != null && indexDomestic.length > 0) {
+            var gaddrStr = "";
+            $.each(indexDomestic, function (i, item) {
+                gaddrStr += "<li name='domesticLi' onclick='selAddr(2," + item.ID + ",this);'><a href='javascript:void(0);'>" + item.Title + "</a></li>";
+            });
+            $("#domesticGaddr").append(gaddrStr);
+        }
+        //周边热门目的地
+        if (indexAround != null && indexAround.length > 0) {
+            var gaddrStr = "";
+            $.each(indexAround, function (i, item) {
+                gaddrStr += "<li name='aroundLi' onclick='selAddr(3," + item.ID + ",this);'><a href='javascript:void(0);'>" + item.Title + "</a></li>";
+            });
+            //$("#aroundGaddr").append(gaddrStr);
+        }
+        //热门产品
+        function loadHotPro() {
+            var proStr = "";
+            $.getJSON(getProductByIDUrl + "?id=" + recdProJson.index, function (data) {
+                if (data != null && data.data != null) {
+                    var index = 1;
+                    $.each(data.data, function (i, item) {
+                        if (index == 5) {
+                            return false;
+                        }
+                        var scoreStr = "";
+                        if (item.satisfy == 100) {
+                            scoreStr = "新产品";
+                        }
+                        else if (item.satisfy < 90) {
+                            scoreStr = "90%满意度";
+                        }
+                        else {
+                            scoreStr = item.satisfy+"%满意度";
+                        }
+                        var proTypeStr = "跟团游";
+                        var goStr = "goProduct";
+                        if (item.ProductTypeid == 12) {
+                            proTypeStr = "自由行";
+                            goStr = "goProduct2";
+                        }
+                        proStr += "<li><a href='javascript:" + goStr + "(" + item.ID + ");'><div class='imgBox'><div class='poss'>" + proTypeStr + "</div><img src='" + item.pic + imgWidthStr + "' alt=''></div><div class='infoBox'>"
+                   + "<div class='o_link'>" + item.title + "</div><p class='price-row'><span class='red_t'>¥<b>" + item.price + "</b><font>起</font></span>"
+                   + "<span class='floatR color9 rT'>" + scoreStr + "</span></p></div></a></li>";
+                        index++;
+                    });
+                    if (proStr == "") {
+                        $.getJSON(groupListUrl + "&Page=1&size=4&ProductType=1,2,3", function (data) {
+                            if (data != null && data.data != null) {
+                                addProduct(0, data.data.LineList);
+                            }
+                        });
+                    }
+                    else {
+                        $("#hotLine").html(proStr);
+                    }
+                }
+            });
+        }
+        //推荐产品
+        function loadPro(type) {
+            var postUrl = groupListUrl + "&Page=1&size=4&ProductType=";
+            var recdId = 0;
+            switch (type) {
+                case 1:
+                    postUrl += "1";
+                    recdId = recdProJson.indexAbroad
+                    break;
+                case 2:
+                    postUrl += "2";
+                    recdId = recdProJson.indexDomestic;
+                    break;
+                case 3:
+                    postUrl += "3";
+                    recdId = recdProJson.indexAround
+                    break;
+            }
+            var proStr = "";
+            $.getJSON(getProductByIDUrl + "?id=" + recdId, function (data) {
+                if (data != null && data.data != null) {
+                    var index = 1;
+                    $.each(data.data, function (i, item) {
+                        if (index == 5) {
+                            return false;
+                        }
+                        var scoreStr = "";
+                        if (item.satisfy == 100) {
+                            scoreStr = "新产品";
+                        }
+                        else if (item.satisfy < 90) {
+                            scoreStr = "90%满意度";
+                        }
+                        else {
+                            scoreStr = item.satisfy + "%满意度";
+                        }
+                        proStr += "<li><a href='javascript:goProduct(" + item.ID + ");'><div class='imgBox'><div class='poss'>跟团游</div><img src='" + item.pic +imgWidthStr+ "' alt=''></div><div class='infoBox'>"
+                   + "<div class='o_link'>" + item.title + "</div><p class='price-row'><span class='red_t'>¥<b>" + item.price + "</b><font>起</font></span>"
+                   + "<span class='floatR color9 rT'>" + scoreStr + "</span></p></div></a></li>";
+                        index++;
+                    });
+                    //加载默认推荐产品
+                    if (proStr == "") {
+                        $.getJSON(postUrl, function (data) {
+                            if (data != null && data.data != null) {
+                                addProduct(type, data.data.LineList);
+                            }
+                        });
+                    }
+                    else {
+                        switch (type) {
+                            case 1:
+                                $("#abroadLine").html(proStr);
+                                $("#abroadLoad").hide();
+                                break;
+                            case 2:
+                                $("#domesticLine").html(proStr);
+                                $("#domesticLoad").hide();
+                                break;
+                            case 3:
+                                $("#aroundLine").html(proStr);
+                                $("#aroundLoad").hide();
+                                break;
+                        }
+                    }
+                }
+            });
+        }
+        loadHotPro();
+        loadPro(1);
+        loadPro(2);
+        loadPro(3);
+        function selAddr(type, id, obj) {
+            var liName = "";
+            var postUrl = groupListUrl + "&Page=1&size=4&ProductType=1,2,3&DestinationID=" + id + "&ra=" + Math.random();
+            switch (type) {
+                case 1:
+                    $("#abroadLine").html("");
+                    $("#abroadLoad").show();
+                    liName = "abroadLi";
+                    break;
+                case 2:
+                    $("#domesticLine").html("");
+                    $("#domesticLoad").show();
+                    liName = "domesticLi";
+                    break;
+                case 3:
+                    $("#aroundLine").html("");
+                    $("#aroundLoad").show();
+                    liName = "aroundLi";
+                    break;
+            }
+            $("[name='" + liName + "']").each(function () {
+                $(this).attr("class", "");
+            });
+            obj.className = "active";
+            if (id == 0) {
+                loadPro(type);
+            }
+            else {
+                $.getJSON(postUrl, function (data) {
+                    if (data != null && data.data != null) {
+                        addProduct(type, data.data.LineList);
+                    }
+                });
+            }
+        }
+        function addProduct(type, proList) {
+            if (proList != null && proList.length > 0) {
+                var proStr = "";
+                $.each(proList, function (i, item) {
+                    var scoreStr = "";
+                    if (item.Scores == 100) {
+                        scoreStr = "新产品";
+                    }
+                    else if (item.Scores < 90) {
+                        scoreStr = "90%满意度";
+                    }
+                    else {
+                        scoreStr = item.Scores + "%满意度";
+                    }
+                    proStr += "<li><a href='javascript:goProduct(" + item.ID + ");'><div class='imgBox'><div class='poss'>跟团游</div><img src='" + item.DefaultPic +imgWidthStr+ "' alt=''></div><div class='infoBox'>"
+                    + "<div class='o_link'>" + item.Title + "</div><p class='price-row'><span class='red_t'>¥<b>" + item.DefaultPrice + "</b><font>起</font></span>"
+                    + "<span class='floatR color9 rT'>" + scoreStr + "</span></p></div></a></li>";
+                });
+                switch (type) {
+                    case 0:
+                        $("#hotLine").html(proStr);
+                        break;
+                    case 1:
+                        $("#abroadLine").html(proStr);
+                        $("#abroadLoad").hide();
+                        break;
+                    case 2:
+                        $("#domesticLine").html(proStr);
+                        $("#domesticLoad").hide();
+                        break;
+                    case 3:
+                        $("#aroundLine").html(proStr);
+                        $("#aroundLoad").hide();
+                        break;
+                }
+            }
+        }
+        function goProduct(id) {
+            goProductPage(id, 1);
+        }
+        function goProduct2(id) {
+            goProductPage(id, 2);
+        }
+
+        function goProduct3(id,type) {
+            goProductPage(id, type);
+        }
+
+        //function showBanner() {
+        //    var isShow = sessionStorage.getItem("bannerShow");
+        //    if (isShow != undefined && isShow == "1") {
+
+        //    }
+        //    else {
+        //        $("#bannerAd").show();
+        //        bannerTimeAction();
+        //    }
+        //}
+        //var bannerTime = 5;
+        //function bannerTimeAction() {
+        //    bannerTime--;
+        //    if (bannerTime > 0) {
+        //        $("#timeCount").html(bannerTime);
+        //        setTimeout('bannerTimeAction()', 1000);
+        //    }
+        //    else {
+        //        hideBanner();
+        //    }
+        //}
+        //function hideBanner() {
+        //    $("#bannerAd").fadeOut(500);
+        //    sessionStorage.setItem("bannerShow", "1");
+        //}
+        //showBanner();
+        $("#ccc").click(function () {
+            $(".tz").hide();
+        });
+    </script>
+</body>
+</html>

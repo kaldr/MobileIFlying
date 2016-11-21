@@ -1,0 +1,444 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="keywords" content="宁波飞扬旅行社,宁波旅行社,宁波旅游网" />
+    <meta name="description" content="飞扬旅游网隶属于浙江飞扬国际旅游集团,宁波旅行社行业第一,全国第八,浙江省首批五星级旅行社,宁波市最佳旅行社.服务热线:4000-365-666" />
+    <meta name="apple-mobile-web-app-title" content="飞扬旅游网" />
+    <title>飞扬旅游网</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/my-app.css">
+    <style>
+        .picker-header, .picker-footer {
+            display: none;
+        }
+    </style>
+</head>
+<body ontouchstart>
+    <div class="views" id="loadDiv">
+        <!--view-main start-->
+        <div class="view view-main">
+            <!--page start-->
+            <div class="page">
+                <!--page-content start-->
+                <div class="page-content white">
+                    <div class="loadingRow" style="background:#66cbff"><img style="margin-top:-20%;" src="../images/loading-ani.gif" alt=""></div>
+                </div>
+                <!--page-content END-->
+            </div>
+            <!-- page END-->
+
+        </div>
+        <!--view-main END-->
+    </div>
+    <!--views start-->
+    <div class="views" id="contentDiv" style="display:none;">
+        <!--view-main start-->
+        <div class="view view-main">
+            <div data-page="calendar" class="page"> </div>
+            <!--page start-->
+            <div class="page navbar-fixed">
+                <!-- navbar start-->
+                <div class="navbar tmBar">
+                    <div class="navbar-inner navbar-on-center">
+                        <div class="left"><a class="back link" id="backUrl" href="javascript:orderBack();"> <i class="icon icon-back"></i></a></div>
+                        <div class="center sliding t1">选择团期</div>
+                        <div class="right"></div>
+                    </div>
+                </div>
+                <!-- navbar END-->
+                <!--page-content start-->
+                <div class="page-content grayBg">
+                    <div class="w-panel mt10" id="groupContent">
+
+                    
+                </div>
+                <!--page-content END-->
+            </div>
+            <!-- page END-->
+
+            <div class="toolbar hspe">
+                <div class="plr10">
+                    <div class="ft16 mb20">团期：<font class="pinkTxt" id="teamTime"></font></div>
+                    <div class="row mb20">
+                        <span class="ft16">成人</span>
+                        <div>
+                            <span class="ft16 mr10" id="adultPrice"></span><span class="numPanel">
+                                <a href="javascript:plusPerson(1);" class="numVH" id="adultPlus">-</a>
+                                <input type="text" name="" value="0" class="form-control vhInput" id="adultNum">
+                                <a href="javascript:addPerson(1);" class="numVH" id="adultAdd">+</a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mb15">
+                        <span class="ft16">儿童(1.2米以下)</span>
+                        <div>
+                            <span class="ft16 mr10" id="childPrice"></span><span class="numPanel">
+                                <a href="javascript:plusPerson(2);" class="numVH" id="childPlus">-</a>
+                                <input type="text" name="" value="0" class="form-control vhInput" id="childNum">
+                                <a href="javascript:addPerson(2);" class="numVH" id="childAdd">+</a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class=""><span>总金额：<strong class="red_t" id="countPrice"></strong></span><span class="floatR"><a href="javascript:goNext();" class="button button-big button-fill inline redBtn radis0 inline mBtn">下一步</a></span></div>
+                </div>
+
+
+            </div>
+        </div>
+        <!--view-main END-->
+    </div>
+    </div>
+    <!-- views end-->
+    <script type="text/javascript" src="../js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="../js/command.js"></script>
+    <script type="text/javascript" src="../js/mywechat.js"></script>
+    <script type="text/javascript">
+        var myRequest = GetRequest();
+        var proId = decodeURI(myRequest["id"]);
+        var pprodId = decodeURI(myRequest["pprod"]);
+        var title = sessionStorage.getItem("title");
+        var imgUrl = sessionStorage.getItem("picImg");
+        if (imgUrl == undefined || imgUrl == null || imgUrl == "") {
+            imgUrl = "http://tripmore.iflying.com/images/nopic.jpg";
+        }
+        var getDays = function (year, month) {
+            // month 取自然值，从 1-12 而不是从 0 开始
+            return new Date(year, month, 0).getDate()
+        }
+        var getDayStr = function (json, dayStr) {
+            var retStr = "";
+            var tempDate = new Date(dayStr);
+            if (json != null && json.length > 0) {
+                $.each(json, function (i, item) {
+                    var sTime = new Date(item.StartTime);
+                    if (sTime.toLocaleDateString() == tempDate.toLocaleDateString()) {
+                        var seatStr = "";
+                        
+                        if (parseInt(item.DefaultPrice, 10) > 0) {
+                            retStr = "<td id='_startTime" + item.PPRODID + "' class='orderTd' onclick='selPlan(this,\"" + item.PPRODID + "\",\"0\"," + item.DefaultPrice + "," + item.DefaultPrice + ",\"" + sTime.toLocaleDateString() + "\",99);' name='planTd'>" + tempDate.getDate() + "<div class='price'>¥" + item.DefaultPrice + "起</div><div class='yw'>" + seatStr + "</div></td>";
+                        }
+                        return false;
+                    }
+                });
+            }
+            if (retStr == "") {
+                retStr = "<td>" + tempDate.getDate() + "</td>";
+            }
+            return retStr;
+        }
+
+        $.getJSON(cruiseTeamUrl + "&productid=" + proId, function (data) {
+            var allGroupStr = "";
+            if (data != null && data.data != null) {
+                //计算最大最小发团日期
+                var minDate=new Date();
+                var maxDate=new Date();
+                var isFirstTime = true;
+                $.each(data.data.DateTime, function (i, item) {
+                    if (isFirstTime) {
+                        minDate = new Date(item.StartTime);
+                        maxDate = new Date(item.StartTime);
+                        isFirstTime = false;
+                    }
+                    else {
+                        var tempTime = new Date(item.StartTime);
+                        if (tempTime > maxDate) {
+                            maxDate = tempTime;
+                        }
+                        if (teamTime < minDate) {
+                            minDate = tempTime;
+                        }
+                    }
+                });
+                var startMonth = minDate.getMonth()+1;
+                var endMonth = maxDate.getMonth() + 1;
+                var minYear = minDate.getFullYear();
+                var maxYear = maxDate.getFullYear();
+                if (maxYear > minYear) {
+                    endMonth = 12;
+                }
+                for (var i = startMonth; i <= endMonth; i++) {
+                    var monthStr = "";
+                    if (i < 10) {
+                        monthStr = "0" + i;
+                    }
+                    else {
+                        monthStr = i;
+                    }
+                    allGroupStr += "<div class='dateTime'><table class='dateTab' border='0' cellspacing='0' cellpadding='0'><tr><th class='headTit' colspan='7'>" + minYear + "-" + monthStr + "</th></tr>"
+                        + "<tr><th>日</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th></tr>";
+                    var tempMin = new Date(minYear + "-" + monthStr + "-01");
+                    var tempWeak = tempMin.getDay();    //第一天星期几
+                    var dayCount = getDays(minYear, i)+1; //本月一共几天
+                    var dayNow = 1;
+                    var isFristWeak = true;
+                    var monthShowStr = "";
+                    var tempDayStr = "";
+                    while (true) {
+                       monthShowStr+="<tr>";
+                       for (var j = 0; j < 7; j++) {
+                           var dayStr2 = "";
+                           if (dayNow < 10) {
+                               dayStr2 = "0" + dayNow;
+                           }
+                           else {
+                               dayStr2 = dayNow;
+                           }
+                            if (isFristWeak) {
+                                if (j == tempWeak) {
+                                    tempDayStr = minYear + "-" + monthStr + "-" + dayStr2;
+                                    monthShowStr += getDayStr(data.data.DateTime, tempDayStr);
+                                    isFristWeak = false;
+                                }
+                                else{
+                                    monthShowStr+="<td>&nbsp;</td>";
+                                }
+                            }
+                            else{                                   
+                                if (dayNow >= dayCount) {
+                                    monthShowStr+="<td>&nbsp;</td>";
+                                }
+                                else {
+                                    tempDayStr = minYear + "-" + monthStr + "-" + dayStr2;
+                                    monthShowStr += getDayStr(data.data.DateTime, tempDayStr);
+                                }
+                            }
+                            if (!isFristWeak && dayNow < dayCount) {
+                                dayNow++;
+                            }
+                        }                           
+                        monthShowStr+="</tr>";
+                        if (dayNow >= dayCount) {
+                            
+                            break;
+                        }
+                    }
+                    allGroupStr += monthShowStr+"</table></div>";
+                    
+                }
+
+                if (maxYear > minYear) {
+                    for (var i = 1; i <= (maxDate.getMonth()+1); i++) {
+                        var monthStr = "";
+                        if (i < 10) {
+                            monthStr = "0" + i;
+                        }
+                        else {
+                            monthStr = i;
+                        }
+                        allGroupStr += "<div class='dateTime'><table class='dateTab' border='0' cellspacing='0' cellpadding='0'><tr><th class='headTit' colspan='7'>" + maxYear + "-" + monthStr + "</th></tr>"
+                            + "<tr><th>日</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th></tr>";
+                        var tempMin = new Date(maxYear + "/" + monthStr + "/01");
+                        var tempWeak = tempMin.getDay();    //第一天星期几
+                        var dayCount = getDays(maxYear, i); //本月一共几天
+                        var dayNow = 1;
+                        var isFristWeak = true;
+                        var monthShowStr = "";
+                        var tempDayStr = "";
+                        while (true) {
+                            monthShowStr += "<tr>";
+                            for (var j = 0; j < 7; j++) {
+                                var dayStr2 = "";
+                                if (dayNow < 10) {
+                                    dayStr2 = "0" + dayNow;
+                                }
+                                else {
+                                    dayStr2 = dayNow;
+                                }
+                                if (isFristWeak) {
+                                    if (j == tempWeak) {
+                                        tempDayStr = maxYear + "-" + monthStr + "-" + dayStr2;
+                                        monthShowStr += getDayStr(data.data.DateTime, tempDayStr);
+                                        isFristWeak = false;
+                                    }
+                                    else {
+                                        monthShowStr += "<td>&nbsp;</td>";
+                                    }
+                                }
+                                else {
+                                    if (dayNow >= dayCount) {
+                                        monthShowStr += "<td>&nbsp;</td>";
+                                    }
+                                    else {
+                                        tempDayStr = maxYear + "-" + monthStr + "-" + dayStr2;
+                                        monthShowStr += getDayStr(data.data.DateTime, tempDayStr);
+                                    }
+                                }
+                                if (!isFristWeak && dayNow < dayCount) {
+                                    dayNow++;
+                                }
+                            }
+                            monthShowStr += "</tr>";
+                            if (dayNow >= dayCount) {
+
+                                break;
+                            }
+                        }
+                        allGroupStr += monthShowStr + "</table></div>";
+
+                    }
+                }                 
+                allGroupStr += "<div class='space' style='height:200px;'>&nbsp;</div>";
+
+                $("#groupContent").html(allGroupStr);
+
+                $("#contentDiv").show();
+                $("#loadDiv").hide();
+
+                if (pprodId != undefined && pprodId != "" && pprodId != "undefined") {
+                    $("#_startTime" + pprodId).click();
+                }
+            }
+        });
+
+        var orderJson = {
+            "ProductID": proId,
+            "ProductTitle": title,
+            "ProductPic": imgUrl,
+            "PlanID": "",
+            "PriceID": "",
+            "ProductType":1,
+            "AdultPrice": 0,
+            "ChildPrice": 0,
+            "StartTime": "",
+            "Seat": 0,
+            "AdultNum": 0,
+            "ChildNum": 0,
+            "Preferential": 0,
+            "TotalPrice": 0,
+            "Customer": "",
+            "Phone": "",
+            "OrderID": 0,
+            "PayPrice": 0,
+            "OrderNo":""
+        }
+        
+        function selPlan(obj, PlanID, PriceID, AdultPrice, ChildPrice, StartTime,Seat) {
+            $("[name='planTd']").each(function(){
+                $(this).attr("style", "backgroundColor:#fff");
+            });
+            obj.style.backgroundColor = "#00E3E3";
+
+            orderJson.PlanID = PlanID;
+            orderJson.PriceID = PriceID;
+            orderJson.AdultPrice = AdultPrice;
+            orderJson.ChildPrice = ChildPrice;
+            orderJson.StartTime = StartTime;
+            orderJson.Seat = Seat;
+            orderJson.AdultNum = 1;
+            orderJson.ChildNum = 0;
+            orderJson.TotalPrice = 0;
+            showContent();
+            countPrice();
+        }
+        function showContent() {
+            $("#teamTime").html(orderJson.StartTime);
+            $("#adultPrice").html("<font class='pinkTxt'>¥" + orderJson.AdultPrice + "</font>/人");
+            $("#childPrice").html("<font class='pinkTxt'>¥" + orderJson.ChildPrice + "</font>/人");
+            $("#adultNum").val(orderJson.AdultNum);
+            $("#childNum").val(orderJson.ChildNum);
+            $("#countPrice").html("");
+            checkSeat();
+        }
+        function addPerson(type) {
+            if ((orderJson.AdultNum + orderJson.ChildNum) == orderJson.Seat) {                
+                return;
+            }
+            else{
+                switch (type) {
+                    case 1:
+                        orderJson.AdultNum++;
+                        break;
+                    case 2:
+                        orderJson.ChildNum++;
+                        break;
+                }
+                checkSeat();
+                countPrice();
+            }
+        }
+        function checkSeat() {
+            if (orderJson.Seat <= (orderJson.AdultNum + orderJson.ChildNum)) {
+                $("#adultAdd").attr("href", "javascript:void(0);");
+                $("#adultAdd").attr("class", "numVH disabled");
+                $("#childAdd").attr("href", "javascript:void(0);");
+                $("#childAdd").attr("class", "numVH disabled");
+            }
+            else {
+                $("#adultAdd").attr("href", "javascript:addPerson(1);");
+                $("#adultAdd").attr("class", "numVH");
+                $("#childAdd").attr("href", "javascript:addPerson(2);");
+                $("#childAdd").attr("class", "numVH");
+            }
+
+            if (orderJson.AdultNum == 1) {
+                $("#adultPlus").attr("href", "javascript:void(0);");
+                $("#adultPlus").attr("class", "numVH disabled");
+            }
+            else if(orderJson.AdultNum>1){
+                $("#adultPlus").attr("href", "javascript:plusPerson(1);");
+                $("#adultPlus").attr("class", "numVH");
+            }
+            if (orderJson.ChildNum == 0) {
+                $("#childPlus").attr("href", "javascript:void(0);");
+                $("#childPlus").attr("class", "numVH disabled");
+            }
+            else if (orderJson.ChildNum > 0) {
+                $("#childPlus").attr("href", "javascript:plusPerson(2);");
+                $("#childPlus").attr("class", "numVH");
+            }
+        }
+        function plusPerson(type) {
+            switch (type) {
+                case 1:
+                    if (orderJson.AdultNum == 0) {
+                        return;
+                    }
+                    else{
+                        orderJson.AdultNum--;
+                        checkSeat();
+                        countPrice();
+                    }
+                    break;
+                case 2:
+                    if (orderJson.ChildNum == 0) {
+                        return;
+                    }
+                    else {
+                        orderJson.ChildNum--;
+                        checkSeat();
+                        countPrice();
+                    }
+                    break;
+            }
+        }
+        function countPrice() {
+            $("#adultNum").val(orderJson.AdultNum);
+            $("#childNum").val(orderJson.ChildNum);
+            var count = orderJson.AdultNum * orderJson.AdultPrice + orderJson.ChildNum * orderJson.ChildPrice - orderJson.Preferential;
+            orderJson.TotalPrice = count;
+            $("#countPrice").html("¥" + count);
+        }
+
+        function goNext() {
+            if (orderJson.TotalPrice > 0) {
+                var dataName = orderJson.ProductID + "_" + Math.random();
+                sessionStorage.setItem(dataName, JSON.stringify(orderJson));
+                window.location.href = "step2.html?token="+dataName;
+            }
+            else{
+                alert("请选择团期及人数");
+            }
+        }
+        function orderBack() {
+            if (confirm("订单还未完成,确定退出?")) {
+                history.back();
+            }
+        }
+    </script>
+</body>
+</html>

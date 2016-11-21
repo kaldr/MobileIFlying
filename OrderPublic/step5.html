@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="keywords" content="宁波飞扬旅行社,宁波旅行社,宁波旅游网" />
+    <meta name="description" content="飞扬旅游网隶属于浙江飞扬国际旅游集团,宁波旅行社行业第一,全国第八,浙江省首批五星级旅行社,宁波市最佳旅行社.服务热线:4000-365-666" />
+    <meta name="apple-mobile-web-app-title" content="飞扬旅游网" />
+    <title>飞扬旅游网</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/my-app.css">
+</head>
+<body ontouchstart>
+    <!--views start-->
+    <div class="views">
+        <!--view-main start-->
+        <div class="view view-main">
+            <!--page start-->
+            <div class="page navbar-fixed">
+                <!-- navbar start-->
+                <div class="navbar tmBar">
+                    <div class="navbar-inner navbar-on-center">
+                        <div class="left"><a class="back link" href="javascript:history.back();"> <i class="icon icon-back"></i></a></div>
+                        <div class="center sliding t1">付款须知</div>
+                        <div class="right"></div>
+                    </div>
+                </div>
+                <!-- navbar END-->
+                <!--page-content start-->
+                <div class="page-content">
+                    <div class="payment">
+                        <p>1.您可登陆爱飞扬旅游网在线预定，您预订的产品支持24小时无损退团服务。</p>
+                        <p>
+                            2.爱飞扬的私人旅游顾问在收到您的预定单后，会将电子合同将发
+                            送至您的电子邮箱，您可以登录邮箱查看，依据《中华人民共和国
+                            合同法》第二章合同的订立第十条、第十一条，在线签订的电子合
+                            同，和纸质合同一样具有同样的法律效力。请查看《中华人民共和
+                            国合同法》。
+                        </p>
+                        <p>
+                            3.在线签约支付完成后，爱飞扬的私人旅游顾问会在您出游前一天
+                            以邮件的形式发送出团通知书到您的邮箱，您只需耐心等待查收，
+                            即可开心出游；出团通知书说明您出游的交通时间、食宿安排和出
+                            游需要注意的事项。
+                        </p>
+                        <p>
+                            4.您预订成功后，该产品（同线路同团期）价格上升不再补收差价
+                            （若因航空公司燃油税费调整而引起的差价除外）；价格下降则退
+                            还差价；超值出游有保障。
+                        </p>
+                        <p>5.自助游产品均为即时计价，请以我方最终确认价格为准。</p>
+                        <p>
+                            6.若预订的机票是团队机票，存在航班调整的可能（包括航空公司、
+                            起飞时间的变化），故最终航班情况以出票时的具体信息为准。
+                        </p>
+                        <p>
+                            7.大床房、蜜月布置等附加要求，预订时我方尽量申请，但无法担
+                            保一定予以安排，请您在入住时再次向前台提及。
+                        </p>
+                    </div>
+                    <div class="row_price">
+                        <label class="label-checkbox">
+                            <input type="checkbox" value="" name="" id="myCheck">
+                            <div class="item-media chk"><i class="icon icon-form-checkbox mr5"></i> 我同意以上条款</div>
+
+                        </label><span class="floatR"><a href="javascript:goPay();" class="button button-big button-fill inline redBtn radis0 inline mBtn">下一步</a></span>
+                    </div>
+                </div>
+                <!--page-content END-->
+            </div>
+            <!-- page END-->
+
+        </div>
+        <!--view-main END-->
+    </div>
+
+    <!-- views end-->
+
+    <script type="text/javascript" src="../js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="../js/command.js"></script>
+    <script type="text/javascript" src="../js/mywechat.js"></script>
+    <script type="text/javascript">
+        var myRequest = GetRequest();
+        var orderId = decodeURI(myRequest["order"]);
+        function goPay() {
+            if ($("#myCheck").is(':checked')) {
+                var ua = window.navigator.userAgent.toLowerCase();
+                if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+                    window.location.href = "http://www.iflying.com/zt/weixin/authorize.php?state=m.iflying.com/pay/payPage.html?order=" + orderId;
+                } else {
+                    window.location.href = "http://m.iflying.com/pay/payPagealipay.html?order=" + orderId;
+                } 
+            }
+            else {
+                alert("您未同意付款条款");
+            }
+        }
+    </script>
+</body>
+</html>

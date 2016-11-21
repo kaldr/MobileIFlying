@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<title>飞扬旅游</title>
+	<link href= 'css/layout.css' type="text/css" rel="Stylesheet"/>
+</head>
+<body>
+	<div id="container">
+		<div id="top-head" class="row">
+			<a class="back-link" href="#"> <i class="i back"></i>
+				返回
+			</a>
+		</div>
+		<div id="resize-box">
+		<div id="canvas-panel">
+			<div class="canvas-box">
+				<div id="text-info">您的第一站从<span>三亚</span>开始</div>
+				<canvas id="canvas">浏览器不支持哦，亲</canvas>
+				<canvas id="canvas_bak"></canvas>
+			</div>
+
+		</div>
+		<div id="drawController">
+			<div class="tool">
+				<img style="display: none"  src = 'image/pencil.png' width = '20px;' height = '20px;' class="img" onclick="draw_graph('pencil',this)" class = 'border_nochoose' title = '铅笔'/>
+				<img style="display: none" src = 'image/line.png' width = '20px;' height = '20px;' class="img" onclick="draw_graph('line',this);" class = 'border_nochoose' title = '画直线'/>
+				<img src = 'image/cancel.png' height = '18px;' class="img cancel" onclick="cancel(this)" class = 'border_nochoose' title = '撤销上一个操作'/>
+				<img src = 'image/next.png'  height = '18px;' class="img next" onclick="next(this)" class = 'border_nochoose' title = '重做上一个操作'/>
+				<img style="display: none" src = 'image/square.png' width = '20px;' height = '20px;' class="img" onclick="draw_graph('square',this)" class = 'border_nochoose' title = '方形'/>
+				<img style="display: none" src = 'image/circle.png' width = '20px;' height = '20px;' class="img" onclick="draw_graph('circle',this)" class = 'border_nochoose' title = '圆'/>
+				<img style="display: none" src = 'image/handwriting.png' width = '20px;' height = '20px;' class="img" onclick="draw_graph('handwriting',this)" class = 'border_nochoose' title = '涂鸦'/>
+				<img style="display: none" src = 'image/save.png' width = '20px;' height = '20px;' class="img" onclick="save()" class = 'border_nochoose' title = '保存'/>
+				<img style="display: none" src = 'image/rubber.png' width = '20px;' height = '20px;' class="img" onclick="draw_graph('rubber',this)" class = 'border_nochoose' title = '橡皮擦'/>
+				<img style="display: none;"  id="chooseSize" src = 'image/line_size_1.png'  width = '20px;' height = '20px;' class="img" onclick="showLineSize(this)" class = 'border_nochoose' title = '线条大小'/>
+				<img src = 'image/xx.png' height = '25px;' class="img xx" onclick="clearContext('1')" class = 'border_nochoose' title = '清屏'/>
+				<input id="chooseColor"  type="button"  class = 'i1 border_nochoose' onClick="showColor(this)" title = '选择颜色'/>
+			</div>
+			<div class="action-row">
+				<a href="#" download="picture.png"  id="downloadImage_a">
+
+					<img height="55" class="code" src = 'image/code.jpg'/>
+					<img style="float: none;" src = 'image/download.png'  height = '45px;' class="img download" class = 'border_nochoose' title = '下载' onclick="save()"/>
+				</a>
+			</div>
+		</div>
+	</div>
+
+		<div id="showHistory" style="left: 0">
+			<h2 style="font-size: 16px; margin: 0 10px 10px 10px;">记录您绘画成果</h2>
+			<div class="draw-result"><img src = 'image/noimg.png' width = '150px;' height = '150px;' id="history_1"/></div>
+		</div>
+	<div id="pro-list">
+		<div class="pro-row">
+			<a href="#">
+				<div class="proImg">
+					<img src="http://img1.vbooking.net/prd/25/316f57fff1674250823ecde1af84a302.jpg@320w" alt="" title=""></div>
+				<div class="pro-rInfo">
+					<div class="pro-title">【多彩贵州· A线】黄果树瀑布荔波小七孔千户苗寨双飞五日游</div>
+					<p class="pro-date">发团日期：11-15,11-22,11-29</p>
+					<div class="pro-price row">
+						<span class="red_t">
+							¥ <b class="ft20">3380</b> <font>起</font>
+						</span>
+						
+					</div>
+				</div>
+			</a>
+		</div>
+		<div class="pro-row">
+			<a href="#">
+				<div class="proImg">
+					<img src="http://img1.vbooking.net/prd/25/316f57fff1674250823ecde1af84a302.jpg@320w" alt="" title=""></div>
+				<div class="pro-rInfo">
+					<div class="pro-title">【多彩贵州· A线】黄果树瀑布荔波小七孔千户苗寨双飞五日游</div>
+					<p class="pro-date">发团日期：11-15,11-22,11-29</p>
+					<div class="pro-price row">
+						<span class="red_t">
+							¥ <b class="ft20">3380</b> <font>起</font>
+						</span>
+						
+					</div>
+				</div>
+			</a>
+		</div>
+		<div class="pro-row">
+			<a href="#">
+				<div class="proImg">
+					<img src="http://img1.vbooking.net/prd/25/316f57fff1674250823ecde1af84a302.jpg@320w" alt="" title=""></div>
+				<div class="pro-rInfo">
+					<div class="pro-title">【多彩贵州· A线】黄果树瀑布荔波小七孔千户苗寨双飞五日游</div>
+					<p class="pro-date">发团日期：11-15,11-22,11-29</p>
+					<div class="pro-price row">
+						<span class="red_t">
+							¥ <b class="ft20">3380</b> <font>起</font>
+						</span>
+						
+					</div>
+				</div>
+			</a>
+		</div><div class="pro-row">
+			<a href="#">
+				<div class="proImg">
+					<img src="http://img1.vbooking.net/prd/25/316f57fff1674250823ecde1af84a302.jpg@320w" alt="" title=""></div>
+				<div class="pro-rInfo">
+					<div class="pro-title">【多彩贵州· A线】黄果树瀑布荔波小七孔千户苗寨双飞五日游</div>
+					<p class="pro-date">发团日期：11-15,11-22,11-29</p>
+					<div class="pro-price row">
+						<span class="red_t">
+							¥ <b class="ft20">3380</b> <font>起</font>
+						</span>
+						
+					</div>
+				</div>
+			</a>
+		</div><div class="pro-row">
+			<a href="#">
+				<div class="proImg">
+					<img src="http://img1.vbooking.net/prd/25/316f57fff1674250823ecde1af84a302.jpg@320w" alt="" title=""></div>
+				<div class="pro-rInfo">
+					<div class="pro-title">【多彩贵州· A线】黄果树瀑布荔波小七孔千户苗寨双飞五日游</div>
+					<p class="pro-date">发团日期：11-15,11-22,11-29</p>
+					<div class="pro-price row">
+						<span class="red_t">
+							¥ <b class="ft20">3380</b> <font>起</font>
+						</span>
+						
+					</div>
+				</div>
+			</a>
+		</div><div class="pro-row">
+			<a href="#">
+				<div class="proImg">
+					<img src="http://img1.vbooking.net/prd/25/316f57fff1674250823ecde1af84a302.jpg@320w" alt="" title=""></div>
+				<div class="pro-rInfo">
+					<div class="pro-title">【多彩贵州· A线】黄果树瀑布荔波小七孔千户苗寨双飞五日游</div>
+					<p class="pro-date">发团日期：11-15,11-22,11-29</p>
+					<div class="pro-price row">
+						<span class="red_t">
+							¥ <b class="ft20">3380</b> <font>起</font>
+						</span>
+						
+					</div>
+				</div>
+			</a>
+		</div>
+	</div>
+
+
+
+		<div id="color" class="color" >
+			<input class="i1" type="button"/>
+			<input class="i2" type="button"/>
+			<input class="i3" type="button"/>
+			<input class="i4" type="button"/>
+			<input class="i5" type="button"/>
+			<input class="i6" type="button"/>
+			<input class="i7" type="button"/>
+			<input class="i8" type="button"/>
+			<input class="i9" type="button"/>
+		</div>
+
+		<div id="line_size"  class = "border_nochoose" style="z-index:99">
+			<img src="image/line_size_1.png" width = '80px;' height = '12px;' onClick="chooseLineSize(1)">
+			<br/>
+			<img src="image/line_size_3.png" width = '80px;' height = '12px;' onClick="chooseLineSize(3)">
+			<br/>
+			<img src="image/line_size_5.png" width = '80px;' height = '12px;' onClick="chooseLineSize(5)">
+			<br/>
+			<img src="image/line_size_7.png" width = '80px;' height = '12px;' onClick="chooseLineSize(7)"></div>
+
+	</div>
+</body>
+	<script src='js/jquery-2.1.3.min.js'></script>
+	<script src='js/zepto.min.js'></script>
+	<script src='js/touch.js'></script>
+<!-- 	<script src='js/websocket.js'></script> -->
+	<script src='js/draw.js'></script>
+	<script src='js/storage.js'></script>
+	<script>  
+		function hideEle(){
+			$("#text-info").fadeOut();
+		}
+		setTimeout(hideEle,2000);  
+		//撤销的array
+		var cancelList = new Array();
+		//撤销的次数
+		var cancelIndex = 0;
+		canvas =  document.getElementById("canvas");
+
+		$(function(){
+			initCanvas();
+			$("img")[0].click();
+			$("#color input").click(chooseColor);
+		});		
+
+		//初始化
+		var initCanvas = function(){
+			canvas =  document.getElementById("canvas");
+			canvas.width = canvasWidth;
+			canvas.height = canvasHeight;
+			context = canvas.getContext('2d');
+			canvasTop = $(canvas).offset().top
+			canvasLeft = $(canvas).offset().left;
+	
+
+			canvas_bak =  document.getElementById("canvas_bak");
+			canvas_bak.width = canvasWidth;
+			canvas_bak.height = canvasHeight;
+			context_bak = canvas_bak.getContext('2d');		
+		}	
+		
+		//下载图片
+		var downloadImage = function(){
+			$("#downloadImage_a")[0].href=canvas.toDataURL();
+			$("#downloadImage_a").click();
+		}
+
+		//展开颜色选择器
+		var showColor = function(obj){
+			var top = $(obj).position().top+27;
+			var left = $(obj).position().left-210;		
+			$("#color")[0].style.left = left + "px";;
+			$("#color")[0].style.top = top + "px";
+			$("#color").show();
+			//alert($("#chooseColor").position().left);
+		
+		}
+		//展开线条大小选择器
+		var showLineSize = function(obj){
+			
+			if($("#line_size").is(":hidden")){
+				var top = $(obj).offset().top;
+				var left = $(obj).offset().left;				
+				$("#line_size")[0].style.left = left + $(obj).width() + 5; +  "px";
+				$("#line_size")[0].style.top = top   + "px";
+				$("#line_size").show();
+			}else{
+				$("#line_size").hide();
+			}
+		}
+
+		//选择颜色
+		var chooseColor = function(obj){		
+			var objClass = $(this).attr("class");
+			$("#chooseColor").attr("class" , "");
+			$("#chooseColor").addClass (objClass).addClass('border_nochoose');			
+			color  = $(this).css('background-color');
+			$("#color").hide();
+
+		}
+
+		//选择大小
+		var chooseLineSize =  function(_size){		
+			$("#chooseSize").attr("src" , "image/line_size_"+_size+".png");		
+			size = _size;
+			$("#line_size").hide();
+		}
+
+
+
+		//撤销上一个操作
+		var cancel = function(){
+			cancelIndex++;
+			//alert(cancelIndex);
+			context.clearRect(0,0,canvasWidth,canvasHeight);
+			var  image = new Image();
+			var index = cancelList.length-1 - cancelIndex;
+			var url = cancelList[index];
+			image.src = url;
+			image.onload = function(){
+				context.drawImage(image , 0 ,0 , image.width , image.height , 0 ,0 , canvasWidth , canvasHeight);
+			}
+			//alert(cancelList);
+		}
+
+		//重做上一个操作
+		var next = function(){
+			cancelIndex--;
+			context.clearRect(0,0,canvasWidth,canvasHeight);
+			var  image = new Image();
+			var index = cancelList.length-1 - cancelIndex  ;
+			var url = cancelList[index];
+			image.src = url;
+			image.onload = function(){
+				context.drawImage(image , 0 ,0 , image.width , image.height , 0 ,0 , canvasWidth , canvasHeight);
+			}
+		}
+
+		//保存历史 用于撤销
+		var saveImageToAry = function (){
+			cancelIndex = 0;
+				
+			var dataUrl =  canvas.toDataURL();
+
+			cancelList.push(dataUrl);
+				//alert(cancelList);
+		}
+
+		//saveImageToAry();
+	</script>
+</html>

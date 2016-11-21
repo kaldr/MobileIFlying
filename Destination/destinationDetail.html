@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title id="myTitle">飞扬旅游网</title>
+    <meta name="keywords" content="宁波飞扬旅行社,宁波旅行社,宁波旅游网" id="myKeywords" />
+    <meta name="description" id="myDescription" content="飞扬旅游网隶属于浙江飞扬国际旅游集团,宁波旅行社行业第一,全国第八,浙江省首批五星级旅行社,宁波市最佳旅行社.服务热线:4000-365-666" />
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/my-app.css">
+    <link rel="stylesheet" href="/css/des.css">
+    <link rel="stylesheet" href="/css/mcss.css">
+</head>
+<body ontouchstart>
+    <!--views start-->
+    <div class="views">
+        <!--view-main start-->
+        <div class="view view-main">
+            <!--page start-->
+            <div class="page navbar-fixed">
+                <!--page-content start-->
+                <div class="navbar tmBar">
+                    <div class="navbar-inner navbar-on-center">
+                        <div class="left"><a href="javascript:history.back();" class="back link"> <i class="icon icon-back"></i></a></div>
+                        <div class="center sliding t1" id="title"></div>
+                        <div class="right"><a href="javascript: window.location.href = 'http://m.iflying.com/mdd/';"> <i class="icon icon-s2"></i></a></div>
+                    </div>
+                </div>
+                <div class="page-content grayBg">
+                    <div class="swiper-custom">
+                        <div class="swiper-container">
+                            <div class="swiper-pagination"></div>
+                            <div class="swiper-wrapper" id="picList">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div role="main" class="ui-content" data-role="content">
+                        <div class="travel_detail_title">
+                            <div class="fluidHeight">
+
+                            </div>
+                        </div>
+                        <div class="mdd_show">
+                            <h2>概述</h2>
+                            <div class="gaishu">
+                                <div id="wrap01">
+                                    <div>
+                                        <p id="summary">
+                                            
+                                        </p>
+                                    </div>
+                                    <div id="gradient"></div>
+                                </div>
+                                <div id="read-more"></div>
+                            </div>
+                        </div>
+                        <div class="mdd_block">
+                            <div class="l_block">
+                                <div class="block1"><a class="ui-link" href="" rel="external" id="trafficLink">交通指南</a></div>
+                                <div class="block2"><a class="ui-link" href="" rel="external" id="scenicLink">景点</a></div>
+                            </div>
+                            <div class="r_block">
+                                <div class="block4"><a class="ui-link" href="" rel="external" id="hotelLink">酒店</a></div>
+                                <div class="block3"><a class="ui-link" href="" rel="external" id="foodLink">美食</a></div>
+                                <div class="block5"><a class="ui-link" href="" rel="external" id="shopLink">购物</a></div>
+                                <div class="clear_both"></div>
+                                <div class="block6"><a class="ui-link" href="" rel="external" id="noteLink">游记</a></div>
+                                <div class="block7"><a class="ui-link" href="" rel="external" id="tipLink">注意事项</a></div>
+                            </div>
+                        </div>
+                        <div class="prod_list" style="display: block;">
+                            <h3>线路推荐</h3>
+                            <ul id="LineList">
+                                
+                            </ul>
+                        </div>
+                        <!--link-->
+                        <!--bottom-->
+
+                    </div>
+                </div>
+                <!--page-content END-->
+            </div>
+            <!-- page END-->
+
+        </div>
+        <!--view-main END-->
+    </div>
+    <!-- views end-->
+
+    <script type="text/javascript" src="/js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="/js/command.js"></script>
+    <script type="text/javascript" src="/js/framework7.js"></script>
+    <script type="text/javascript" src="/js/kitchen-sink.js"></script>
+    <script type="text/javascript">
+        var myRequest = GetRequest();
+        var cityCode = decodeURI(myRequest["city"]);
+        var gaddrId = decodeURI(myRequest["gaddr"]);
+        var getInfoUrl = "";
+        if (gaddrId != undefined && gaddrId != null && gaddrId != "" && gaddrId != "undefined") {
+            getInfoUrl = gaddrInfo2Url + "&GaddrID=" + gaddrId;
+        }
+        else {
+            getInfoUrl = gaddrInfoUrl + "&CityCode=" + cityCode;
+        }
+
+        if (gaddrId != undefined && gaddrId != null && gaddrId != "" && gaddrId != "undefined") {
+            $("#trafficLink").attr("href", "javascript:window.location.href='/Destination/destinationTraffic.html?gaddr=" + gaddrId + "'");
+            $("#scenicLink").attr("href", "javascript:window.location.href='/Destination/destinationScenic.html?gaddr=" + gaddrId + "'");
+            $("#hotelLink").attr("href", "javascript:window.location.href='/Destination/destinationHotel.html?gaddr=" + gaddrId + "'");
+            $("#foodLink").attr("href", "javascript:window.location.href='/Destination/destinationFood.html?gaddr=" + gaddrId + "'");
+            $("#shopLink").attr("href", "javascript:window.location.href='/Destination/destinationShop.html?gaddr=" + gaddrId + "'");
+            $("#noteLink").attr("href", "javascript:window.location.href='/TravelNotes/notesList.html?gaddr=" + gaddrId + "'");
+            $("#tipLink").attr("href", "javascript:window.location.href='/Destination/destinationTip.html?gaddr=" + gaddrId + "'");
+        }
+        else {
+            $("#trafficLink").attr("href", "javascript:window.location.href='http://m.iflying.com/" + cityCode + "/jiaotong/?city=" + cityCode + "'");
+            $("#scenicLink").attr("href", "javascript:window.location.href='http://m.iflying.com/" + cityCode + "/jingdian/?city=" + cityCode + "'");
+            $("#hotelLink").attr("href", "javascript:window.location.href='http://m.iflying.com/" + cityCode + "/hotel/?city=" + cityCode + "'");
+            $("#foodLink").attr("href", "javascript:window.location.href='http://m.iflying.com/" + cityCode + "/meishi/?city=" + cityCode + "'");
+            $("#shopLink").attr("href", "javascript:window.location.href='http://m.iflying.com/" + cityCode + "/gouwu/?city=" + cityCode + "'");
+            $("#noteLink").attr("href", "javascript:window.location.href='http://m.iflying.com/" + cityCode + "/gonglue/?city=" + cityCode + "'");
+            $("#tipLink").attr("href", "javascript:window.location.href='http://m.iflying.com/" + cityCode + "/zhuyishixiang/?city=" + cityCode + "'");
+        }
+
+
+        $.ajax({
+            type: "GET",
+            url: getInfoUrl + "&Type=0",
+            dataType: "text",
+            async: false,
+            success: function (myMsg) {
+                var dataObj = eval("(" + myMsg + ")");
+                if (dataObj != null && dataObj.result == 1) {
+                    var item = dataObj.data;
+                    $("#title").html(item.Title);
+                    gaddrId = item.ID;
+                    $("#myTitle").html("【2016" + item.Title + "旅游攻略】" + item.Title + "自助游攻略_" + item.Title + "旅游指南 - 飞扬旅游网");
+                    $("#myKeywords").attr("content", "2016" + item.Title + "旅游攻略," + item.Title + "自助游攻略," + item.Title + "旅游指南");
+                    $("#myDescription").attr("content", item.Title + "旅游攻略,介绍了" + item.Title + "旅游景点大全包含热门线路推荐、更有" + item.Title + "美食推荐、住宿攻略、交通方案，" + item.Title + "旅游地图等" + item.Title + "旅游攻略信息,了解更多" + item.Title + "旅游攻略上飞扬旅游网。");
+                    
+                    $.each(item.Pic, function (i, picItem) {
+                        $("#picList").append("<div class='swiper-slide'><img src='" + picItem.Photo + "' alt=''></div>");
+                    });
+                    var myApp = new Framework7();
+                    var mySwiper = myApp.swiper('.swiper-container', {
+                        autoplay: 2500,
+                        pagination: '.swiper-pagination',
+                        paginationHide: false,
+                        paginationClickable: true,
+                    });
+                    loadProduct();
+                }
+            },
+            error: function () {
+                return;
+            }
+        });
+        $.ajax({
+            type: "GET",
+            url: getInfoUrl + "&Type=1",
+            dataType: "text",
+            async: false,
+            success: function (myMsg) {
+                var dataObj = eval("(" + myMsg + ")");
+                if (dataObj != null && dataObj.result == 1) {
+                    var item = dataObj.data;
+                    $("#summary").html(item.Intro);
+                }
+            },
+            error: function () {
+                return;
+            }
+        });  
+       
+        function loadProduct() {
+            postUrl = groupListUrl + "&Page=1&size=99&DestinationID=" + gaddrId + "&ProductType=1,2,3&ra=" + Math.random();
+            $.getJSON(postUrl, function (data) {
+                if (data != null && data.data != null) {
+                    var lineStr = "";
+                    $.each(data.data.LineList, function (i, item) {
+                        lineStr += "<li><a onclick='goProduct(" + item.ID + ");'><div class='product_pic'><img src='" + item.DefaultPic + "'></div>"
+                        + "<div class='product_bg'></div><h2>" + item.Title + "</h2><span class='product_tips'><em>满意度：" + item.Scores + "%</em>"
+                        + "<strong class='base_price'><dfn>¥</dfn>" + item.DefaultPrice + "<dfn>起</dfn></strong></span></a></li>";
+                    });
+                    $("#LineList").html(lineStr);
+                }
+            });
+        }
+        function goProduct(id) {
+            goProductPage(id, 1);
+        }
+        $(function () {
+            var slideHeight = 50; // px
+            var defHeight = $('#wrap01').height();
+            if (defHeight >= slideHeight) {
+                $('#wrap01').css('height', slideHeight + 'px');
+                $('#read-more').append('<a>点击查看更多<img src="/images/more_qz.png" style="height:20px;width:30px; margin-top:-5px; display:inline-block;"></a>');
+                $('#read-more a').click(function () {
+                    var curHeight = $('#wrap01').height();
+                    if (curHeight == slideHeight) {
+                        $('#wrap01').animate({
+                            height: defHeight
+                        }, "normal");
+                        $('#read-more a').html('点击隐藏<img src="/images/more_down.png" style="height:20px;width:30px; margin-top:-5px; display:inline-block;">');
+                        $('#gradient').fadeOut();
+                    } else {
+                        $('#wrap01').animate({
+                            height: slideHeight
+                        }, "normal");
+                        $('#read-more a').html('点击查看更多<img src="/images/more_qz.png" style="height:20px;width:30px; margin-top:-5px; display:inline-block;">');
+                        $('#gradient').fadeIn();
+                    }
+                    return false;
+                });
+            }
+        });
+    </script>
+	<script src="https://s4.cnzz.com/z_stat.php?id=4072742&web_id=4072742" language="JavaScript"></script>
+</body>
+</html>

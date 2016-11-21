@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="飞扬旅游网" />
+    <title>签证,旅游签证,商务签证,探亲签证 - 飞扬旅游网</title>
+    <meta name="keywords" content="代办签证,旅游签证,商务签证,探亲签证" />
+    <meta name="description" content="飞扬旅游网隶属于浙江飞扬国际旅行社,宁波旅行社行业第一,全国第八,浙江省首批五星级旅行社,专业提供签证,旅游签证,商务签证,探亲签证办理代办业务。飞扬旅游网!m.Iflying.com" />
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/my-app.css">
+    <link rel="stylesheet" href="/css/jin.css">
+</head>
+<body ontouchstart>
+    <input type="hidden" id="DestinationID" value="" />
+    <!--views start-->
+    <div class="views">
+        <!--view-main start-->
+        <div class="view view-main">
+            <!--page start-->
+            <div class="page navbar-fixed">
+                <!-- navbar start-->
+                <div class="navbar tmBar">
+                    <div class="navbar-inner navbar-on-center">
+                        <div class="left"><a class="back link" href="javascript:window.location.href='http://m.iflying.com/'"> <i class="icon icon-back"></i></a></div>
+                        <div class="center sliding t1">签证</div>
+                        <div class="right"><a href="javascript: window.location.href = '/Search/search.html';"> <i class="icon icon-s2"></i></a></div>
+                    </div>
+                </div>
+                <!-- navbar END-->
+                <!--page-content start-->
+                <div class="page-content grayBg">
+                    <div class="success_rate">
+                        <div class="rateT">99.8%</div>
+                        <p class="ft20 mb15">出签成功率</p>
+                        <div class="visa-menu">
+                            <a href="#">
+                                <i class="vi v1">&nbsp;</i>
+                                <p>免费咨询</p>
+                            </a> <a href="#">
+                                <i class="vi v2">&nbsp;</i>
+                                <p>免费审核</p>
+                            </a> <a href="#">
+                                <i class="vi v3">&nbsp;</i>
+                                <p>短信跟踪</p>
+                            </a> <a href="#">
+                                <i class="vi v4">&nbsp;</i>
+                                <p>全场包邮</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="w_media" style="padding:15px 5px;">
+                        <ul class="hot_visa" id="visaList">
+
+                        </ul>
+                        <div class="mlr5"><a class="button  moreVisa" href="javascript:window.location.href='/Search/search.html'">查看全部国家/地区签证</a></div>
+                    </div>
+                    <div class="w_media">
+                        <h2 class="normal ft16 mb15">办理流程</h2>
+                        <ul class="sche_list">
+                            <li>
+                                <i class="schI i-01">&nbsp;</i>
+                                <p>
+                                    01.电话/<br>
+                                    网上预订
+                                </p>
+                            </li>
+                            <li>
+                                <i class="schI i-02">&nbsp;</i>
+                                <p>
+                                    02.客户<br>
+                                    确认
+                                </p>
+                            </li>
+                            <li>
+                                <i class="schI i-03">&nbsp;</i>
+                                <p>
+                                    03.资料<br>
+                                    审核
+                                </p>
+                            </li>
+                            <li>
+                                <i class="schI i-04">&nbsp;</i>
+                                <p>
+                                    04.送答/<br>
+                                    面试陪签
+                                </p>
+                            </li>
+                            <li>
+                                <i class="schI i-05">&nbsp;</i>
+                                <p>
+                                    05.出签<br>
+                                    配送
+                                </p>
+                            </li>
+                            <li>
+                                <i class="schI i-01">&nbsp;</i>
+                                <p>
+                                    06.快乐<br>
+                                    出行
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--page-content END-->
+            </div>
+            <!-- page END-->
+        </div>
+        <!--view-main END-->
+    </div>
+
+    <!-- views end-->
+
+    <script type="text/javascript" src="/js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="/js/command.js"></script>
+    <script type="text/javascript">
+        var myRequest = GetRequest();
+        var openId = decodeURI(myRequest["openid"]);
+        if (openId != undefined && openId != "") {
+            sessionStorage.setItem("WeChatToken", openId);
+        }
+        var page = 1;
+        var size = 18;
+        function loadLineInfo() {
+            var desId = $("#DestinationID").val();
+            var postUrl = "";
+            if (desId != "") {
+                postUrl = visaListUrl + "&Page=" + page + "&size=" + size + "&DestinationID=" + desId + "&ra=" + Math.random();
+            }
+            else {
+                postUrl = visaListUrl + "&Page=" + page + "&size=" + size + "&ra=" + Math.random();
+            }
+            $.getJSON(postUrl, function (data) {
+                if (data != null && data.data != null) {
+                    if (data.data.VisaList.length > 0) {
+                        var visaStr = "";
+                        $.each(data.data.VisaList, function (i, item) {
+                            visaStr += "<li><a href='javascript:goProduct(" + item.ID + ");'><img src='" + item.DefaultPic + "' alt=''><h2>" + item.WebTitle + "</h2><p class='price-v'>¥" + item.DefaultPrice + "</p></a></li>";
+                        });
+                        $("#visaList").append(visaStr);
+                    }
+                    var w = $(".hot_visa li").width();
+                    var h = w * 0.66;
+                    $(".hot_visa li img").css({ "height": h });
+
+                }
+            });
+        }
+        function goProduct(id) {
+            goProductPage(id, 5);
+        }
+        loadLineInfo();
+    </script>
+	<script src="https://s4.cnzz.com/z_stat.php?id=4072742&web_id=4072742" language="JavaScript"></script>
+</body>
+</html>

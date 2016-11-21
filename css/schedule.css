@@ -1,0 +1,53 @@
+@charset "utf-8";
+
+/*schedule-list*/
+.views { max-width:100%; width: 100%;}
+#schedule-list { font-size:20px;}
+.step-row { background: url(../images/dot.gif) repeat-y center top; color:#949393; background-size: 0.15rem auto; padding: 2rem 0 1rem; text-align:center;}
+.step_num{ width:7.5rem; height:4.5rem; text-align:center; margin:0 auto; background: url(../images/round.png) no-repeat 0 0; background-size: 100% auto; display:inline-block;}
+
+.step-row  i { height:2.5rem; width: 1.6rem; margin-top:1rem; display: inline-block; vertical-align:middle; background: url(../images/num.png) no-repeat; background-size: 100% auto;}
+.active i {background: url(../images/num-over.png) no-repeat; background-size: 100% auto;}
+.list1 i{ background-position: 0 0.25rem;}
+.list2 i{ background-position: 0 -2.1rem;}
+.list3 i{ background-position: 0 -4.4rem;}
+.list4 i{ background-position: 0 -6.8rem;}
+.list5 i{ background-position: 0 -9.15rem;}
+.list6 i{ background-position: 0 -11.6rem;}
+.step-Info { text-align:left; font-size:1rem; padding:0 1rem 0 4.1rem;  -webkit-transform: translate(50%, -3.2rem);transform: translate(50%, -3.2rem); margin:0 auto;  width: 50%; margin-bottom:-5rem;}
+.step-Info h2 { font-size:1.5rem; line-height:2rem; }
+.step-row.active {background: url(../images/dot-over.gif) repeat-y center top;background-size: 0.15rem auto;color:#e86b11;}
+
+.step-row.active .step_num{background: url(../images/round-over.png) no-repeat 0 0; background-size: 100% auto;  }
+.step-row:nth-child(2n) .step_num{ background-position: -1px -6rem; }
+.step-row:nth-child(2n) .step-Info { margin:0 0 -3rem 0; -webkit-transform: translate(0, -3.2rem);transform: translate(0, -3.2rem); text-align:right; padding:0 4.1rem 0 1rem; }
+.step-Info div { margin-left:-3rem;}
+.step-row:nth-child(2n) .step-Info div { margin-right:-3rem; margin-left:0;}
+html {
+    font-size : 14px;
+}
+@media only screen and (min-width: 401px){
+    html {
+        font-size: 22px !important;
+    }
+}
+@media only screen and (min-width: 428px){
+    html {
+        font-size: 26.75px !important;
+    }
+}
+@media only screen and (min-width: 481px){
+    html {
+        font-size: 30px !important; 
+    }
+}
+@media only screen and (min-width: 569px){
+    html {
+        font-size: 32px !important; 
+    }
+}
+@media only screen and (min-width: 641px){
+    html {
+        font-size: 35px !important; 
+    }
+}

@@ -1,0 +1,1839 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hengyue.Data.DBUtility</name>
+    </assembly>
+    <members>
+        <member name="T:Hengyue.Data.DBUtility.BaseBuilder">
+            <summary>
+            增删查改的基类
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.BaseBuilder.where">
+            <summary>
+            where 条件
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.BaseBuilder.dbcontext">
+            <summary>
+            数据库上下文
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.BaseBuilder.dbexecute">
+            <summary>
+            先放着  以后再优化
+            </summary>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.BaseBuilder.#ctor(Hengyue.Data.DBUtility.DBContext)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="dbcontext"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.BaseBuilder.SetSQL(System.String)">
+            <summary>
+            设置SQL语句
+            </summary>
+            <param name="sql"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.BaseBuilder.Where(System.String)">
+            <summary>
+            设置Where语句
+            </summary>
+            <param name="where">条件</param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.BaseBuilder.AndWhere(System.String)">
+            <summary>
+            设置AndWhere语句
+            </summary>
+            <param name="Where">条件</param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.BaseBuilder.AndWhere(System.String,System.Object)">
+            <summary>
+            设置Andwhere条件
+            </summary>
+            <param name="field"></param>
+            <param name="obj"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.BaseBuilder.Where(System.String,System.Object)">
+            <summary>
+            设置Where条件
+            </summary>
+            <param name="field"></param>
+            <param name="obj"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.BaseBuilder.Parameter(System.String,System.Object)">
+            <summary>
+             设置查询参数
+            </summary>
+            <param name="Key"></param>
+            <param name="obj"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.BaseBuilder.Parameter(System.String,MySql.Data.MySqlClient.MySqlDbType,System.Object)">
+            <summary>
+            设置查询参数
+            </summary>
+            <param name="Key"></param>
+            <param name="Type"></param>
+            <param name="obj"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.BaseBuilder.GetWhere">
+            <summary>
+            得到where条件
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCommand.BeginTransaction">
+            <summary>
+            获取事务
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCommand.ExTransaction(System.Action{MySql.Data.MySqlClient.MySqlTransaction})">
+            <summary>
+            执行委托,返回事务
+            </summary>
+            <param name="_action">委托方法</param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCommand.ExDataSet(System.String)">
+            <summary>
+            查询SQL返回DataSet
+            </summary>
+            <param name="sqlStr">sql语句</param>
+            <param name="error">异常信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCommand.ExDataSet(System.String,MySql.Data.MySqlClient.MySqlParameter[])">
+            <summary>
+            查询SQL返回DataSet
+            </summary>
+            <param name="sqlStr">sql语句</param>
+            <param name="param">参数集</param>
+            <param name="error">异常信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCommand.ExNonQuery(System.String)">
+            <summary>
+            执行SQL
+            </summary>
+            <param name="sqlStr">sql语句</param>
+            <param name="error">异常信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCommand.ExNonQuery(System.String,MySql.Data.MySqlClient.MySqlTransaction)">
+            <summary>
+            执行SQL
+            </summary>
+            <param name="sqlStr">sql语句</param>
+            <param name="myTran">事务</param>
+            <param name="error">异常信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCommand.ExNonQuery(System.String,MySql.Data.MySqlClient.MySqlParameter[])">
+            <summary>
+            执行SQL
+            </summary>
+            <param name="sqlStr">sql语句</param>
+            <param name="param">参数集</param>
+            <param name="error">异常信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCommand.ExNonQuery(System.String,MySql.Data.MySqlClient.MySqlParameter[],MySql.Data.MySqlClient.MySqlTransaction)">
+            <summary>
+            执行SQL
+            </summary>
+            <param name="sqlStr">sql语句</param>
+            <param name="param">参数集</param>
+            <param name="myTran">事务</param>
+            <param name="error">异常信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCommand.ExScalar(System.String)">
+            <summary>
+            查询SQL返回第一行第一列
+            </summary>
+            <param name="sqlStr">sql语句</param>
+            <param name="error">异常信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCommand.ExScalar(System.String,MySql.Data.MySqlClient.MySqlTransaction)">
+            <summary>
+            查询SQL返回第一行第一列
+            </summary>
+            <param name="sqlStr">sql语句</param>
+            <param name="myTran">事务</param>
+            <param name="error">异常信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCommand.ExScalar(System.String,MySql.Data.MySqlClient.MySqlParameter[])">
+            <summary>
+            查询SQL返回第一行第一列
+            </summary>
+            <param name="sqlStr">sql语句</param>
+            <param name="param">参数集</param>
+            <param name="error">异常信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCommand.ExScalar(System.String,MySql.Data.MySqlClient.MySqlParameter[],MySql.Data.MySqlClient.MySqlTransaction)">
+            <summary>
+            查询SQL返回第一行第一列
+            </summary>
+            <param name="sqlStr">sql语句</param>
+            <param name="param">参数集</param>
+            <param name="myTran">事务</param>
+            <param name="error">异常信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCommand.ExDataTable(System.String)">
+            <summary>
+            查询SQL返回DataTable
+            </summary>
+            <param name="sqlStr">sql语句</param>
+            <param name="error">异常信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCommand.ExDataTable(System.String,MySql.Data.MySqlClient.MySqlParameter[])">
+            <summary>
+            查询SQL返回DataTable
+            </summary>
+            <param name="sqlStr">sql语句</param>
+            <param name="param">参数集</param>
+            <param name="error">异常信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCommand.ExPageDataTable(System.String,System.Int32,System.Int32)">
+            <summary>
+            查询SQL返回DataTable
+            </summary>
+            <param name="sqlStr">sql语句</param>
+            <param name="size">条数</param>
+            <param name="page">页数(从0开始)</param>
+            <param name="error">异常信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCommand.ExPageDataTable(System.String,MySql.Data.MySqlClient.MySqlParameter[],System.Int32,System.Int32)">
+            <summary>
+            查询SQL返回DataTable
+            </summary>
+            <param name="sqlStr">sql语句</param>
+            <param name="param">参数集</param>
+            <param name="size">条数</param>
+            <param name="page">页数(从0开始)</param>
+            <param name="error">异常信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCommand.ImportMySQL(System.Data.DataTable)">
+            <summary>
+            批量插入数据
+            </summary>
+            <param name="myTable">数据表(必须带有TableName)</param>
+            <returns></returns>
+        </member>
+        <member name="T:Hengyue.Data.DBUtility.DBContext">
+            <summary>
+            数据库上下文类
+            蒋智辉 2015年1月27号
+            封装了数据库操作底层，封装了事务操作，自动释放资源。
+            修改记录：
+                    2015年2月26号，增加了多数据库的支持
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.DBContext.connStr">
+            <summary>
+            默认连接字符串
+            </summary>
+        </member>
+        <member name="P:Hengyue.Data.DBUtility.DBContext.SQL">
+            <summary>
+            具体执行的SQL语句
+            </summary>
+        </member>
+        <member name="P:Hengyue.Data.DBUtility.DBContext.Table">
+            <summary>
+            需要操作的表名
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.DBContext.tran">
+            <summary>
+            MySql事务类
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.DBContext.conn">
+            <summary>
+            MySql连接类
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.DBContext.comm">
+            <summary>
+            MySql执行类
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.DBContext.param">
+            <summary>
+            查询参数类
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.DBContext.IsCommit">
+            <summary>
+            事务是否已经提交
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.DBContext.IsError">
+            <summary>
+            事务在运行中是否出现错误
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.DBContext.ErrorMsg">
+            <summary>
+            事务在运行中出错的原因，多个错误间已换行分开
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.DBContext.IsTran">
+            <summary>
+            该数据库上下文是否启用事务，如启用事务，该数据库上下文所有的操作都将以事务的形式执行
+            </summary>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBContext.#ctor(System.Boolean,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="IsTran">是否开启事务 默认不开始事务</param>
+            <param name="ConnStr">是否启用传入的连接字符串，达到连接多个数据库的能力</param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBContext.Select(System.String)">
+            <summary>
+            执行查询语句
+            </summary>
+            <param name="Field">需要返回的字段  全部返回 * </param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBContext.Parameter(System.String,MySql.Data.MySqlClient.MySqlDbType,System.Object)">
+            <summary>
+            设置参数，当SQL语句中带参数时，必须去设置参数，否则查询过程中会出现错误
+            </summary>
+            <param name="Key">参数名，SQL语句中参数的名称</param>
+            <param name="Type">参数类型，数据库中该字段的类型</param>
+            <param name="obj">参数值，提交查询过程中具体需要替换的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBContext.Parameter(System.String,System.Object)">
+            <summary>
+            设置参数，当SQL语句中带参数时，必须去设置参数，否则查询过程中会出现错误，此处不需要参数类型，系统会根据具体的值设置数据中相应的类型
+            </summary>
+            <param name="Key">参数名，SQL语句中参数的名称</param>
+            <param name="obj">参数值，提交查询过程中具体需要替换的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBContext.RemoveAt(System.Int32)">
+            <summary>
+            移除参数列表中的某一项
+            </summary>
+            <param name="index">参数列表中需要移除项的索引</param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBContext.Insert">
+            <summary>
+            执行插入语句
+            </summary>
+            <returns>DBInsert类</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Hengyue.Data.DBUtility.DBContext.Insert``1(``0,System.String)" -->
+        <member name="M:Hengyue.Data.DBUtility.DBContext.Delete">
+            <summary>
+            执行删除语句
+            </summary>
+            <returns>DBDelete类</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Hengyue.Data.DBUtility.DBContext.Select``1(System.String,System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:Hengyue.Data.DBUtility.DBContext.Delete``1(``0)" -->
+        <member name="M:Hengyue.Data.DBUtility.DBContext.Update">
+            <summary>
+            执行更新语句
+            </summary>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Hengyue.Data.DBUtility.DBContext.Update``1(``0,System.String)" -->
+        <member name="M:Hengyue.Data.DBUtility.DBContext.From(System.String)">
+            <summary>
+            设置需要操作的表名，在进行具体的增删查改操作前应先设置好表名，否则后面将无法设置表名导致执行错误
+            </summary>
+            <param name="Table">要操作数据库的表名称</param>
+            <returns>DBContext类</returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBContext.ExecuteSQL(System.String)">
+            <summary>
+            执行SQL语句类，此方法提供直接执行SQL语句的方法，调用此方法不需要先调用From方法
+            </summary>
+            <param name="SQL">需要执行的SQL语句</param>
+            <returns>DBExecute类</returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBContext.ExecuteSQL(System.String,System.Object[])">
+            <summary>
+            执行SQL语句类，此方法提供直接执行SQL语句的方法，调用此方法不需要先调用From方法
+            </summary>
+            <param name="SQL">需要执行的SQL语句</param>
+            <param name="obj">参数数组</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBContext.Init">
+            <summary>
+            初始化方法
+            </summary>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBContext.TableInit``1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBContext.OpenTran">
+            <summary>
+            开始事务
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBContext.Commit">
+            <summary>
+            提交事务
+            </summary>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBContext.Dispose">
+            <summary>
+            当该上下文离开了作用域将自动释放资源
+            </summary>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBContext.Check">
+            <summary>
+            具体执行前的准备工作
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Hengyue.Data.DBUtility.Map">
+            <summary>
+            键值对类
+            </summary>
+        </member>
+        <member name="P:Hengyue.Data.DBUtility.Map.Key">
+            <summary>
+            键
+            </summary>
+        </member>
+        <member name="P:Hengyue.Data.DBUtility.Map.Value">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.Map.#ctor(System.String,System.Object)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="Key">键</param>
+            <param name="Value">值</param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCustom.GetCustomTableList(System.String,System.String)">
+            <summary>
+            返回自定义表集合
+            </summary>
+            <param name="sqlStr">查询SQL语句</param>
+            <param name="customFields">查询列名称(列之间,隔开)</param>
+            <returns>表集合(Hashtable)</returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCustom.GetTableList``1(System.String,System.String)">
+            <summary>
+            查询SQL返回实体类集合
+            </summary>
+            <typeparam name="T">实体类</typeparam>
+            <param name="sqlStr">sql语句</param>
+            <param name="customFields">返回字段</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCustom.GetPageCustomTableList(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            返回分页自定义表集合
+            </summary>
+            <param name="sqlStr">查询SQL语句</param>
+            <param name="customFields">查询列名称(列之间,隔开)</param>
+            <param name="size">每页大小</param>
+            <param name="page">页索引</param>
+            <returns>表集合(Hashtable)</returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCustom.GetCustomTable(System.String,System.String)">
+            <summary>
+            返回自定义表
+            </summary>
+            <param name="sqlStr">查询SQL语句</param>
+            <param name="customFields">查询列名称(列之间,隔开)</param>
+            <returns>表(Hashtable)</returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCustom.GetTabl``1(System.String,System.String)">
+            <summary>
+            查询SQL返回实体类
+            </summary>
+            <typeparam name="T">实体类</typeparam>
+            <param name="sqlStr">sql语句</param>
+            <param name="customFields">返回字段</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCustom.GetSaveCustomDataSQL``1(``0,System.String,System.Collections.Generic.List{System.String},MySql.Data.MySqlClient.MySqlParameter[]@)">
+            <summary>
+            生成插入的SQL语句
+            </summary>
+            <typeparam name="T">数据实体对象类型</typeparam>
+            <param name="obj">数据实体对象</param>
+            <param name="lstExclude">排除列集合</param>
+            <param name="sTableName">表名</param>
+            <param name="param">返回数据参数集合</param>
+            <returns>返回SQL语句</returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCustom.GetSaveCustomDataSQLByHas``1(``0,System.String,System.Collections.Generic.List{System.String},MySql.Data.MySqlClient.MySqlParameter[]@)">
+            <summary>
+            生成插入的SQL语句
+            </summary>
+            <typeparam name="T">数据实体对象类型</typeparam>
+            <param name="obj">数据实体对象</param>
+            <param name="sTableName">表名</param>
+            <param name="hasField">获取列集合</param>
+            <param name="param">返回数据参数集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCustom.GetUpdateCustomDataSQL``1(``0,System.String,System.Collections.Generic.List{System.String},System.String,MySql.Data.MySqlClient.MySqlParameter[]@)">
+            <summary>
+            生成更新的SQL语句
+            </summary>
+            <typeparam name="T">数据实体对象类型</typeparam>
+            <param name="obj">数据实体对象</param>
+            <param name="sTableName">表名</param>
+            <param name="lstExclude">排除列集合</param>
+            <param name="sPrimaryField">主键(限单主键表)</param>
+            <param name="param">返回数据参数集合</param>
+            <returns>返回SQL语句</returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCustom.GetUpdateCustomDataSQLByHas``1(``0,System.String,System.Collections.Generic.List{System.String},System.String,MySql.Data.MySqlClient.MySqlParameter[]@)">
+            <summary>
+            生成更新的SQL语句
+            </summary>
+            <typeparam name="T">数据实体对象类型</typeparam>
+            <param name="obj">数据实体对象</param>
+            <param name="sTableName">表名</param>
+            <param name="hasField">获取列集合</param>
+            <param name="sPrimaryField">主键列</param>
+            <param name="param">返回数据参数集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBCustom.GetMySqlParameter(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            生成MySqlParameter并返回
+            </summary>
+            <param name="dict">字段名+数据</param>
+            <returns></returns>
+        </member>
+        <member name="T:Hengyue.Data.DBUtility.DBDelete">
+            <summary>
+            数据库删除类，该类由上下文去实例化，请勿自己实例化
+            蒋智辉 2015年1月28号
+            封装了Delete 所需的方法
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.DBDelete.dbexecute">
+            <summary>
+            数据库执行类
+            </summary>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBDelete.#ctor(Hengyue.Data.DBUtility.DBContext)">
+            <summary>
+            构造函数，当该类实例化的时候必须传入数据库上下文
+            </summary>
+            <param name="dbcontext">数据库上下文</param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBDelete.Where(System.String)">
+            <summary>
+            设置Where条件
+            </summary>
+            <param name="where"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBDelete.Where(System.String,System.Object)">
+            <summary>
+            设置查询条件
+            </summary>
+            <param name="field">列名</param>
+            <param name="obj">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBDelete.AndWhere(System.String,System.Object)">
+            <summary>
+            设置查询条件
+            </summary>
+            <param name="field"></param>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBDelete.AndWhere(System.String)">
+            <summary>
+            设置Where条件
+            </summary>
+            <param name="where"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBDelete.Parameter(System.String,MySql.Data.MySqlClient.MySqlDbType,System.Object)">
+            <summary>
+            设置参数，当SQL语句中带参数时，必须去设置参数，否则查询过程中会出现错误
+            </summary>
+            <param name="Key">参数名，SQL语句中参数的名称</param>
+            <param name="Type">参数类型，数据库中该字段的类型</param>
+            <param name="obj">参数值，提交查询过程中具体需要替换的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBDelete.Parameter(System.String,System.Object)">
+            <summary>
+            设置参数，当SQL语句中带参数时，必须去设置参数，否则查询过程中会出现错误，此处不需要参数类型，系统会根据具体的值设置数据中相应的类型
+            </summary>
+            <param name="Key">参数名，SQL语句中参数的名称</param>
+            <param name="obj">参数值，提交查询过程中具体需要替换的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBDelete.Execute">
+            <summary>
+            执行语句，返回影响的行数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Hengyue.Data.DBUtility.DBExecute">
+            <summary>
+            数据库执行类，封装了具体对数据执行的方法，该类由上下文去实例化，请勿自己实例化
+            蒋智辉 2015年1月28号
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.DBExecute.dbcontext">
+            <summary>
+             数据库操作上下文
+            </summary>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBExecute.#ctor(Hengyue.Data.DBUtility.DBContext)">
+            <summary>
+            执行类构造函数
+            在生成的时候传入数据库操作的上下文
+            </summary>
+            <param name="dbcontext">数据库操作上下文</param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBExecute.ExecuteReturnID">
+            <summary>
+            执行一句插入语句，返回自增长的值
+            </summary>
+            <returns>自动增长ID</returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBExecute.Execute">
+            <summary>
+            执行一句SQL语句
+            </summary>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBExecute.Query``1">
+            <summary>
+            查询一个对象，直接将数据库中的一行记录映射成一个实体对象
+            </summary>
+            <typeparam name="T">需要返回的实体对象类型</typeparam>
+            <returns>实体对象</returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBExecute.QueryList``1">
+            <summary>
+            查询一组对象，直接将数据库中的一组记录映射成一个List对象集合
+            </summary>
+            <typeparam name="T">需要返回的实体对象类型</typeparam>
+            <returns>List集合</returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBExecute.QueryList">
+            <summary>
+            返回一个表格，直接将数据库中的一组记录映射成一个表格对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBExecute.Parameter(System.String,MySql.Data.MySqlClient.MySqlDbType,System.Object)">
+            <summary>
+            设置参数，当SQL语句中带参数时，必须去设置参数，否则查询过程中会出现错误
+            </summary>
+            <param name="Key">参数名，SQL语句中参数的名称</param>
+            <param name="Type">参数类型，数据库中该字段的类型</param>
+            <param name="obj">参数值，提交查询过程中具体需要替换的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBExecute.Parameter(System.String,System.Object)">
+            <summary>
+            设置参数，当SQL语句中带参数时，必须去设置参数，否则查询过程中会出现错误，此处不需要参数类型，系统会根据具体的值设置数据中相应的类型
+            </summary>
+            <param name="Key">参数名，SQL语句中参数的名称</param>
+            <param name="obj">参数值，提交查询过程中具体需要替换的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBExecute.ExScalar``1">
+            <summary>
+            执行一个语句返回结果中的第一行第一列，将直接转换为所需要的类型
+            </summary>
+            <typeparam name="T">需要返回的类型</typeparam>
+            <returns>具体的值</returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBExecute.ToList``1(System.Data.DataTable)">
+            <summary>
+            DataTable 转 List
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="myTable"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Hengyue.Data.DBUtility.DBInsert">
+            <summary>
+            数据库插入类，该类由上下文去实例化，请勿自己实例化
+            蒋智辉 2015年1月28号
+            封装了Insert 所需的方法
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.DBInsert.dbexecute">
+            <summary>
+            数据库执行类
+            </summary>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBInsert.Column(System.String,System.Object)">
+            <summary>
+            设置要插入的列
+            </summary>
+            <param name="Key">列名称</param>
+            <param name="Value">具体的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBInsert.Parameter(System.String,MySql.Data.MySqlClient.MySqlDbType,System.Object)">
+            <summary>
+            设置参数，当SQL语句中带参数时，必须去设置参数，否则查询过程中会出现错误
+            </summary>
+            <param name="Key">参数名，SQL语句中参数的名称</param>
+            <param name="Type">参数类型，数据库中该字段的类型</param>
+            <param name="obj">参数值，提交查询过程中具体需要替换的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBInsert.Parameter(System.String,System.Object)">
+            <summary>
+            设置参数，当SQL语句中带参数时，必须去设置参数，否则查询过程中会出现错误，此处不需要参数类型，系统会根据具体的值设置数据中相应的类型
+            </summary>
+            <param name="Key">参数名，SQL语句中参数的名称</param>
+            <param name="obj">参数值，提交查询过程中具体需要替换的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBInsert.Execute">
+            <summary>
+            执行插入语句
+            </summary>
+            <returns>自动增长ID</returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBInsert.#ctor(Hengyue.Data.DBUtility.DBContext)">
+            <summary>
+            构造函数，当该类实例化的时候必须传入数据库上下文
+            </summary>
+            <param name="dbcontext">数据库上下文</param>
+        </member>
+        <member name="T:Hengyue.Data.DBUtility.DBOperate">
+            <summary>
+            普通数据库执行类
+            </summary>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBOperate.ExDataTable(System.String,System.String)">
+            <summary>
+            查询SQL返回DataTable
+            </summary>
+            <param name="sqlStr">sql语句</param>
+            <param name="connStr">连接字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBOperate.ExScalar(System.String,System.String)">
+            <summary>
+            查询SQL返回第一行第一列
+            </summary>
+            <param name="sqlStr">sql语句</param>
+            <param name="connStr">连接字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBOperate.ExScalar(System.String,MySql.Data.MySqlClient.MySqlParameter[],System.String)">
+            <summary>
+            查询SQL返回第一行第一列
+            </summary>
+            <param name="sqlStr">sql语句</param>
+            <param name="param">参数集</param>
+            <param name="connStr">连接字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBOperate.ExNonQuery(System.String,System.String)">
+            <summary>
+            执行SQL
+            </summary>
+            <param name="sqlStr">sql语句</param>
+            <param name="connStr">连接字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBOperate.ExNonQuery(System.String,MySql.Data.MySqlClient.MySqlParameter[],System.String)">
+            <summary>
+            执行SQL
+            </summary>
+            <param name="sqlStr">sql语句</param>
+            <param name="param">参数集</param>
+            <param name="connStr">连接字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBOperate.ExDataTable(System.String,MySql.Data.MySqlClient.MySqlParameter[],System.String)">
+            <summary>
+            查询SQL返回DataTable
+            </summary>
+            <param name="sqlStr">sql语句</param>
+            <param name="param">参数集</param>
+            <param name="connStr">连接字符串</param>
+            <returns></returns>
+        </member>
+        <member name="T:Hengyue.Data.DBUtility.DBSelect">
+            <summary>
+            数据库查询类，该类由上下文去实例化，请勿自己实例化
+            蒋智辉 2015年1月28号
+            封装了SELECT 所需的方法
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.DBSelect.dbexecute">
+            <summary>
+            数据库执行类
+            </summary>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect.#ctor(Hengyue.Data.DBUtility.DBContext,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="dbcontext">数据库上下文</param>
+            <param name="field">需要返回的列</param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect.Where(System.String)">
+            <summary>
+            设置查询条件
+            </summary>
+            <param name="where"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect.Where(System.String,System.Object)">
+            <summary>
+            设置查询条件
+            </summary>
+            <param name="field">列名</param>
+            <param name="obj">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect.AndWhere(System.String)">
+            <summary>
+            设置查询条件
+            </summary>
+            <param name="Where"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect.AndWhere(System.String,System.Object)">
+            <summary>
+            设置查询条件
+            </summary>
+            <param name="field"></param>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect.Group(System.String)">
+            <summary>
+            设置分组条件
+            </summary>
+            <param name="group"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect.Having(System.String)">
+            <summary>
+            设置筛选条件
+            </summary>
+            <param name="having"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect.Parameter(System.String,MySql.Data.MySqlClient.MySqlDbType,System.Object)">
+            <summary>
+            设置参数，当SQL语句中带参数时，必须去设置参数，否则查询过程中会出现错误
+            </summary>
+            <param name="Key">参数名，SQL语句中参数的名称</param>
+            <param name="Type">参数类型，数据库中该字段的类型</param>
+            <param name="obj">参数值，提交查询过程中具体需要替换的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect.Parameter(System.String,System.Object)">
+            <summary>
+            设置参数，当SQL语句中带参数时，必须去设置参数，否则查询过程中会出现错误，此处不需要参数类型，系统会根据具体的值设置数据中相应的类型
+            </summary>
+            <param name="Key">参数名，SQL语句中参数的名称</param>
+            <param name="obj">参数值，提交查询过程中具体需要替换的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect.Order(System.String)">
+            <summary>
+            设置排序字段
+            </summary>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect.Query``1">
+            <summary>
+            查询一个对象
+            </summary>
+            <typeparam name="T">对象类型</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect.QueryList``1">
+            <summary>
+            查询一组对象
+            </summary>
+            <typeparam name="T">对象类型</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect.QueryList">
+            <summary>
+            查询表格
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect.QueryPaging``1(System.Int32,System.Int32)">
+            <summary>
+            分页获取数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="pageindex"></param>
+            <param name="pagesize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect.QueryPaging(System.Int32,System.Int32)">
+            <summary>
+            分页获取数据
+            </summary>
+            <param name="pageindex"></param>
+            <param name="pagesize"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Hengyue.Data.DBUtility.DBUpdate">
+            <summary>
+            数据库更新类，该类由上下文去实例化，请勿自己实例化
+            蒋智辉 2015年1月28号
+            封装了Update 所需的方法
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.DBUpdate.dbexecute">
+            <summary>
+            数据库执行类
+            </summary>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBUpdate.#ctor(Hengyue.Data.DBUtility.DBContext)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="dbcontext">数据库上下文</param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBUpdate.Column(System.String,System.Object)">
+            <summary>
+            设置要更新的列
+            </summary>
+            <param name="Key">列名称</param>
+            <param name="Value">更新的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBUpdate.Parameter(System.String,MySql.Data.MySqlClient.MySqlDbType,System.Object)">
+            <summary>
+            设置参数，当SQL语句中带参数时，必须去设置参数，否则查询过程中会出现错误
+            </summary>
+            <param name="Key">参数名，SQL语句中参数的名称</param>
+            <param name="Type">参数类型，数据库中该字段的类型</param>
+            <param name="obj">参数值，提交查询过程中具体需要替换的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBUpdate.Parameter(System.String,System.Object)">
+            <summary>
+            设置参数，当SQL语句中带参数时，必须去设置参数，否则查询过程中会出现错误，此处不需要参数类型，系统会根据具体的值设置数据中相应的类型
+            </summary>
+            <param name="Key">参数名，SQL语句中参数的名称</param>
+            <param name="obj">参数值，提交查询过程中具体需要替换的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBUpdate.Where(System.String)">
+            <summary>
+            添加条件
+            </summary>
+            <param name="where"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBUpdate.Where(System.String,System.Object)">
+            <summary>
+            设置查询条件
+            </summary>
+            <param name="field">列名</param>
+            <param name="obj">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBUpdate.AndWhere(System.String)">
+            <summary>
+            添加条件
+            </summary>
+            <param name="where"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBUpdate.AndWhere(System.String,System.Object)">
+            <summary>
+            设置查询条件
+            </summary>
+            <param name="field"></param>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBUpdate.Execute">
+            <summary>
+            执行语句  
+            </summary>
+            <returns>影响行数</returns>
+        </member>
+        <member name="T:Hengyue.Data.DBUtility.DeleteBuilder">
+            <summary>
+            删除的实现类
+            </summary>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DeleteBuilder.Check">
+            <summary>
+            设置SQL语句
+            </summary>
+        </member>
+        <member name="T:Hengyue.Data.DBUtility.InsertBuilder">
+            <summary>
+            插入实现类
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.InsertBuilder.value">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.InsertBuilder.#ctor(Hengyue.Data.DBUtility.DBContext)">
+            <summary>
+            
+            </summary>
+            <param name="dbcontext"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.InsertBuilder.Column(System.String,System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="Key"></param>
+            <param name="Value"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.InsertBuilder.Check">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Hengyue.Data.DBUtility.ListRequest">
+            <summary>
+            列表请求类
+            蒋智辉 
+            2015年1月25号
+            </summary>
+        </member>
+        <member name="P:Hengyue.Data.DBUtility.ListRequest.PageSize">
+            <summary>
+            每页大小
+            </summary>
+        </member>
+        <member name="P:Hengyue.Data.DBUtility.ListRequest.SortField">
+            <summary>
+            排序字段
+            </summary>
+        </member>
+        <member name="P:Hengyue.Data.DBUtility.ListRequest.SortOrder">
+            <summary>
+            排序方式
+            </summary>
+        </member>
+        <member name="P:Hengyue.Data.DBUtility.ListRequest.PageIndex">
+            <summary>
+            当前页码
+            </summary>      
+        </member>
+        <member name="P:Hengyue.Data.DBUtility.ListRequest.SqlStr">
+            <summary>
+            sql语句 已过时
+            </summary>
+        </member>
+        <member name="P:Hengyue.Data.DBUtility.ListRequest.TableName">
+            <summary>
+            表名
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Hengyue.Data.DBUtility.ListRequest.Field">
+            <summary>
+            返回的字段名
+            </summary>
+        </member>
+        <member name="P:Hengyue.Data.DBUtility.ListRequest.Where">
+            <summary>
+            查询条件
+            </summary>
+        </member>
+        <member name="T:Hengyue.Data.DBUtility.ListResponse`1">
+            <summary>
+            分页请求返回对象
+            蒋智辉
+            2015年1月25号
+            </summary>
+        </member>
+        <member name="P:Hengyue.Data.DBUtility.ListResponse`1.total">
+            <summary>
+            总行数
+            </summary>
+        </member>
+        <member name="P:Hengyue.Data.DBUtility.ListResponse`1.data">
+            <summary>
+            数据集合
+            </summary>
+        </member>
+        <member name="T:Hengyue.Data.DBUtility.ListResponse">
+            <summary>
+            分页请求返回对象
+            </summary>
+        </member>
+        <member name="P:Hengyue.Data.DBUtility.ListResponse.total">
+            <summary>
+            总行数
+            </summary>
+        </member>
+        <member name="P:Hengyue.Data.DBUtility.ListResponse.data">
+            <summary>
+            数据集合
+            </summary>
+        </member>
+        <member name="T:Hengyue.Data.DBUtility.Parameter">
+            <summary>
+            数据库参数类
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.Parameter.param">
+            <summary>
+            参数集合
+            </summary>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.Parameter.SetParameter(System.String,MySql.Data.MySqlClient.MySqlDbType,System.Object)">
+            <summary>
+            设置参数，当SQL语句中带参数时，必须去设置参数，否则查询过程中会出现错误
+            </summary>
+            <param name="Key">参数名，SQL语句中参数的名称</param>
+            <param name="Type">参数类型，数据库中该字段的类型</param>
+            <param name="obj">参数值，提交查询过程中具体需要替换的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.Parameter.SetParameter(System.String,System.Object)">
+            <summary>
+            设置参数，当SQL语句中带参数时，必须去设置参数，否则查询过程中会出现错误，此处不需要参数类型，系统会根据具体的值设置数据中相应的类型
+            </summary>
+            <param name="Key">参数名，SQL语句中参数的名称</param>
+            <param name="obj">参数值，提交查询过程中具体需要替换的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.Parameter.GetMySqlDbType(System.Object)">
+            <summary>
+            C#与MySQL类型转换
+            </summary>
+            <param name="obj">值</param>
+            <returns>转换后的MySQL中的类型</returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.Parameter.RemoveAt(System.Int32)">
+            <summary>
+            移除参数集合中的某一项
+            </summary>
+            <param name="index">需要移除的索引</param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.Parameter.Clear">
+            <summary>
+            清空参数集合
+            </summary>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.Parameter.Check">
+            <summary>
+            具体操作前的准备工作
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Hengyue.Data.DBUtility.SelectBuilder">
+            <summary>
+            查询实现类
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.SelectBuilder.field">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.SelectBuilder.group">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.SelectBuilder.having">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.SelectBuilder.order">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.SelectBuilder.#ctor(Hengyue.Data.DBUtility.DBContext,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dbcontext"></param>
+            <param name="field"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.SelectBuilder.Group(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="group"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.SelectBuilder.Having(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="having"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.SelectBuilder.Order(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="order"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.SelectBuilder.GetString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.SelectBuilder.Check">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.SelectBuilder.QueryPaging``1(Hengyue.Data.DBUtility.DBExecute,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dbexecute"></param>
+            <param name="pageindex"></param>
+            <param name="pagesize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.SelectBuilder.QueryPaging(Hengyue.Data.DBUtility.DBExecute,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="dbexecute"></param>
+            <param name="pageindex"></param>
+            <param name="pagesize"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Hengyue.Data.DBUtility.BaseBuilder`1">
+            <summary>
+            增删查改基类
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.BaseBuilder`1.item">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.BaseBuilder`1.#ctor(Hengyue.Data.DBUtility.DBContext,`0)">
+            <summary>
+            
+            </summary>
+            <param name="dbcontext"></param>
+            <param name="item"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.BaseBuilder`1.Where(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="expression"></param>
+            <param name="obj"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.BaseBuilder`1.Where(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+            <summary>
+            
+            </summary>
+            <param name="expression"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.BaseBuilder`1.AndWhere(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="expression"></param>
+            <param name="obj"></param>
+        </member>
+        <member name="T:Hengyue.Data.DBUtility.DBDelete`1">
+            <summary>
+            数据库删除类，该类由上下文去实例化，请勿自己实例化
+            蒋智辉 2015年1月28号
+            封装了Delete 所需的方法
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.DBDelete`1.dbexecute">
+            <summary>
+            数据库执行类
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.DBDelete`1.builder">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBDelete`1.#ctor(Hengyue.Data.DBUtility.DBContext,`0)">
+            <summary>
+             构造函数，当该类实例化的时候必须传入数据库上下文和具体的对象
+            </summary>
+            <param name="dbcontext">数据库上下文</param>
+            <param name="item">具体的对象</param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBDelete`1.#ctor(Hengyue.Data.DBUtility.DBContext)">
+            <summary>
+            
+            </summary>
+            <param name="dbcontext"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBDelete`1.Where(System.String)">
+            <summary>
+            设置条件
+            </summary>
+            <param name="where"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBDelete`1.Where(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Object)">
+            <summary>
+            设置查询条件
+            </summary>
+            <param name="expression">表达式</param>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBDelete`1.AndWhere(System.String,System.Object)">
+            <summary>
+            设置查询条件
+            </summary>
+            <param name="field"></param>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBDelete`1.AndWhere(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Object)">
+            <summary>
+            设置查询条件
+            </summary>
+            <param name="expression">表达式</param>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBDelete`1.Where(System.String,System.Object)">
+            <summary>
+            设置查询条件
+            </summary>
+            <param name="field">列名</param>
+            <param name="obj">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBDelete`1.AndWhere(System.String)">
+            <summary>
+            设置条件
+            </summary>
+            <param name="where"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBDelete`1.Parameter(System.String,MySql.Data.MySqlClient.MySqlDbType,System.Object)">
+            <summary>
+            设置参数，当SQL语句中带参数时，必须去设置参数，否则查询过程中会出现错误
+            </summary>
+            <param name="Key">参数名，SQL语句中参数的名称</param>
+            <param name="Type">参数类型，数据库中该字段的类型</param>
+            <param name="obj">参数值，提交查询过程中具体需要替换的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBDelete`1.Parameter(System.String,System.Object)">
+            <summary>
+            设置参数，当SQL语句中带参数时，必须去设置参数，否则查询过程中会出现错误，此处不需要参数类型，系统会根据具体的值设置数据中相应的类型
+            </summary>
+            <param name="Key">参数名，SQL语句中参数的名称</param>
+            <param name="obj">参数值，提交查询过程中具体需要替换的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBDelete`1.Execute">
+            <summary>
+            执行语句
+            </summary>
+            <returns>影响的行数</returns>
+        </member>
+        <member name="T:Hengyue.Data.DBUtility.DBInsert`1">
+            <summary>
+            数据库插入类，该类由上下文去实例化，请勿自己实例化
+            蒋智辉 2015年1月28号
+            封装了Insert 所需的方法
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.DBInsert`1.builder">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.DBInsert`1.dbexecute">
+            <summary>
+            数据库执行类
+            </summary>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBInsert`1.#ctor(Hengyue.Data.DBUtility.DBContext,`0)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="dbcontext">数据库上下文</param>
+            <param name="item">具体的对象</param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBInsert`1.Column(System.String,System.Object)">
+            <summary>
+            设置要插入的列，如果调用了该方法，就只插入该方法所传入的列
+            </summary>
+            <param name="Key">列名</param>
+            <param name="Value">要插入的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBInsert`1.Column(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+            <summary>
+            设置要插入的列，如果调用了该方法，就只插入该方法所传入的列
+            </summary>
+            <param name="expression">表达式集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBInsert`1.Exclude(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+            <summary>
+            需要排除的列
+            </summary>
+            <param name="expression">表达式集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBInsert`1.Exclude(System.String[])">
+            <summary>
+            需要排除的列，调用了该方法，将不会插入所设置的列
+            </summary>
+            <param name="field">列名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBInsert`1.Parameter(System.String,MySql.Data.MySqlClient.MySqlDbType,System.Object)">
+            <summary>
+            设置参数，当SQL语句中带参数时，必须去设置参数，否则查询过程中会出现错误
+            </summary>
+            <param name="Key">参数名，SQL语句中参数的名称</param>
+            <param name="Type">参数类型，数据库中该字段的类型</param>
+            <param name="obj">参数值，提交查询过程中具体需要替换的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBInsert`1.Parameter(System.String,System.Object)">
+            <summary>
+            设置参数，当SQL语句中带参数时，必须去设置参数，否则查询过程中会出现错误，此处不需要参数类型，系统会根据具体的值设置数据中相应的类型
+            </summary>
+            <param name="Key">参数名，SQL语句中参数的名称</param>
+            <param name="obj">参数值，提交查询过程中具体需要替换的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBInsert`1.Execute">
+            <summary>
+            执行语句
+            </summary>
+            <returns>自增长的ID</returns>
+        </member>
+        <member name="T:Hengyue.Data.DBUtility.DBSelect`1">
+            <summary>
+            数据库查询类，该类由上下文去实例化，请勿自己实例化
+            蒋智辉 2015年1月28号
+            封装了SELECT 所需的方法
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.DBSelect`1.dbexecute">
+            <summary>
+            数据库执行类
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.DBSelect`1.builder">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect`1.#ctor(Hengyue.Data.DBUtility.DBContext,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="dbcontext">数据库上行文</param>
+            <param name="Field">需要返回的列</param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect`1.Where(System.String)">
+            <summary>
+            设置wher条件
+            </summary>
+            <param name="where"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect`1.AndWhere(System.String)">
+            <summary>
+            设置Where条件
+            </summary>
+            <param name="where"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect`1.Where(System.String,System.Object)">
+            <summary>
+            设置查询条件
+            </summary>
+            <param name="field">列名</param>
+            <param name="obj">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect`1.Where(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Object)">
+            <summary>
+            设置查询条件
+            </summary>
+            <param name="expression">表达式</param>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect`1.AndWhere(System.String,System.Object)">
+            <summary>
+            设置查询条件
+            </summary>
+            <param name="Where"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect`1.AndWhere(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Object)">
+            <summary>
+            设置查询条件
+            </summary>
+            <param name="expression">表达式</param>
+            <param name="obj">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect`1.Group(System.String)">
+            <summary>
+            设置分组条件
+            </summary>
+            <param name="group"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect`1.Group(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+            <summary>
+            设置分组条件
+            </summary>
+            <param name="expression">表达式</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect`1.Having(System.String)">
+            <summary>
+            设置筛选条件
+            </summary>
+            <param name="having"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect`1.Parameter(System.String,MySql.Data.MySqlClient.MySqlDbType,System.Object)">
+            <summary>
+            设置参数，当SQL语句中带参数时，必须去设置参数，否则查询过程中会出现错误
+            </summary>
+            <param name="Key">参数名，SQL语句中参数的名称</param>
+            <param name="Type">参数类型，数据库中该字段的类型</param>
+            <param name="obj">参数值，提交查询过程中具体需要替换的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect`1.Parameter(System.String,System.Object)">
+            <summary>
+            设置参数，当SQL语句中带参数时，必须去设置参数，否则查询过程中会出现错误，此处不需要参数类型，系统会根据具体的值设置数据中相应的类型
+            </summary>
+            <param name="Key">参数名，SQL语句中参数的名称</param>
+            <param name="obj">参数值，提交查询过程中具体需要替换的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect`1.Order(System.String)">
+            <summary>
+            设置排序字段
+            </summary>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect`1.Query">
+            <summary>
+            查询一个对象
+            </summary>
+            <typeparam name="T">对象类型</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect`1.QueryList">
+            <summary>
+            查询一组对象
+            </summary>
+            <typeparam name="T">对象类型</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBSelect`1.QueryData">
+            <summary>
+            查询表格
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Hengyue.Data.DBUtility.DBUpdate`1">
+            <summary>
+            数据库更新类，该类由上下文去实例化，请勿自己实例化
+            蒋智辉 2015年1月28号
+            封装了Update 所需的方法
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.DBUpdate`1.dbexecute">
+            <summary>
+            数据库执行类
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.DBUpdate`1.builder">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBUpdate`1.#ctor(Hengyue.Data.DBUtility.DBContext,`0)">
+            <summary>
+            构造函数 
+            </summary>
+            <param name="dbcontext">数据库上下</param>
+            <param name="item"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBUpdate`1.Column(System.String,System.Object)">
+            <summary>
+            需要更新的列，如果调用了该方法，就只更新该方法所传入的列
+            </summary>
+            <param name="Key">列名</param>
+            <param name="Value">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBUpdate`1.Column(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+            <summary>
+            需要更新的列，如果调用了该方法，就只更新该方法所传入的列
+            </summary>
+            <param name="expression">表达式</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBUpdate`1.Parameter(System.String,MySql.Data.MySqlClient.MySqlDbType,System.Object)">
+            <summary>
+            设置参数，当SQL语句中带参数时，必须去设置参数，否则查询过程中会出现错误
+            </summary>
+            <param name="Key">参数名，SQL语句中参数的名称</param>
+            <param name="Type">参数类型，数据库中该字段的类型</param>
+            <param name="obj">参数值，提交查询过程中具体需要替换的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBUpdate`1.Parameter(System.String,System.Object)">
+            <summary>
+            设置参数，当SQL语句中带参数时，必须去设置参数，否则查询过程中会出现错误，此处不需要参数类型，系统会根据具体的值设置数据中相应的类型
+            </summary>
+            <param name="Key">参数名，SQL语句中参数的名称</param>
+            <param name="obj">参数值，提交查询过程中具体需要替换的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBUpdate`1.Where(System.String)">
+            <summary>
+            添加条件
+            </summary>
+            <param name="where"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBUpdate`1.Where(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+            <summary>
+            设置条件
+            </summary>
+            <param name="expression">表达式</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBUpdate`1.AndWhere(System.String,System.Object)">
+            <summary>
+            设置查询条件
+            </summary>
+            <param name="field"></param>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBUpdate`1.Where(System.String,System.Object)">
+            <summary>
+            设置查询条件
+            </summary>
+            <param name="field">列名</param>
+            <param name="obj">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBUpdate`1.AndWhere(System.String)">
+            <summary>
+            添加条件
+            </summary>
+            <param name="where"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBUpdate`1.Execute">
+            <summary>
+            执行语句
+            </summary>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBUpdate`1.Exclude(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+            <summary>
+            需要排除的字段，调用了该方法，将不会插入所设置的列
+            </summary>
+            <param name="expression">表达式</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.DBUpdate`1.Exclude(System.String[])">
+            <summary>
+            需要排除的字段，调用了该方法，将不会插入所设置的列
+            </summary>
+            <param name="field">列集合</param>
+            <returns></returns>
+        </member>
+        <member name="T:Hengyue.Data.DBUtility.DeleteBuilder`1">
+            <summary>
+            删除实现类
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:Hengyue.Data.DBUtility.InsertBuilder`1">
+            <summary>
+            插入实现类
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.InsertBuilder`1.item">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Hengyue.Data.DBUtility.InsertBuilder`1.exclude">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.InsertBuilder`1.#ctor(Hengyue.Data.DBUtility.DBContext,`0)">
+            <summary>
+            
+            </summary>
+            <param name="dbcontext"></param>
+            <param name="item"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.InsertBuilder`1.Column(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+            <summary>
+            
+            </summary>
+            <param name="expression"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.InsertBuilder`1.Exclude(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="field"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.InsertBuilder`1.Exclude(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+            <summary>
+            
+            </summary>
+            <param name="expression"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.InsertBuilder`1.Check">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Hengyue.Data.DBUtility.SelectBuilder`1">
+            <summary>
+            查询实现类
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.SelectBuilder`1.#ctor(Hengyue.Data.DBUtility.DBContext,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dbcontext"></param>
+            <param name="field"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.SelectBuilder`1.Where(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="expression"></param>
+            <param name="obj"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.SelectBuilder`1.AndWhere(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="expression"></param>
+            <param name="obj"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.SelectBuilder`1.Group(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+            <summary>
+            
+            </summary>
+            <param name="expression"></param>
+        </member>
+        <member name="T:Hengyue.Data.DBUtility.UpdateBuilder`1">
+            <summary>
+            更新实现类
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.UpdateBuilder`1.#ctor(Hengyue.Data.DBUtility.DBContext,`0)">
+            <summary>
+            
+            </summary>
+            <param name="dbcontext"></param>
+            <param name="item"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.UpdateBuilder`1.Where(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="expression"></param>
+            <param name="obj"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.UpdateBuilder`1.Where(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+            <summary>
+            
+            </summary>
+            <param name="expression"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.UpdateBuilder`1.AndWhere(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="expression"></param>
+            <param name="obj"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.UpdateBuilder`1.Check">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Hengyue.Data.DBUtility.UpdateBuilder">
+            <summary>
+            更新实现类
+            </summary>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.UpdateBuilder.#ctor(Hengyue.Data.DBUtility.DBContext)">
+            <summary>
+            
+            </summary>
+            <param name="dbcontext"></param>
+        </member>
+        <member name="M:Hengyue.Data.DBUtility.UpdateBuilder.Check">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>

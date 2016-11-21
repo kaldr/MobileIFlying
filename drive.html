@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="飞扬旅游网" />
+    <title>自驾旅游_2016宁波自驾旅游线路推荐_报价 - 飞扬旅游网</title>
+    <meta name="keywords" content="自驾游,宁波自驾旅游,宁波自驾旅游线路报价" />
+    <meta name="description" content="飞扬旅游网提供宁波自驾旅游线路、宁波自驾旅游推荐、宁波自驾旅游线路报价。飞扬旅游网!m.Iflying.com" />
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/my-app.css">
+    <link rel="stylesheet" href="/css/jin.css">
+	<style>
+	.imgBox img { height:110px;}
+	</style>
+</head>
+<body ontouchstart>
+    <!--views start-->
+    <div class="views">
+        <!--view-main start-->
+        <div class="view view-main">
+            <!--page start-->
+            <div class="page navbar-fixed">
+                <!--page-content start-->
+                <div class="navbar tmBar">
+                    <div class="navbar-inner navbar-on-center">
+                        <div class="left"><a href="javascript:window.location.href='index.html'" class="back link"> <i class="icon icon-back"></i></a></div>
+                        <div class="center sliding t1">自驾游</div>
+                        <div class="right"><a href="javascript: window.location.href = 'Search/search.html';"> <i class="icon icon-s2"></i></a></div>
+                    </div>
+                </div>
+                <div class="page-content grayBg">
+                    <div class="swiper-custom mb15">
+                        <div class="swiper-container">
+                            <div class="swiper-pagination"></div>
+                            <div id="adList" class="swiper-wrapper">
+
+                            </div>
+                        </div>
+                    </div>                    
+                    
+                    <div class="w-panel tab-list borderNone p0" style="margin-bottom:0;">
+                        <!-- tabs控制面板 -->
+                        <div class="buttons-row"> <a class="tab-link button active" href="#tab1">自驾线路</a> <a class="tab-link button" href="#tab2">摄影游</a> <a class="tab-link button" href="#tab3">春季踏青</a> <a class="tab-link button" href="#tab4">欢乐亲子</a></div>
+                        <div class="tabs-animated-wrap">
+                            <!-- Tabs, 标签内容区容器 -->
+                            <div class="tabs">
+                                <!-- Tab 1, 默认激活 -->
+                                <div id="tab1" class="tab active">
+                                    <div class="content-block">
+                                        <ul class="offer-list sizing"  id="dirvePro1">
+                                           
+                                        </ul>
+
+                                    </div>
+                                </div>
+                                <!-- Tab 2 -->
+                                <div class="tab" id="tab2">
+                                    <div class="content-block"> 222 </div>
+                                </div>
+                                <!-- Tab 3-->
+                                <div class="tab" id="tab3">
+                                    <div class="content-block"> 33 </div>
+                                </div>
+                                <!-- Tab 4-->
+                                <div class="tab" id="tab4">
+                                    <div class="content-block"> 44 </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--page-content END-->
+            </div>
+            <!-- page END-->
+
+        </div>
+        <!--view-main END-->
+    </div>
+    <!-- views end-->
+
+    <script type="text/javascript" src="/js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="/js/framework7.js"></script>
+    <script type="text/javascript" src="/js/kitchen-sink.js"></script>
+    <script type="text/javascript" src="/js/command.js"></script>
+    <script type="text/javascript" src="/js/recommended.js"></script>
+    <script type="text/javascript">
+        var myRequest = GetRequest();
+        var openId = decodeURI(myRequest["openid"]);
+        if (openId != undefined && openId != "") {
+            sessionStorage.setItem("WeChatToken", openId);
+        }
+        loadAdInfo(recdAdJson.drive);
+        var page = 1;
+        var size = 10;
+        function loadLineInfo() {
+            $.getJSON(dirveListUrl + "&Page=" + page + "&Size=" + size + "&ra=" + Math.random(), function (data) {
+                if (data != null && data.data != null) {
+                    if (data.data.LineList.length > 0) {
+                        var lineStr = "";
+                        $.each(data.data.LineList, function (i, item) {
+                            lineStr += "<li><a href='javascript:goProduct(" + item.ID + ");'><div class='imgBox'><img src='" + item.DefaultPic + "' alt=''></div>";
+                            lineStr += "<div class='infoBox'><div class='o_link'>" + item.Title + "</div><p class='price-row clerFix'><span class='red_t'>¥<b>" + item.DefaultPrice + "</b><font>起</font>";
+                            lineStr += "</span><span class='floatR color9 rT'>" + item.Scores + "%满意度</span></p></div></a></li>";
+                        });
+                        $("#dirvePro1").append(lineStr);
+                    }
+
+                }
+            });
+        }
+        function goProduct(id) {
+            goProductPage(id, 4);
+        }
+        loadLineInfo();
+    </script>
+	<script src="https://s4.cnzz.com/z_stat.php?id=4072742&web_id=4072742" language="JavaScript"></script>
+</body>
+</html>

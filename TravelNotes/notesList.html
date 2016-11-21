@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>游记部落_旅游攻略_自助游攻略指南-飞扬旅游网</title>
+    <meta name="keywords" content="游记部落,旅游攻略,景点攻略,旅游景点攻略" />
+    <meta name="description" content="飞扬旅游网提供驴友出游旅游景点攻略、旅游线路、景点游玩旅游攻略,吃、喝、玩、乐的真实经历、心得，让你出行更方便，快捷" />
+    <meta name="apple-mobile-web-app-title" content="飞扬旅游网" />
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/my-app.css">
+</head>
+<body ontouchstart>
+    <!--views start-->
+    <div class="views">
+        <!--view-main start-->
+        <div class="view view-main">
+            <!--page start-->
+            <div class="page navbar-fixed">
+                <!-- navbar start-->
+                <div class="navbar tmBar">
+                    <div class="navbar-inner navbar-on-center">
+                        <div class="left">
+                            <a class="back link" href="javascript:history.back();">
+                                <i class="icon icon-back"></i>
+                            </a>
+                        </div>
+                        <div class="center sliding t1">相关游记</div>
+                        <div class="right"></div>
+                    </div>
+                </div>
+                <!-- navbar END-->
+                <!--page-content start-->
+                <div class="page-content">
+                    <ul class="diary-list" id="traList">
+
+                    </ul>
+
+                </div>
+                <!--page-content END-->
+            </div>
+            <!-- page END-->
+        </div>
+        <!--view-main END-->
+    </div>
+
+    <!-- views end-->
+
+    <script type="text/javascript" src="/js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="/js/command.js"></script>
+    <script type="text/javascript">
+        var myRequest = GetRequest();
+        var gaddrId = decodeURI(myRequest["gaddr"]);
+        var cityCode = decodeURI(myRequest["city"]);
+        var getInfoUrl = "";
+        if (gaddrId != undefined && gaddrId != null && gaddrId != "" && gaddrId != "undefined") {
+            getInfoUrl = gaddrInfo2Url + "&GaddrID=" + gaddrId;
+        }
+        else {
+            getInfoUrl = gaddrInfoUrl + "&CityCode=" + cityCode;
+        }
+        if (cityCode != undefined && cityCode != null && cityCode != "" && cityCode != "undefined") {
+            $.ajax({
+                type: "GET",
+                url: getInfoUrl + "&Type=1",
+                dataType: "text",
+                async: true,
+                success: function (myMsg) {
+                    var dataObj = eval("(" + myMsg + ")");
+                    if (dataObj != null && dataObj.result == 1) {
+                        var item = dataObj.data;
+                        gaddrId = item.ID;
+                        loadInfo();
+                    }
+                },
+                error: function () {
+                    return;
+                }
+            });
+        }
+        else {
+            loadInfo();
+        }
+        function loadInfo() {
+            $.getJSON(travelNoteListUrl + "&GaddrID=" + gaddrId + "&Page=1&Size=20", function (data) {
+                if (data != null && data.data != null) {
+                    var noteStr = "";
+                    $.each(data.data.TravelList, function (i, item) {
+                        var tempTime = item.CreateTime.split("T")[0];
+                        noteStr += "<li><a href='http://m.iflying.com/youji/?id=" + item.ID + "'><img class='img' src='" + item.PicUrl + "'><div class='diary-rInfo'><h2 class='row-1 ft16 mb5'>" + item.Title + "</h2>"
+                        + "<div class='color6 row-2'>作者：" + item.Author + "</div><div class='row color9 ft13 row-1'><span class='line25'>浏览：" + item.BrowseCount + "</span><span class='line25'>发表于：" + tempTime + "</span>"
+                        + "</div></div></a></li>";
+                    });
+                    $("#traList").html(noteStr);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

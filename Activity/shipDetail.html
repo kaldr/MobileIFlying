@@ -1,0 +1,405 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title id="myTitle">飞扬旅游网</title>
+    <meta name="keywords" content="宁波飞扬旅行社,宁波旅行社,宁波旅游网" id="myKeywords" />
+    <meta name="description" id="myDescription" content="飞扬旅游网隶属于浙江飞扬国际旅游集团,宁波旅行社行业第一,全国第八,浙江省首批五星级旅行社,宁波市最佳旅行社.服务热线:4000-365-666" />
+    <meta name="apple-mobile-web-app-title" content="飞扬旅游网" />
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/my-app.css">
+    <link rel="stylesheet" href="/css/jin.css">
+</head>
+<body ontouchstart>
+    <div class="views" id="loadDiv">
+        <!--view-main start-->
+        <div class="view view-main">
+            <!--page start-->
+            <div class="page">
+                <!--page-content start-->
+                <div class="page-content white">
+                    <div class="loadingRow" style="background:#66cbff"><img style="margin-top:-20%;" src="/images/loading-ani.gif" alt=""></div>
+                </div>
+                <!--page-content END-->
+            </div>
+            <!-- page END-->
+
+        </div>
+        <!--view-main END-->
+    </div>
+    <!--views start-->
+    <div class="views" id="contentDiv" style="display:none;">
+        <!--view-main start-->
+        <div class="view view-main">
+            <!--page start-->
+            <div class="page">
+                <!--page-content start-->
+                <div class="page-content grayBg">
+                    <div class="w-panel borderNone" style="padding-top:0;">
+                        <div class="media-panel activeD">
+                            <div class="swiper-custom mb15">
+                                <div class="swiper-container">
+                                    <div class="swiper-pagination"></div>
+                                    <div id="picList" class="swiper-wrapper" style="max-height:250px;">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="javascript:history.back();" class="floating-button backBtn">
+                                <i class="icon icon-back mBack"></i>
+                            </a>
+                            <!--<a href="#" class="floating-button shareBtn">
+                                <i class="icon icon-back share"></i>
+                            </a>-->
+                        </div>
+                        <div class="plr10 ft14">
+                            <div class="ft14 color6 mb10" id="LineNO" style=" display:none"></div>
+                            <div class="ft18 mb10" id="lineTitle"></div>
+                            <div class="color9 mb5 ft12" id="subTitle"></div>
+                            <div class="red_t ft14 mb5">
+                                ¥ <font class="ft24" id="linePrice"></font>
+                                
+                            </div>
+                            <div class="row linkRow" style="border-top:1px solid #efefef; padding-top:10px">
+                                <a href="javascript:void(0);" id="startPlc">
+                                    
+                                </a>
+                                <a href="javascript:void(0);" id="trafficStr">
+                                   
+                                </a>
+                                <a href="javascript:void(0);" id="dayStr">
+                                    
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-panel borderNone" style="display:none">
+                        <div class="plr10" id="priDiv">
+                            
+                        </div>
+                    </div>
+                    <div id="moreDiv" class="list-block media-list mt">
+                        <ul>
+                            <li>
+                                <div class="swipeout-content">
+                                    <a class="item-link item-content" href="#" id="moreinfoLink">
+                                        <div class="item-inner">
+                                            <div class="item-title-row">
+                                                <div class="item-title"><i class="i i0"></i><font class="pinkTxt" id="scoreStr"></font>满意度，<font class="pinkTxt" id="dpNum"></font>用户点评</div>
+                                            </div>
+                                            <div class="color6 tt">30天内已有<font class="pinkTxt" id="playNum"></font>人游玩过！此线共有<font class="pinkTxt" id="BrowseCount"></font>人浏览过</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="w-panel borderNone plr10" style="margin-top:15px">
+                        <h3 class="normal ft16 mb15">出发日期<font style="font-size:10px;color:#999;">(以下价格均为起价)</font></h3>
+                        <div class="date-panel row alginCenter">
+                            <ul class="row date-list" id="dateStr"></ul>
+                            <a class="next-date" href="javascript:goOrder();"><i class="icon icon-next"></i></a>
+                        </div>
+
+                    </div>
+
+                    <div class="w-panel tab-list borderNone p0">
+                        <!-- tabs控制面板 -->
+                        <div class="buttons-row">
+                            <a class="tab-link button active" href="#tab1">行程特色</a>
+                            <a class="tab-link button" href="#tab2">参考行程</a>
+                            <a class="tab-link button" href="#tab3" id="commStr">用户点评(0)</a>
+                        </div>
+                        <div class="tabs">
+                            <!-- Tab 1, 默认激活 -->
+                            <div class="tab active" id="tab1">
+                                <div class="content-block">
+                                    <div class="p10 ft12 color6 line25" id="ProductFeatures">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Tab 2 -->
+                            <div id="tab2" class="tab">
+                                <div class="content-block">
+                                    <div class="xc border_b" id="tripStr">
+                                        
+                                    </div>
+                                    <div class="p10 ft14">
+                                        <a href="#" class="red_t2 link" id="moreTrip">点击查看更多</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Tab 3-->
+                            <div id="tab3" class="tab">
+                                <div class="content-block">
+
+                                    <div class="list-block media-list border_b">
+                                        <ul class="cmtList" id="commentList">
+                                            
+                                        </ul>
+                                    </div>
+
+                                    <div class="p10 ft16">
+                                        <a href="#" class="red_t2 link" id="moreCommnet">点击查看更多</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-block media-list mt" style="margin-bottom:20px;">
+                        <ul>
+                            <li>
+                                <div class="swipeout-content">
+                                    <a class="item-link item-content" href="#" id="roomLink">
+                                        <div class="item-inner">
+                                            <div class="item-title-row">
+                                                <div class="item-title">
+                                                    <i class="i i09"></i>
+                                                    房型介绍
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="swipeout-content">
+                                    <a class="item-link item-content" href="#" id="tripLink">
+                                        <div class="item-inner">
+                                            <div class="item-title-row">
+                                                <div class="item-title">
+                                                    <i class="i i02"></i>
+                                                    详细行程
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="swipeout-content">
+                                    <a class="item-link item-content" href="#" id="feeLink">
+                                        <div class="item-inner">
+                                            <div class="item-title-row">
+                                                <div class="item-title">
+                                                    <i class="i i03"></i>
+                                                    费用说明
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="swipeout-content">
+                                    <a class="item-link item-content" href="#" id="tipsLink">
+                                        <div class="item-inner">
+                                            <div class="item-title-row">
+                                                <div class="item-title">
+                                                    <i class="i i04"></i>
+                                                    重要提醒
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="space">&nbsp;</div>
+                </div>
+                <!--page-content END-->
+            </div>
+            <!-- page END-->
+            <div class="toolbar tabbar yd">
+                <!--  groupBar start -->
+                <div class="toolbar-inner groupBar">
+                    <a class="tab-link m1" href="javascript:telAction();">
+                        <i class="icon tel"></i>
+                        <span>电话客服</span>
+                    </a>
+                    <a class="tab-link m2" href="javascript:goOrder();">
+                        <i class="icon order"></i>
+                        <span>意向下单<font class="ft12 pinkTxt">(无需付款)</font></span>
+                    </a>
+                    <a class="button button-fill m3" href="javascript:goOrder();">立即预定</a>
+
+                </div>
+                <!--  shipBar start -->
+            </div>
+        </div>
+        <!--view-main END-->
+    </div>
+    <!-- views end-->
+
+    <script type="text/javascript" src="/js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="/js/command.js"></script>
+    <script type="text/javascript" src="/js/framework7.js"></script>
+    <script type="text/javascript" src="/js/kitchen-sink.js"></script>
+    <script type="text/javascript">
+        var myRequest = GetRequest();
+        var proId = decodeURI(myRequest["id"]);
+        var psprice = decodeURI(myRequest["ps"]);
+        var ppid = decodeURI(myRequest["ppid"]);
+        var vyw = decodeURI(myRequest["yw"]);
+        var Concid = decodeURI(myRequest["Concid"]);
+
+        //活动団期
+        var myArray = new Array()
+        $.getJSON("http://appservice.iflying.com/Get/ActivityDateTime_NewWAP.ashx?StrMd5=690128A2418E1049CA5C97E3B475B9C8&productid=" + proId + "&Activitysid=71,72,73,74", function (actdata) {
+            console.log(actdata.data.Alldatas.length);
+            if (actdata.data.Alldatas[0].doubledatas.length > 0) {
+                for (var i = 0; i < actdata.data.Alldatas[0].doubledatas.length; i++) {
+                    myArray[i] = actdata.data.Alldatas[0].doubledatas[i];
+                }
+            }
+        });
+
+
+        $.getJSON(shipInfoUrl + "&ProductID=" + proId, function (data) {
+            if (data != null && data.data != null) {
+                var item = data.data;
+                
+                $("#LineNO").html("线路编号：" + item.BasicNO);
+                $("#lineTitle").html(item.WebTitle);
+                $("#myTitle").html(item.WebTitle);
+                $("#myKeywords").attr("content", item.SubTitle);
+                $("#myDescription").attr("content", item.WebTitle + ",飞扬旅游网");
+                sessionStorage.setItem("title", item.WebTitle);
+                $("#subTitle").html(item.SubTitle);
+                $("#linePrice").html(psprice);
+                //$("#linePrice").html(item.DefaultPrice);
+                $("#playNum").html(item.TotalCount);
+                $("#BrowseCount").html(item.BrowseCount);
+                if (item.Scores == 100 || item.CommentCount == 0) {
+                    $("#moreDiv").hide();
+                }
+                $("#startPlc").html("<i class='iconB start'></i>出发地：" + item.Depart);
+                $("#trafficStr").html("<i class='iconB reBack'></i>" + item.Go_Traffic + "&nbsp;往/" + item.Round_Traffic + "&nbsp;返");
+                $("#dayStr").html("<i class='iconB delay'></i>" + item.Day + "天" + item.Night + "晚");
+
+                var priStr = "<div class='mb10'><span class='ft16' style='vertical-align:middle;'>优惠券：</span>";
+                if (item.VouchersStatus == 1) {
+                    priStr += "<div class='coupon'><font>抵</font><span>" + item.VouchersPrice + "</span></div>";
+                }
+                priStr += "<div class='coupon'><font>送</font><span>100</span></div></div><dl class='tipInfo'>";
+                if (item.VouchersStatus == 1) {
+                    priStr += "<dt>抵：</dt><dd>预订此产品使用抵用券，每位成人可抵扣<font class='yellowT'>" + item.VouchersPrice + "</font>元现金。</dd>";
+                }
+                priStr += "<dt>送：</dt><dd>旅游结束后发表点评，赠送【<font class='yellowT'>100元x成人数</font>】抵用券。</dd></dl>";
+                $("#priDiv").html(priStr);
+                $("#ProductFeatures").html(escape2Html(item.Features));
+                var tripStr = "";
+                if (item.TripInfo != null && item.TripInfo.length > 0) {
+                    $.each(item.TripInfo, function (i, tripItem) {
+                        tripStr += "<section class='mb10'><div class='ft12'><span class='mr10'>第" + tripItem.Day + "天</span>" + tripTrafficStr(tripItem.Title) + "</div></section>";
+                    });
+                }
+                $("#tripStr").html(tripStr);
+
+               
+
+                //团期处理
+                if (item.DateTime != null && item.DateTime.length > 0) {
+                    var dateStr = "";
+                    var index = 1;
+                    $.each(item.DateTime, function (i, dateItem) {
+                        if (index == 9) {
+                            return false;
+                        }
+                        var tempTime = new Date(dateItem.StartTime);
+                        var monthStr = (tempTime.getMonth() + 1);
+                        if (tempTime.getMonth() < 9) {
+                            monthStr = "0" + (tempTime.getMonth() + 1);
+                        }
+                        var dayStr = tempTime.getDate();
+                        if (tempTime.getDate() < 10) {
+                            dayStr = "0" + tempTime.getDate();
+                        }
+                        var tempStr = monthStr + "-" + dayStr;
+
+                        for(var iii=0;iii<myArray.length;iii++)
+                        {
+                            if(  myArray[iii].PPRODID==dateItem.PPRODID)
+                            {
+                                var vps = parseFloat(myArray[iii].DefaultPrice) - parseFloat(myArray[iii].ActivityReducePrice);
+                                dateStr += "<li class='col-25' onclick='goOrder2(" + dateItem.PPRODID + ","+vps+");'><div class='date-time'><span class='mr5'>" + tempStr + "</span>" + getDayOfWeekStr(tempTime.getDay()) + "</div><p class='date-price'>¥ " + psprice + "</p></li>";
+
+                            } 
+                        }
+
+                        index++;
+                    });
+                    $("#dateStr").html(dateStr);
+                }
+                //图片处理
+                $.each(item.BigPic, function (i, picItem) {
+                    $("#picList").append("<div class='swiper-slide'><img src='" + picItem.PicPath + "' alt=''></div>");
+                });
+                var myApp = new Framework7();
+                var mySwiper = myApp.swiper('.swiper-container', {
+                    autoplay: 2500,
+                    pagination: '.swiper-pagination',
+                    paginationHide: false,
+                    paginationClickable: true,
+                });
+                //获取评论
+                $.getJSON(commentsCountUrl + "&ProductID=" + proId, function (data2) {
+                    if (data2 != null && data2.data != null) {
+                        $("#commStr").html("用户点评(" + data2.data.TotalCount + ")");
+                        $("#dpNum").html(data2.data.TotalCount);
+                    }
+
+                });
+                var commentStr = "";
+                $.getJSON(commentsListUrl + "&ProductID=" + proId + "&size=3&page=1", function (data2) {
+                    if (data2 != null && data2.data != null) {
+                        var myscore = 90;
+                        if (data2.data.TotalScores > 90) {
+                            myscore = data2.data.TotalScores;
+                        }
+                        $("#scoreStr").html(myscore + "%");
+                        $.each(data2.data.CommentsInfo, function (i, commItem) {
+                            commentStr += "<li class='item-content'><div class='item-inner'><div class='item-title-row color9 mb5'><div class='item-title'>" + commItem.FullName + "</div>";
+                            commentStr += "<div class='item-after'>满意度：<font class='red_t2'>" + commItem.TotalScores + "%</font></div></div><div class='itemTxt mb5 ft14'>" + commItem.Notes + "</div>";
+                            commentStr += "<div class='date-msg'>" + commItem.RvTime + "</div></div></li>";
+                        });
+                        if (commentStr == "") {
+                            commentStr += "<li class='item-content'><div class='item-inner'><div class='item-title-row color9 mb5'><div class='item-title'></div>";
+                            commentStr += "<div class='item-after'><font class='red_t2'></font></div></div><div class='itemTxt ft14 mb5'>暂无点评</div>";
+                            commentStr += "<div class='date-msg'></div></div></li>";
+                        }
+                        $("#commentList").html(commentStr);
+                    }
+                });
+                $("#moreCommnet").attr("href", "javascript:window.location.href='/ProductOther/commentList.html?id=" + proId + "'");
+                $("#feeLink").attr("href", "javascript:window.location.href='/ProductOther/groupFee.html?id=" + proId + "'");
+                $("#tipsLink").attr("href", "javascript:window.location.href='/ProductOther/groupTips.html?id=" + proId + "'");
+                $("#moreTrip").attr("href", "javascript:window.location.href='/ProductOther/groupTrip.html?id=" + proId + "'");
+                $("#tripLink").attr("href", "javascript:window.location.href='/ProductOther/groupTrip.html?id=" + proId + "'");
+                $("#roomLink").attr("href", "javascript:window.location.href='/ProductOther/shipRoom.html?id=" + proId + "'");
+
+                sessionStorage.setItem("shipJson", JSON.stringify(item));
+
+                $("#loadDiv").hide();
+                $("#contentDiv").show();
+            }
+        });
+
+        function goOrder() {
+            window.location.href = "/Activity/ship_step1.html?id=" + proId + "&pprod=" + ppid + "&ps=" + psprice + "&Concid=" + Concid;
+        }
+        function goOrder2(pprod,price) {
+            window.location.href = "/Activity/ship_step1.html?id=" + proId + "&pprod=" + pprod + "&ps=" + price + "&Concid=" + Concid;
+        }
+
+        function telAction() {
+            goTel();
+        }
+    </script>
+</body>
+</html>

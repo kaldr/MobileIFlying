@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title id="myTitle">飞扬旅游网</title>
+    <meta name="keywords" content="宁波飞扬旅行社,宁波旅行社,宁波旅游网" id="myKeywords" />
+    <meta name="description" id="myDescription" content="飞扬旅游网隶属于浙江飞扬国际旅游集团,宁波旅行社行业第一,全国第八,浙江省首批五星级旅行社,宁波市最佳旅行社.服务热线:4000-365-666" />
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/my-app.css">
+    <link rel="stylesheet" href="/css/des.css">
+    <link rel="stylesheet" href="/css/mcss.css">
+</head>
+<body ontouchstart>
+    <!--views start-->
+    <div class="views">
+        <!--view-main start-->
+        <div class="view view-main">
+            <!--page start-->
+            <div class="page navbar-fixed">
+                <!--page-content start-->
+                <div class="navbar tmBar">
+                    <div class="navbar-inner navbar-on-center">
+                        <div class="left">
+                            <a href="javascript:history.back();" class="back link">
+                                <i class="icon icon-back"></i>
+                            </a>
+                        </div>
+                        <div class="center sliding t1" id="title"></div>
+                        <div class="right"></div>
+                    </div>
+                </div>
+                <div class="page-content grayBg">
+                    <div>
+                        <img height="150" width="100%" src="" alt="" id="pic">
+                    </div>
+                    <ul class="ul_order_show mb15">
+                        <li class="user_a" id="AboutTicket"></li>
+                        <li class="user_a" id="AboutOpenTime">
+
+                        </li>
+                        <li class="user_a" id="AboutPlayTime"></li>
+                        <li class="user_a" id="AboutVisitSeason">
+
+                        </li>
+                    </ul>
+
+                    <div class="w_media sc-detail">
+                        <div class="dis_line ft16">
+                            <span class="cred">简介</span>
+                        </div>
+                        <p id="Gaddr">
+                        </p>
+
+                    </div>
+                    <div class="w_media sc-detail">
+                        <div class="dis_line ft16">
+                            <span class="cred">交通</span>
+                        </div>
+                        <p id="AboutTraffic">
+                        </p>
+                    </div>
+
+                </div>
+                <!--page-content END-->
+            </div>
+            <!-- page END-->
+        </div>
+        <!--view-main END-->
+    </div>
+    <!-- views end-->
+
+    <script type="text/javascript" src="/js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="/js/command.js"></script>
+    <script type="text/javascript">
+        var myRequest = GetRequest();
+        var scenicId = decodeURI(myRequest["id"]);
+        $.ajax({
+            type: "GET",
+            url: scenicInfoUrl + "&ProductID=" + scenicId ,
+            dataType: "text",
+            async: false,
+            success: function (myMsg) {
+                var dataObj = eval("(" + myMsg + ")");
+                if (dataObj != null && dataObj.result == 1) {
+                    var item = dataObj.data;
+                    $("#myTitle").html(item.Title+"门票_"+item.Title+"游玩攻略_"+item.Title+"介绍,地址,在哪里_"+item.Title+"好玩吗 - 飞扬旅游网");
+                    $("#myKeywords").attr("content", item.Title);
+                    $("#myDescription").attr("content", "飞扬旅游网为你提供" + item.Title + "旅游攻略,门票预订,那么" + item.Title + "好玩吗?多少钱?" + item.Title + "怎么走?了解更多上飞扬旅游网");
+
+                    $("#title").html(item.Title);
+                    $("#pic").attr("src",item.DefaultPic);
+                    $("#AboutTicket").html("门票："+item.AboutTicket);
+                    $("#AboutOpenTime").html("开放时间："+item.AboutOpenTime);
+                    $("#AboutPlayTime").html("建议游玩时间："+item.AboutPlayTime);
+                    $("#AboutVisitSeason").html(item.AboutVisitSeason);
+                    $("#Gaddr").html(escape2Html(item.Gaddr));
+                    $("#AboutTraffic").html(escape2Html(item.AboutTraffic));
+                }
+            },
+            error: function () {
+                return;
+            }
+        });
+    </script>
+	<script src="https://s4.cnzz.com/z_stat.php?id=4072742&web_id=4072742" language="JavaScript"></script>
+</body>
+</html>

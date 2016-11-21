@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="飞扬旅游网" />
+    <title>邮轮旅游线路_邮轮旅游推荐 - 飞扬旅游网</title>
+    <meta name="keywords" content="邮轮旅游,邮轮旅游推荐" />
+    <meta name="description" content="飞扬旅游网提供邮轮旅游线路、邮轮旅游推荐、邮轮旅游线路报价。飞扬旅游网!m.Iflying.com" />
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/my-app.css">
+    <link rel="stylesheet" href="/css/jin.css">
+</head>
+<body ontouchstart>
+    <!--views start-->
+    <div class="views">
+        <!--view-main start-->
+        <div class="view view-main">
+            <!--page start-->
+            <div class="page navbar-fixed">
+                <!--page-content start-->
+                <div class="navbar tmBar">
+                    <div class="navbar-inner navbar-on-center">
+                        <div class="left"><a href="javascript:window.location.href='http://m.iflying.com/'" class="back link"> <i class="icon icon-back"></i></a></div>
+                        <div class="center sliding t1">邮轮游</div>
+                        <div class="right"><a href="javascript: window.location.href = '/Search/search.html';"> <i class="icon icon-s2"></i></a></div>
+                    </div>
+                </div>
+                <div class="page-content grayBg">                    
+                    <div class="swiper-custom mb15">
+                        <div class="swiper-container">
+                            <div class="swiper-pagination"></div>
+                            <div id="adList" class="swiper-wrapper">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w-panel tab-list borderNone p0">
+                        <!-- tabs控制面板 -->
+                        <div class="buttons-row"> <a class="tab-link button active" href="#tab1">飞扬主推</a> <a class="tab-link button" href="#tab2">限时特惠</a> <a class="tab-link button" href="#tab3">海外航线</a> </div>
+                        
+                            <!-- Tabs, 标签内容区容器 -->
+                            <div class="tabs">
+                                <!-- Tab 1, 默认激活 -->
+                                <div id="tab1" class="tab active">
+                                    <div class="content-block">
+                                        <ul class="offer-list sizing" id="lineList1">
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- Tab 2 -->
+                                <div class="tab" id="tab2">
+                                    <div class="content-block">
+                                        <ul class="offer-list sizing" id="lineList2"></ul>
+                                    </div>
+                                </div>
+                                <!-- Tab 3-->
+                                <div class="tab" id="tab3">
+                                    <div class="content-block">
+                                        <ul class="offer-list sizing" id="lineList3"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                       
+                    </div>
+                    <div class="w-panel">
+                        <h2 class="hometitH2">热门产品</h2>
+                        <div class="tab" id="moreList">
+
+                        </div>
+                        <div class="mlr5"><a class="button  moreVisa" href="javascript:window.location.href='/Search/search.html?type=2'">更多产品</a></div>
+                    </div>
+                    <div style="padding:15px 5px;" class="w_media">
+                        <h2 class="ft16 normal mb15"><span class="mlr5">邮轮品牌</span></h2>
+                        <ul class="hot_visa shipBrand">
+                            <li>
+                                <a href="javascript:window.location.href='/cruise/shipTravel_brandDetail1.html'">
+                                    <img alt="" src="/images/gsdLogo.jpg">
+                                    <h3>歌诗达邮轮</h3>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:window.location.href='/cruise/shipTravel_brandDetail2.html'">
+                                    <img alt="" src="/images/lxLogo.jpg">
+                                    <h3>丽星邮轮</h3>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:window.location.href='/cruise/shipTravel_brandDetail3.html'">
+                                    <img alt="" src="/images/jlbLogo.jpg">
+                                    <h3>皇家加勒比邮轮</h3>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:window.location.href='/cruise/shipTravel_brandDetail4.html'">
+                                    <img alt="" src="/images/mscLogo.jpg">
+                                    <h3>MSC地中海邮轮</h3>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:window.location.href='/cruise/shipTravel_brandDetail5.html'">
+                                    <img alt="" src="/images/thLogo.jpg">
+                                    <h3>天海邮轮</h3>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:window.location.href='/cruise/shipTravel_brandDetail6.html'">
+                                    <img alt="" src="/images/gzLogo.jpg">
+                                    <h3>公主邮轮</h3>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--page-content END-->
+            </div>
+            <!-- page END-->
+
+        </div>
+        <!--view-main END-->
+    </div>
+    <!-- views end-->
+
+    <script type="text/javascript" src="/js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="/js/framework7.js"></script>
+    <script type="text/javascript" src="/js/kitchen-sink.js"></script>
+    <script type="text/javascript" src="/js/command.js"></script>
+    <script type="text/javascript" src="/js/recommended.js"></script>
+    <script type="text/javascript" src="/js/propublic.js"></script>
+    <script type="text/javascript">
+        var myRequest = GetRequest();
+        var openId = decodeURI(myRequest["openid"]);
+        if (openId != undefined && openId != "") {
+            sessionStorage.setItem("WeChatToken", openId);
+        }
+        loadAdInfo(recdAdJson.cruise);
+        function loadhotLine(crusieId,type) {
+            var proStr = "";
+            $.getJSON(getProductByIDUrl + "?id=" + crusieId, function (data) {
+                var index = 1;
+                if (data != null && data.data != null) {
+
+                    $.each(data.data, function (i, item) {
+                        if (index == 5) {
+                            return false;
+                        }
+                        var scoreStr = "";
+                        if (item.satisfy == 100) {
+                            scoreStr = "新产品";
+                        }
+                        else if (item.satisfy < 90) {
+                            scoreStr = "90%满意度";
+                        }
+                        else {
+                            scoreStr = item.satisfy + "%满意度";
+                        }
+                        proStr += "<li><a href='javascript:goProduct(" + item.ID + ");'><div class='imgBox'><img src='" + item.pic +imgWidthStr+ "' alt=''></div>";
+                        proStr += "<div class='infoBox'><div class='o_link'>" + item.title + "</div><p class='price-row clerFix'><span class='red_t'>¥<b>" + item.price + "</b><font>起</font>";
+                        proStr += "</span><span class='floatR color9 rT'>" + scoreStr + "</span></p></div></a></li>";
+                        index++;
+                    });
+                    if (proStr == "") {
+                        $.getJSON(shipListUrl + "&Page=1&size=4", function (data) {
+                            if (data != null && data.data != null) {
+                                $.each(data.data.CruiseList, function (i, item) {
+                                    var scoreStr = "";
+                                    if (item.Scores == 100) {
+                                        scoreStr = "新产品";
+                                    }
+                                    else if (item.Scores < 90) {
+                                        scoreStr = "90%满意度";
+                                    }
+                                    else {
+                                        scoreStr = item.Scores + "%满意度";
+                                    }
+                                    proStr += "<li><a href='javascript:goProduct(" + item.ID + ");'><div class='imgBox'><img src='" + item.DefaultPic +imgWidthStr+ "' alt=''></div>";
+                                    proStr += "<div class='infoBox'><div class='o_link'>" + item.Title + "</div><p class='price-row clerFix'><span class='red_t'>¥<b>" + item.DefaultPrice + "</b><font>起</font>";
+                                    proStr += "</span><span class='floatR color9 rT'>" + scoreStr + "</span></p></div></a></li>";
+                                });
+                                $("#lineList"+type).html(proStr);         
+                            }
+                        });
+                    }
+                    else {
+                        $("#lineList"+type).html(proStr);    
+                    }
+                }
+            });
+        }       
+        function goProduct(id) {
+            goProductPage(id, 3);
+        }
+        loadhotLine(recdProJson.cruise1, 1);
+        loadhotLine(recdProJson.cruise2, 2);
+        loadhotLine(recdProJson.cruise3, 3);
+        LoadShipLine();
+    </script>
+	<script src="https://s4.cnzz.com/z_stat.php?id=4072742&web_id=4072742" language="JavaScript"></script>
+</body>
+</html>

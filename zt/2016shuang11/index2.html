@@ -1,0 +1,345 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>2016飞扬旅游11.11旅游狂欢节</title>
+<script src="http://css.iflying.com/js/zt_top_bottom.js" type="text/javascript"></script>
+<meta content="2016年大型夕阳红专列畅游旅游" name="description">
+<meta content=" 2016年大型夕阳红专列畅游旅游"  name="keywords">
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <script type="text/javascript" src="../../js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="../../js/command.js"></script>
+    <script type="text/javascript" src="../../js/framework7.js"></script>
+    <script type="text/javascript" src="../../js/kitchen-sink.js"></script>
+    <script type="text/javascript" src="../../js/gaddrJs.js"></script>
+    <script type="text/javascript" src="../../js/recommended.js"></script>
+    <script type="text/javascript" src="../../js/jquery.lazyload.js"></script>
+    <style>
+        .tj_cont .a_img .yuwei{ position:absolute; top:0; right:0;  background:#239CF5;color:#FFFFFF; font-size:14px;  padding:8px; font-family:"微软雅黑"; text-align:center; font-style:normal;}
+    </style>
+</head>
+<body>
+
+    <script type="text/javascript">
+        GetZBYList();
+        function GetZBYList() {
+            var data71 = "";
+            var data72 = "";
+            var data73 = "";
+            var data74 = "";
+
+            var ProductType = "";
+            var urlbtn = "";
+            var vurl = "http://appservice.iflying.com/Get/ActivityList_NewWAP.ashx?StrMd5=690128A2418E1049CA5C97E3B475B9C8";
+            $.getJSON(vurl, function (data) {
+                console.log(data);
+                if (data != null && data.data != null && data.data.Alldatas != null) {
+                    $.each(data.data.Alldatas, function (i, item) {
+                        document.getElementById("timeSapn").value = item.doubledtime;
+                        console.log(item);
+
+                        $.each(item.doubledatas, function (ii, item1) {
+                            if (item1.ProductTypeid == 1) {
+                                ProductType = "跟团游";
+                                urlbtn = "/Activity/groupLine.html?id=" + item1.productid + "&ps=" + item1.MinPrice + "&ppid=" + item1.Productppid + "&yw=" + item1.SiteNums + "&Concid=" + item1.Activityid;
+                            }
+                            if (item1.ProductTypeid == 2) {
+                                ProductType = "签证";
+                                urlbtn = "/Activity/visaDetail.html?id=" + item1.productid + "&ps=" + item1.MinPrice + "&Concid=" + item1.Activityid;
+
+                            }
+                            if (item1.ProductTypeid == 3) {
+                                ProductType = "门票";
+                                urlbtn = "http://m.iflying.com/line/?id=" + item1.productid;
+                            }
+                            if (item1.ProductTypeid == 12) {
+                                ProductType = "自由行";
+                                urlbtn = "/Activity/freeLine.html?id=" + item1.productid + "&ps=" + item1.MinPrice + "&ppid=" + item1.Productppid + "&yw=" + item1.SiteNums + "&Concid=" + item1.Activityid;
+                            }
+                            if (item1.ProductTypeid == 13) {
+                                ProductType = "自驾游";
+                                urlbtn = "/Activity/driveLine.html?id=" + item1.productid + "&ps=" + item1.MinPrice + "&Concid=" + item1.Activityid+"&ppid=" + item1.Productppid;
+                            }
+
+                            var PlanStartTime = "";
+                            if (item1.PlanStartTime != "")
+                            {
+                                PlanStartTime = "发团计划：" + item1.PlanStartTime;
+                            }
+
+
+                            if (item1.Activityid == 71) {
+                                var xsstr = "";
+                                //if (item1.activitytype == 2) {
+                                    if(item1.SiteNums<1)
+                                    {
+                                        xsstr = "<div class=\"no\" id=\"no_ms_213082\"> <span></span> </div>";
+                                    }
+                                //}
+
+                                data71 += "<div class=\"line_view\">"
+                                         + xsstr
+                                         + "<span class=\"top_list\"><em class=\"l\">" + ProductType + "</em><em class=\"w\">限" + item1.SiteNums + "个</em><em class=\"c\">" + item1.address + "</em></span>"
+                                         +"<div class=\"wc\"><img src=\""+item1.DefaultPic+"\">"
+                                         + "<div class=\"notit\"><a href=\"#\" class=\"line_name\">" + item1.WebTitle + "</a></div></div><div class=\"tabboy\" style=\"position:relative\"><a href=\"" + urlbtn + "\" class=\"line_btn2\" onclick=\"Gotopages('" + urlbtn + "'," + item1.activitytype + ")\">立即秒杀</a> <span class=\"price_f\">秒杀价：<em class=\"prc\">&yen;" + item1.MinPrice + "</em><br><del class=\"jian\">原价" + item1.DefaultPrice + "元</del></span><span class=\"del_yuan\">" + PlanStartTime + "</span>  </div></div>";
+                            }
+                            if (item1.Activityid == 72) {
+                                var xsstr = "";
+                               // if (item1.activitytype == 2) {
+                                    if (item1.SiteNums < 1) {
+                                        xsstr = "<div class=\"no\" id=\"no_ms_213082\"> <span></span> </div>";
+                                    }
+                               // }
+
+                                data72 += "<li><div class=\"tj_lines\">" + xsstr + "<div class=\"a_img\"> <a href=\"#\" target=\"_blank\"><img src=\"" + item1.DefaultPic + "\"  width=\"100%\" /></a><p>" + item1.WebTitle + "</p><em>" + ProductType + "</em><div class=\"yuwei\">" + item1.SiteNums + "位</div><div class=\"clear\"></div></div><div class=\"j_det\"><a href=\"" + urlbtn + "\" target=\"_blank\" onclick=\"Gotopages('" + urlbtn + "'," + item1.activitytype + ")\" class=\"line_btn2\">立即预定</a> <span style=\"color:#f42738;\">特价：<span  class=\"prc\">&yen;" + item1.MinPrice + "</span> </span><br><del>原价：" + item1.DefaultPrice + "元</del><br></div></div></li>";
+                            }
+                            if (item1.Activityid == 73) {
+                                data73 += "<li><div class=\"tj_lines\"><div class=\"a_img\"> <a href=\"#\" target=\"_blank\"><img src=\"" + item1.DefaultPic + "\"  width=\"100%\" /></a><p title=\"" + item1.WebTitle + "\">" + item1.WebTitle + "</p><em>" + ProductType + "</em><div class=\"clear\"></div></div><div class=\"j_det\"><a href=\"" + urlbtn + "\" target=\"_blank\" class=\"line_btn2\"  onclick=\"Gotopages('" + urlbtn + "',4)\">立即预定</a> <span style=\"color:#f42738;\">特价：<span class=\"prc\">&yen;" + item1.MinPrice + "</span> </span><br><del>原价：" + item1.DefaultPrice + "元</del><br><span title=\"" + PlanStartTime + "\">" + PlanStartTime + "</span> </div></div></li>";
+                            }
+                            if (item1.Activityid == 74) {
+                                data74 += "<li><div class=\"info-box\"><div class=\"maintit\">" + item1.WebTitle + "</div><div class=\"dept\"><i></i>" + item1.address + " | " + ProductType + "</div><div class=\"price\">￥<em>" + item1.MinPrice + "</em> <del class=\"tq\">原价:￥" + item1.DefaultPrice + "</del></div></div><div class=\"zyx_img\"><A href=\"" + urlbtn + "\" onclick=\"Gotopages('" + urlbtn + "',4)\"><img src=\"" + item1.DefaultPic + "\" /></A></div></li>";
+                            }
+
+                        });
+
+                    });
+                    //加载默认推荐产品
+
+                    $("#datas71").append(data71);
+                    $("#datas72").append(data72);
+                    $("#datas73").append(data73);
+                    $("#datas74").append(data74);
+                    //$("#section1").append(sectiondata);
+                }
+            });
+        }
+
+        function Gotopages(url,val)
+        {
+            if (val == 1)
+            {
+                alert("活动未开始！");
+                return;
+            }
+            if (val == 3) {
+                alert("活动已结束！");
+                return;
+            }
+
+            window.location.href = url;
+        }
+
+        function GETProductTypeid(val)
+        {
+            var str = "";
+            if(val==1)
+            {
+                str="跟团游";
+            }
+            if (val == 2) {
+                str = "签证";
+            }
+            if (val == 3) {
+                str = "门票";
+            }
+            if (val == 12) {
+                str = "自由行";
+            }
+            if (val == 13) {
+                str = "自驾游";
+            }
+
+            return str;
+        }
+
+    </script>
+    <script type="text/javascript">
+        function c(a, b, time) {
+            //if(cl) clearTimeout(cl);
+            if (!lc) {
+                ct = time;
+                lc = setTimeout('add_time("' + time + '")', 200);
+            } else {
+                ct = time;
+            }
+            Show_TabADSMenuold(a, b);
+        }
+    //<![CDATA[
+    function Show_TabADSMenuold(tabadid_numold, tabadnumold) {
+        for (var i = 1; i < 6; i++) {
+            var d = document.getElementById("tabadmenuold_" + tabadid_numold + i);
+            if (d) d.className = "";
+        }
+        for (var i = 1; i < 6; i++) {
+            var d = document.getElementById("tabadcontentold_" + tabadid_numold + i);
+            if (d) d.style.display = "none";
+        }
+        document.getElementById("tabadmenuold_" + tabadid_numold + tabadnumold).className = "TasADSOn";
+        document.getElementById("tabadcontentold_" + tabadid_numold + tabadnumold).style.display = "block";
+
+    }
+
+    $(function () {
+        var ts = parseInt(document.getElementById("timeSapn").value, 10)//剩余的毫秒数
+        if (ts > 0) {
+            timer();
+        } else {
+            document.getElementById("myTime").innerHTML = "";
+        }
+    });
+
+    function timer() {
+        var ts = parseInt(document.getElementById("timeSapn").value, 10)//剩余的毫秒数
+        if (ts > 0) {
+            var dd = parseInt(ts / 1000 / 60 / 60 / 24, 10);
+            var hh = parseInt(ts / 1000 / 60 / 60 % 24, 10);//计算剩余的小时数
+            var mm = parseInt(ts / 1000 / 60 % 60, 10);//计算剩余的分钟数
+            var ss = parseInt(ts / 1000 % 60, 10);//计算剩余的秒数
+            dd = checkTime(dd);
+            hh = checkTime(hh);
+            mm = checkTime(mm);
+            ss = checkTime(ss);
+            document.getElementById("myTime").innerHTML =
+                //"距开始：<span class=\"ft\">" + dd + "天</span><span class=\"num\">" + hh + "</span>：<span class=\"num\">" + mm + "</span>：<span class=\"num\">" + ss + "</span>";
+                "<li style=\" \" id=\"time_d\">" + dd + "</li>"
+              + "<li style=\"width:14px;\" id=\"time_d_u\"><span>天</span></li>"
+              + "<li style=\" \" id=\"time_h\">" + hh + "</li>"
+              + "<li style=\"width:14px;\" id=\"time_h_u\"><span>时</span></li>"
+              + "<li style=\" \" id=\"time_m\">" + mm + "</li>"
+              + "<li style=\"width:14px;\" id=\"time_m_u\"><span>分</span></li>"
+              + "<li style=\" \" id=\"time_s\">" + ss + "</li>"
+              + "<li style=\"width:14px;\" id=\"time_s_u\"><span>秒</span></li> ";
+
+            ts = ts - 1000;
+            document.getElementById("timeSapn").value = ts;
+            setTimeout(timer, 1000);
+        }
+        else {
+            location.reload();
+            //getMs();
+        }
+    }
+
+    function checkTime(i) {
+
+        if (i < 10) {
+            i = "<b>0</b><b>" + i + "</b>";
+        }
+        else {
+            i = "<b>" + parseInt(i / 10, 10) + "</b><b>" + parseInt(i % 10, 10) + "</b>";
+        }
+        return i;
+    }
+
+    </script>
+
+<input type="hidden" id="timeSapn" value="100000" />
+<div class="layout">
+  <div class="banner" id="gzz"><img src="http://img0.vbooking.net/2016zt/2016shuang11/images/wap_bk.jpg " width="100%" ></div>
+  <!--秒杀-->
+  <div class="ms">
+    <div class="leftpic"></div>
+    <div  class="group_list_all">
+    <ul class="hd_time">
+      <li><em>2016</em>年<em>11</em>月<em>11</em>日 中午<em>10</em>时<em>00</em>分<br>下单30分钟不付款，自动取消订单</li>
+    </ul>
+      <ul class="hd_time" id="myTime">
+          <!--<li style="width:55px;">&nbsp;&nbsp;<span>倒计时</span></li>
+          <li style=" " id="time_d"><b>1</b><b>5</b></li>
+          <li style="width:14px;" id="time_d_u"><span>天</span></li>
+          <li style=" " id="time_h"><b>2</b><b>3</b></li>
+          <li style="width:14px;" id="time_h_u"><span>时</span></li>
+          <li style=" " id="time_m"><b>5</b><b>9</b></li>
+          <li style="width:14px;" id="time_m_u"><span>分</span></li>
+          <li style=" " id="time_s"><b>0</b><b>1</b></li>
+          <li style="width:14px;" id="time_s_u"><span>秒</span></li>-->
+      </ul>
+  </div>
+  </div>
+  
+  <div class="tabboy" id="datas71">
+   
+  </div>
+  <!--团购-->
+  <div class="tg">
+    <div class="ms1">
+    <div class="leftpic2"></div>
+    <div class="righttext2">时间：11月11日上午10点
+      <br>
+      请提前与工作人员预约出游时间。限在线下单付款有效，数量有限，下单成功后30分钟内未付款，自动取消。</div>
+  </div>
+    <div class="tj_cont">
+        <ul id="datas72"></ul>
+    </div>
+  </div>
+  <!--特价-->
+  <div class="tj">
+   <div class="ms1">
+    <div class="leftpic3"></div>
+    <div class="righttext2">时间：11月4日<br>
+超值线路，特价抢购，先到先得！出境线路免费赠送WIFI，仅限线上下单付款有效， 咨询电话：4000-365-666。 </div>
+  </div>
+    <div class="tj_cont">
+        <ul id="datas73">
+            
+            
+        </ul>
+    </div>
+  </div>
+  <!--自由行-->
+  <div class="zyx">
+    <div class="ms1">
+    <div class="leftpic4"></div>
+    <div class="righttext2">时间：11月4日 
+      <br>
+      超值组合，特价抢购，先到先得！仅限线上下单付款有效， 咨询电话：4000-365-666。 </div>
+  </div>
+    <div class="zyxlist">
+        <ul id="datas74">
+
+        </ul>
+    </div>
+	
+	<div class="tj_cont">
+  <ul id="datas73" class="">
+    <li>
+      <div class="tj_lines">
+        <div class="a_img"> <a href="#" target="_blank"><img src="http://img1.vbooking.net/product/201610/26/1dc234982880dc5a2a462de7fc0f120ee00c0883.jpg" width="100%"></a>
+          <p title="测试">测试</p>
+          <em>自驾游</em><i></i>
+          <div class="clear"></div>
+        </div>
+        <div class="j_det"><a href="/Activity/driveLine.html?id=240482&amp;ps=389&amp;Concid=73&amp;ppid=454478" target="_blank" class="line_btn2" onClick="Gotopages('/Activity/driveLine.html?id=240482&amp;ps=389&amp;Concid=73&amp;ppid=454478',4)">立即预定</a> <span style="color:#f42738;">特价：<span class="prc">¥389</span> </span><br>
+          <del>原价：399元</del><br>
+          <span title=""></span> </div>
+      </div>
+    </li>
+    <li>
+      <div class="tj_lines">
+        <div class="a_img"> <a href="#" target="_blank"><img src="http://img1.vbooking.net/product/201610/26/3a8a6035224ea9da554de8331f1f4e6d11da406e.jpg" width="100%"></a>
+          <p title="测试">测试+玉龙山氡泉</p>
+          <em>自驾游</em> <i></i>
+          <div class="clear"></div>
+        </div>
+        <div class="j_det"><a href="/Activity/driveLine.html?id=240485&amp;ps=468&amp;Concid=73&amp;ppid=454483" target="_blank" class="line_btn2" onClick="Gotopages('/Activity/driveLine.html?id=240485&amp;ps=468&amp;Concid=73&amp;ppid=454483',4)">立即预定</a> <span style="color:#f42738;">特价：<span class="prc">¥468</span> </span><br>
+          <del>原价：478元</del><br>
+          <span title=""></span> </div>
+      </div>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class="m_foot" >
+    <p>电话：4000-365-666/ 0574-27666666<br>
+      Copyright © 浙江飞扬国际旅游集团股份有限公司
+     <div style="display:none"> <script src="http://s4.cnzz.com/stat.php?id=4072742&web_id=4072742" language="JavaScript"></script></div>
+    </p>
+  </div>
+</div>
+</body>
+</html>
